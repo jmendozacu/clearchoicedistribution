@@ -1,0 +1,58 @@
+<?php 
+	$rmaitems = $this->getRmaItems();
+?>
+<div class="entry-edit">
+    <div class="entry-edit-head"><h4 class="icon-head head-customer-sales-statistics"><?php echo Mage::helper('rma')->__('Return Items') ?></h4></div>
+    <div class="grid">
+        <table cellspacing="0" class="data">
+            <thead>
+                <tr class="headings">
+                    <th><?php echo Mage::helper('rma')->__('SKU') ?></th>
+                    <th><?php echo Mage::helper('rma')->__('Name') ?></th>
+                    <th><?php echo Mage::helper('rma')->__('Shipped') ?></th>
+                    <th><?php echo Mage::helper('rma')->__('Return') ?></th>
+                    <th><?php echo Mage::helper('rma')->__('Type of Return') ?></th>
+                    <th><?php echo Mage::helper('rma')->__('Status') ?></th>
+                    <th><?php echo Mage::helper('rma')->__('Verify') ?></th>
+                </tr>
+            </thead>
+            <tbody>
+            	<?php foreach($rmaitems as $item){ ?>
+                <?php
+				$product = $this->getRmaItemDetail($item);
+				
+				$rmaModel = Mage::getModel('rma/rma')->load($item->getRmaId());
+				$thisOrderID = $rmaModel->getOrderId();
+				
+				$thisOrder = Mage::getModel('sales/order')->load($thisOrderID);
+				$orderItems = $thisOrder->getAllItems();
+				
+				foreach ($orderItems as $itemId => $thisItem)
+					{
+					if($thisItem->getProductId() == $product->getProductId())
+						{
+						$thisQtyShipped = number_format($thisItem->getQtyShipped());
+						break;
+						}
+					else
+						{
+						$thisQtyShipped = 0;
+						}
+					}
+				?>
+                <tr>
+                	<td><?php echo $product->getSku(); ?></td>
+                    <td><?php echo $product->getName(); ?></td>
+                    <td><?php echo $thisQtyShipped; ?></td>
+                    <td><?php echo $item->getQty(); ?></td>
+                    <td><?php echo $item->getType()?></td>
+                    <td><?php echo $item->getStatus()?></td>
+                    <td><a href="<?php echo $this->getVerifyUrl($item)?>">Verify</a></td>
+                </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="clear"></div>
+<br/>

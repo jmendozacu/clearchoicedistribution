@@ -1,0 +1,215 @@
+<?xml version="1.0"?>
+<config>
+  <tabs>
+    <GTTmodul translate="label" module="CustomZoom">
+      <label>GTT Zoom Module</label>
+      <sort_order>250</sort_order>
+    </GTTmodul>
+  </tabs>
+  <sections>
+    <GTT_CustomZoom translate="label" module="CustomZoom">
+      <label>GTT Zoom module</label>
+      <tab>GTTmodul</tab>
+      <frontend_type>text</frontend_type>
+      <sort_order>10</sort_order>
+      <show_in_default>1</show_in_default>
+      <show_in_website>1</show_in_website>
+      <show_in_store>1</show_in_store>
+      <groups>
+        <general translate="label">
+          <label>GTT Zoom settings</label>
+          <frontend_type>text</frontend_type>
+          <sort_order>10</sort_order>
+          <show_in_default>1</show_in_default>
+          <show_in_website>1</show_in_website>
+          <show_in_store>1</show_in_store>
+          <fields>
+            <enabled>
+              <label>Enable GTT Zoom module</label>
+              <frontend_type>select</frontend_type>
+              <source_model>adminhtml/system_config_source_yesno</source_model>
+              <sort_order>10</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </enabled>
+            <position>
+              <label>Image Display Location</label>
+              <frontend_type>select</frontend_type>
+              <source_model>CustomZoom/source_position</source_model>
+              <sort_order>20</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+              <comment>Display zoom image location at frontend</comment>
+            </position>
+            <adjust_x>
+              <label>Display from Left</label>
+              <frontend_type>text</frontend_type>
+              <sort_order>30</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </adjust_x>
+            <adjust_y>
+              <label>Display  from Top</label>
+              <frontend_type>text</frontend_type>
+              <sort_order>40</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </adjust_y>
+            <fix_size translate="label">
+              <label>Set Height/Width</label>
+              <frontend_type>select</frontend_type>
+              <source_model>CustomZoom/source_fixed</source_model>
+              <sort_order>50</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </fix_size>
+            <image_size translate="label">
+              <label>Set Image Size</label>
+              <frontend_type>text</frontend_type>
+              <sort_order>60</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+              <comment>Size of the main image at detail page.</comment>
+            </image_size>
+            <zoom_width translate="label">
+              <label>Zoom Width</label>
+              <frontend_type>text</frontend_type>
+              <sort_order>70</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+              <comment>'auto' is specified width same as the small image.</comment>
+            </zoom_width>
+            <zoom_height translate="label">
+              <label>Zoom Height</label>
+              <frontend_type>text</frontend_type>
+              <sort_order>80</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+              <comment>'auto' is specified height same as the small image.</comment>
+            </zoom_height>
+            <effect>
+              <label>Zoom Effect</label>
+              <frontend_type>select</frontend_type>
+              <source_model>CustomZoom/source_effect</source_model>
+              <sort_order>90</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </effect>
+            <shade_opacity>
+              <label>Shade Opacity</label>
+              <frontend_type>text</frontend_type>
+              <sort_order>100</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+              <comment>between 0-1</comment>
+            </shade_opacity>
+            <lens_opacity>
+              <label>Lens Opacity</label>
+              <frontend_type>text</frontend_type>
+              <sort_order>110</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+              <comment>between 0-1</comment>
+            </lens_opacity>
+            <smooth_move>
+              <label>Smooth Move</label>
+              <frontend_type>text</frontend_type>
+              <sort_order>120</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+              <comment>The higher the number gives smoother effects.</comment>
+            </smooth_move>
+            <shade>
+              <label>Shade colour</label>
+              <frontend_type>text</frontend_type>
+              <sort_order>130</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+              <comment>E.g. '#6d6d6d'.(Only Hexa format)</comment>
+            </shade>
+            
+            <!--<show_title>
+                            <label>Show Title</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>140</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </show_title>
+                        <title_opacity>
+                            <label>Title Opacity</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>150</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Where 0 is fully transparent, and 1 is fully opaque.</comment>
+                        </title_opacity>-->
+          </fields>
+        </general>
+        <configurable translate="label">
+          <label>For Configurable products only</label>
+          <frontend_type>text</frontend_type>
+          <sort_order>20</sort_order>
+          <show_in_default>1</show_in_default>
+          <show_in_website>1</show_in_website>
+          <show_in_store>1</show_in_store>
+          <fields>
+            <attribute>
+              <label>Select Attributes</label>
+              <frontend_type>select</frontend_type>
+              <source_model>CustomZoom/source_attribute</source_model>
+              <sort_order>10</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </attribute>
+            <displayimages>
+              <label>Select Image for Display</label>
+              <frontend_type>select</frontend_type>
+              <source_model>CustomZoom/source_images</source_model>
+              <sort_order>20</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+              <comment>pictures should be taken from gallery.</comment>
+            </displayimages>
+          </fields>
+        </configurable>
+        <category>
+          <label>Select Categories</label>
+          <frontend_type>text</frontend_type>
+          <sort_order>30</sort_order>
+          <show_in_default>1</show_in_default>
+          <show_in_website>1</show_in_website>
+          <show_in_store>1</show_in_store>
+          <fields>
+            <options translate="label">
+              <label>Select size for selected category</label>
+              <frontend_model>CustomZoom/system_config_category</frontend_model>
+              <backend_model>adminhtml/system_config_backend_serialized_array</backend_model>
+              <sort_order>100</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>0</show_in_website>
+              <show_in_store>0</show_in_store>
+            </options>
+          </fields>
+        </category>
+      </groups>
+    </GTT_CustomZoom>
+  </sections>
+</config>

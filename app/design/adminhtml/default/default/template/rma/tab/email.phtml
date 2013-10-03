@@ -1,0 +1,112 @@
+
+<?php
+
+
+	$rmadata = $this->getRmadata(); 
+	$storeID = $rmadata->getStoreId();
+
+$included_row = Mage::getSingleton('core/resource')->getConnection('core_read')->fetchAll("SELECT `value` FROM `core_config_data` WHERE `scope`='stores' AND `scope_id`='" . $storeID . "' AND `path`='rma/rma/emailaddress'");
+
+if(empty($included_row)) {$included_row = Mage::getSingleton('core/resource')->getConnection('core_read')->fetchAll("SELECT `value` FROM `core_config_data` WHERE `scope`='default' AND `scope_id`='0' AND `path`='rma/rma/emailaddress'");}
+
+if(empty($included_row))
+	{
+?>
+<?php echo $this->getBlockHtml('formkey')?>
+<div class="entry-edit">
+    <div class="entry-edit-head"><h4 class="icon-head head-customer-sales-statistics"><?php echo Mage::helper('rma')->__('Error') ?></h4></div>
+    <div class="grid">
+    
+<table cellspacing="0" cellpadding="10" class="data">
+<tbody>
+<tr>
+<td>
+<span style="color:#900; font-weight: bold; font-size: 14px;">RMA Module has not been properly configured</span><br /><br />Go to <i>"System"</i>&rarr;<i>"Configuration"</i>&rarr;<i>"RMA Configuration" (under "Sales")</i>, fill out the two sections, and make sure to <b>Save Config</b>.
+</td>
+</tr>
+</tbody>
+</table>
+       
+    </div>
+</div>
+<div class="clear"></div>
+<br/>
+
+<?php
+	}
+else
+	{
+?>
+<?php $rmaemail = $this->getRmaEmails(); ?>
+<form id="send_email" name="send_email" action="<?php echo $this->getUrl('*/*/sendemail', array('id' => $this->getRequest()->getParam('id') ))?>" method="post">
+<?php echo $this->getBlockHtml('formkey')?>
+
+<div class="entry-edit">
+    <!--<div class="entry-edit-head"><h4 class="icon-head head-customer-sales-statistics"><?php echo Mage::helper('rma')->__('Send Email to Customer') ?></h4></div>-->
+    <div class="entry-edit-head"><h4 class="icon-head head-customer-sales-statistics"><?php echo Mage::helper('rma')->__('Add note to RMA') ?></h4></div>
+    <div class="grid">
+    	<table cellspacing="0" cellpadding="10" class="data">
+        	<tbody>
+            	<tr>
+                	<td width="50px;" style="padding:8px;"><?php echo $this->__('Subject:');?> &nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="email_subject"  value="" style="width:550px;" /></td>
+                </tr>
+                <tr>
+                	<td style="padding:8px;">
+                    	<!--<?php echo $this->__('Email Body:');?><br/>-->
+                    	<?php echo $this->__('Note:');?><br/>
+                		<textarea name="email_body" style="width:99%; height:200px;" rows="5"></textarea><br/>
+                        <!--<input type="checkbox" name="send_check" value="<?php echo 'Notify Customer'?>"><?php echo '  Notify Customer'?>-->
+                        <input type="checkbox" name="send_check" value="<?php echo 'Email Customer'?>"><?php echo '  Email Customer'?>
+                        <div class="f-right" style="padding-top:10px; padding-bottom:5px;">
+                        	<?php echo $this->getChildHtml('submit_button') ?>
+        				</div>
+                    </td>
+               	</tr>
+           </tbody>
+       </table>
+    </div>
+</div>
+</form>
+<div class="clear"></div>
+<br/>
+<div class="entry-edit">
+    <!--<div class="entry-edit-head"><h4 class="icon-head head-customer-sales-statistics"><?php echo Mage::helper('rma')->__('Customer Emails') ?></h4></div>-->
+    <div class="entry-edit-head"><h4 class="icon-head head-customer-sales-statistics"><?php echo Mage::helper('rma')->__('Note History') ?></h4></div>
+    <div class="grid">
+        <table cellspacing="0" class="data">
+            <thead>
+                <tr class="headings">
+                    <!--<th><?php echo Mage::helper('rma')->__('Email Details') ?></th>
+                    <th width="125px;"><?php echo Mage::helper('rma')->__('Date Sent') ?></th>-->
+                    <th><?php echo Mage::helper('rma')->__('Note Details') ?></th>
+                    <th width="125px;"><?php echo Mage::helper('rma')->__('Date Added') ?></th>
+                </tr>
+            </thead>
+            <tbody>
+            	<?php foreach($rmaemail as $email){ ?>
+                <tr>
+                	<td>
+                  <?php if($email->getSubject()) { ?>
+						<span><?php echo Mage::helper('rma')->__('Subject: ') ?><strong><?php echo $email->getSubject(); ?></strong></span>
+                    	<br/>
+                        <!--<span style="padding-left:10px;"><i><?php echo Mage::helper('rma')->__('Email: ') ?></i><br/></span>-->
+                        <span<i><?php echo Mage::helper('rma')->__('Note: ') ?></i><br/></span>
+                  <?php } ?>
+                        <div style="padding-left:10px;"><?php echo $email->getEmailBody(); ?></div>
+                    </td>
+                    <td><?php
+						  echo Mage::helper('core')->formatDate($email->getDateSent(), 'long', false);
+						  echo("<br>");
+						  echo Mage::helper('core')->formatTime($email->getDateSent(), 'long', false);
+						  ?></td>
+                </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="clear"></div>
+<br/>
+<?php
+	}
+?>

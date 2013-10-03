@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+    </default>
+    <mptp_index_index>
+        <reference name="content">
+            <block type="mptp/mptp" name="mptp" template="mptp/mptp.phtml" />
+        </reference>
+    </mptp_index_index>
+</layout> 

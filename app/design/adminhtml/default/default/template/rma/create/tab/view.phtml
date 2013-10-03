@@ -1,0 +1,54 @@
+<?php 
+	$rmaorder = $this->getOrderdata();
+	//$rmacustomer = $this->getRmaCustomer();
+	
+	$storeID = $rmaorder->getStoreId();
+	$storeName = Mage::getModel('core/store_group')->load($storeID)->getData('name');
+	
+?>
+<div class="box-left">
+    <div class="entry-edit-head"><h4 class="icon-head head-customer-view"><?php echo Mage::helper('rma')->__('Order Information') ?></h4></div>
+    <fieldset>
+        <table cellspacing="0" class="form-list">
+            <tr>
+                <td class="label"><?php echo $this->__('Order #:');?></td>
+                <td><strong><?php echo $rmaorder->getIncrementId(); ?></strong></td>
+            </tr>
+            <tr>
+                <td class="label"><?php echo $this->__('Order Date:'); ?></td>
+                <td><strong><?php echo Mage::helper('core')->formatDate($rmaorder->getCreatedAt(), 'long', true) ?></strong></td>
+            </tr>
+            <tr>
+                <td class="label"><?php echo $this->__('Store Name:'); ?></td>
+                <td><strong><?php echo $storeName; ?></strong></td>
+            </tr>
+        </table>
+    </fieldset>
+</div>
+<div class="box-right">
+    <div class="entry-edit-head"><h4 class="icon-head head-customer-view"><?php echo Mage::helper('rma')->__('Customer Information') ?></h4></div>
+    <fieldset>
+        <table cellspacing="0" class="form-list">
+            <tr>
+            	<td class="label"><?php echo $this->__('Customer Name:');?></td>
+                <td>
+	                <?php //if ($_customerUrl=$this->getCustomerViewUrl()) : ?>
+                		<!--<a href="<?php //echo $_customerUrl ?>" target="_blank"><strong><?php //echo $rmacustomer->getFirstname() . ' ' . $rmacustomer->getLastname()?></strong></a>-->
+                   	<?php //else: ?>
+                    	<strong><?php echo $rmaorder->getCustomerName()?></strong>
+                    <?php //endif; ?>
+               	</td>
+            </tr>
+            <tr>
+            	<td class="label"><?php echo $this->__('Customer Email:');?></td>
+                <td><a href="mailto:<?php echo $rmaorder->getCustomerEmail()?>"><strong><?php echo $rmaorder->getCustomerEmail()?></strong></a></td>
+            </tr>
+            <tr>
+            	<td class="label"><?php echo $this->__('Customer Contact:');?></td>
+                <td><input style="width:200px;" type="text" name="contact"  value=""/></td>
+            </tr>
+        </table>
+    </fieldset>
+</div>
+<div class="clear"></div>
+<?php echo $this->getItemsHtml(); ?>

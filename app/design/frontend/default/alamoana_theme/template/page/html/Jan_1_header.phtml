@@ -1,0 +1,339 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2011 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+/**
+ * @var Mage_Page_Block_Html_Header $this
+ */
+?>
+
+<?php
+$baseurl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB);
+?>
+
+<link href="<?php echo $this->getSkinUrl('js/queckview/css/queckbox.css') ?>" rel="stylesheet" type="text/css" />
+
+
+<div id="wrapper">
+<div class="container">
+        <?php  
+		 $top_bar = Mage::getStoreConfig('customadmin/header/links_topbar_enabled', Mage::app()->getStore()->getId());
+		?>
+        <?php 
+		if($top_bar){
+				$topbarbg = Mage::getStoreConfig('customadmin/header/topbar_toplink', Mage::app()->getStore()->getId());
+		?>
+        <div class="top-grey-bar <?php if ($topbarbg) echo $topbarbg; ?>">
+			<div class="main">                
+                <div class="box-top store">
+                	<ul>
+                    	<li class="jewelry active">
+                        <a href="<?=$baseurl?>"><span>Jewelry</span></a>
+                            <span class="drop-dwn dropdwnjew" style="display:none">
+                                <a href="<?=$baseurl?>">
+                                <img src="<?php echo $this->getSkinUrl('images/jewellery-icon-active.png') ?>" alt="jewelry" /> 
+                                Jewelry
+                                </a>
+                            </span>
+                        
+                        </li>
+                    	<?php /*?><li class="jewelry active">
+                        <a href="<?=$baseurl?>jewelry/"><span>Jewelry</span></a>
+                            <span class="drop-dwn dropdwnjew" style="display:none">
+                                <a href="<?=$baseurl?>jewelry/">
+                                <img src="<?php echo $this->getSkinUrl('images/jewellery-icon-active.png') ?>" alt="jewelry" /> 
+                                Jewelry
+                                </a>
+                            </span>
+                        
+                        </li><?php */?>
+                        <li class="baby-shop">
+                        <a href="<?=$baseurl?>babyshop/">
+                        <span>Baby shop</span>
+                        </a>
+                        <span class="drop-dwn drop-dwnbaby" style="display:none">
+                        <a href="<?=$baseurl?>babyshop/">
+                        <img src="<?php echo $this->getSkinUrl('images/baby-shop-icon-active.png') ?>" alt="Baby shop" /> 
+                        Baby shop
+                        </a>
+                        </span>
+                        </li>
+                        <li class="watches"><a href="<?=$baseurl?>watches/"><span>Watches</span></a>
+                        <span class="drop-dwn dropdwnwatches" style="display:none">
+                        
+                        <a href="<?=$baseurl?>watches/"><img src="<?php echo $this->getSkinUrl('images/watche-icon-active.png') ?>" alt="Watches" /> Watches</a></span></li>
+                        
+                        <li class="fashion"><a href="<?=$baseurl?>fashion/"><span>Fashion</span></a>
+                        <span class="drop-dwn dropdwnfashion" style="display:none">
+                        <a href="<?=$baseurl?>fashion/"><img src="<?php echo $this->getSkinUrl('images/fashion-icon-active.png') ?>" alt="Fashion" /> Fashion</a></span></li>
+                    </ul>
+                </div>
+              <div class="box-top customer-care">Customer service: <b>1-18734589</b></div>
+              <div class="box-top free-shipping">Free shipping above <b>$ 50</b></div>
+              <div class="box-top language">
+              	<ul>
+                	<li class="languagepack">
+                    <span class="flag"><img src="<?php echo $this->getSkinUrl('images/usa-icon.jpg') ?>" alt="Fashion" /></span><span>Language: <em>USA</em></span>
+                    <span class="arrow-doen">
+                    <a href="<?=$this->getUrl('?___store=default&___from_store=default');?>" class="arrw"><img src="<?php echo $this->getSkinUrl('images/language-arrow.png') ?>" alt="" /></a>
+                    <div class="lng-box" style="display:none">
+                    	<p class="shape-v"><img src="<?php echo $this->getSkinUrl('images/shape-v.png') ?>" alt="" /></p>
+                        <ul>
+                        	<li><a href="<?=$this->getUrl('?___store=french&___from_store=default');?>"><img src="<?php echo $this->getSkinUrl('images/french-icon.jpg') ?>" alt="French" />French</a></li>
+                            <li><a href="<?=$this->getUrl('?___store=default&___from_store=german');?>"><img src="<?php echo $this->getSkinUrl('images/german-icon.jpg') ?>" alt="German" />German</a></li>
+                        </ul>
+                    </div>
+                    </span>
+                    </li>
+                </ul>
+              </div>
+                <div class="cls"></div>
+            </div>
+        </div>
+        <?php
+		}
+		?>
+		<div style="width:100%;background:#595959;">
+			<div class="logo-main main">
+				<div class="fltR">
+					<div class="topMnu">
+						<div class="search_top">
+							<form id="search_mini_form" action="<?php echo $this->helper('catalogsearch')->getResultUrl() ?>" method="get">
+								<div class="form-search">                
+									<input id="search" type="text" name="<?php echo $this->helper('catalogsearch')->getQueryParamName() ?>" value="<?php echo $this->helper('catalogsearch')->getEscapedQueryText() ?>" class="input-text" />
+									<button type="submit" title="Zoeken" class="topsearch button"><img src="<?php echo $this->getSkinUrl('images/search-btn.jpg') ?>" /></button>
+									<script type="text/javascript">
+										var searchForm = new Varien.searchForm('search_mini_form', 'search', '<?php echo $this->__('Enter a search term') ?>');
+										searchForm.initAutocomplete('<?php echo $this->helper('catalogsearch')->getSuggestUrl() ?>', 'search_autocomplete');
+									</script>
+								</div>
+							</form>
+						</div>
+						
+						<a href="<?php echo $this->getUrl('contacts') ?>"><div class="box-top email">EMAIL US</div></a>
+						<div class="box-top phone"><?php echo $storePhone = Mage::getStoreConfig('general/store_information/phone'); ?></div>
+						
+						<div class="cls"></div>
+						<div class="cls"></div>
+						<div style="width:100%;height:9px;"></div>
+						  <a class="dealer-app" href="<?php echo $this->getUrl('request'); ?>" style="color:white;"><?php echo $this->__('Dealer Application') ?></a>
+						  <?php if ($this->helper('customer')->isLoggedIn()): ?>
+								<a href="<?php echo $this->getUrl('customer/account/logout') ?>"><?php echo $this->__('Logout') ?></a>
+								<?php else: ?>
+								<a href="<?php echo $this->getUrl('customer/account/login') ?>"><?php echo $this->__('Log In') ?></a>
+						  <?php endif ?>
+								
+								<a href="<?php echo $this->getUrl('customer/account') ?>"><?php echo $this->__('My Account') ?></a>
+								<!--<a class="toplink-mob" href="<?php //echo $this->getUrl('about-us') ?>"><?php //echo $this->__('About us') ?></a>                            
+								<a class="toplink-mob" href="<?php //echo $this->getUrl('contacts') ?>"><?php //echo $this->__('Contact') ?></a> -->
+								<a href="<?php echo $this->getUrl('wishlist') ?>"><?php echo $this->__('Wishlist') ?></a>
+								<a onclick="popWin('<?php echo $this->getUrl('catalog/product_compare/index/') ?>','compare','top:0,left:0,width=820,height=600,resizable=yes,scrollbars=yes')" href="<?=$this->helper('core/url')->getCurrentUrl()?>"><?php echo $this->__('Compare') ?></a>
+								
+								<?php //echo $this->getChildHtml('cart_header') ?>  
+									 <ul>
+										<li id="mini-cart" class="user-menu-item user-menu-cart">
+											<?php echo $this->getChildHtml('cart_header') ?>
+										</li>
+									</ul>
+									<div class="cls"></div>
+						<div class="language_pack">
+							 <?php  //echo $this->getChildHtml('store_language') ?>
+							 <?php //echo $this->getChildHtml('store_currency_selector') ?>
+						</div>   		
+
+					</div>
+				</div>
+				<div class="logo fltL">
+					
+					<?php if ($this->getIsHomePage()):?>
+				   <a class="logo" href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>"><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
+					<?php else:?>
+					<a class="logo" href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>"><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
+					<!--<a href="<?php //echo $this->getUrl('') ?>" title="<?php //echo $this->getLogoAlt() ?>" class="logo"></strong><?php //echo $this->getLogoAlt() ?></a> -->					<?php endif?>
+				</div>
+				<div class="cls"></div>
+			</div>
+		</div>	
+        <?php  
+		 	$menu_bg = Mage::getStoreConfig('customadmin/header/menu_background_enabled', Mage::app()->getStore()->getId());
+		?>
+        <div class="mnu" style="background-color:<?=$menu_bg?> !important;">
+        	<div class="main">
+            	<?php echo $this->getChildHtml('topMenu') ?>   
+                <div id="skin_menu">
+                <ul>
+                	<li><a href="<?=$this->getUrl();?>?skin=skin1">Skin</a>
+                        <ul class="skin_sub">
+                            <li><a href="<?=$this->getUrl();?>?skin=default">Default Skin</a>
+                            <li><a href="<?=$this->getUrl();?>?skin=brown">Brown</a></li>
+                            <li><a href="<?=$this->getUrl();?>?skin=grey">Grey</a></li>
+                            <li><a href="<?=$this->getUrl();?>?skin=pink">Pink</a></li>
+                        </ul>
+                	</li>
+                </ul>
+            </div>
+                
+            <?php
+				$_helper = Mage::helper('catalog/category'); 
+				$_categories_main = $_helper->getStoreCategories(); 
+				echo '<div class=select-menu style=display:block;>';
+				echo '<select name=list_category  onChange=window.location=this.value>';
+				echo '<option value="">SELECT MENU</option>';
+						foreach($_categories_main as $category_one): 
+							echo '<option class="main_menu_mob" value="'.$_helper->getCategoryUrl($category_one).'">'.$category_one->getName() .'</option>';
+							$sub_two_id = $category_one->getId();
+							$category_sub = Mage::getModel('catalog/category')->getCategories($sub_two_id);
+							foreach ($category_sub as $category_two):
+							echo '<option class="sub_menu_mob" value='.$_helper->getCategoryUrl($category_two).'>&nbsp;&nbsp;&nbsp;'.$category_two->getName() .'</option>';
+								$sub_three_id = $category_two->getId();
+								$category_child = Mage::getModel('catalog/category')->getCategories($sub_three_id);
+									foreach ($category_child as $category_three):
+											echo '<option class="child_menu_mob" value="'.$_helper->getCategoryUrl($category_three). '">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $category_three->getName() . '</option>';
+									endforeach;
+							endforeach;
+					endforeach;
+				echo "</select>";
+				echo '</div>';
+			?> 
+
+
+                                          	
+                <div class="cls"></div></div>
+        </div>
+    
+<?php /*?><div class="header-container">
+    <div class="header">
+        <?php if ($this->getIsHomePage()):?>
+        <h1 class="logo"><strong><?php echo $this->getLogoAlt() ?></strong><a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a></h1>
+        <?php else:?>
+        <a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><strong><?php echo $this->getLogoAlt() ?></strong><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
+        <?php endif?>
+        <div class="quick-access">
+            <?php echo $this->getChildHtml('topSearch') ?>
+            <p class="welcome-msg"><?php echo $this->getWelcome() ?> <?php echo $this->getAdditionalHtml() ?></p>
+            <?php echo $this->getChildHtml('topLinks') ?>
+            <?php echo $this->getChildHtml('store_language') ?>
+        </div>
+        <?php echo $this->getChildHtml('topContainer'); ?>
+    </div>
+</div>
+<?php echo $this->getChildHtml('topMenu') ?><?php */?>
+
+
+<?php
+
+########################################################################################
+# Function Use : This function is used to cut character for display purpose
+########################################################################################
+function charCut($mytext, $limit, $msg="...")
+{
+   $mytext = strip_tags($mytext);
+   if (strlen($mytext) > $limit)
+   {
+   		$text=chunk_split($mytext,$limit," ");
+   }
+   else
+   {
+   		$text=$mytext;
+   }
+	
+   if (strlen($text) > $limit)
+   {
+       $txt1=wordwrap($text, $limit, '[cut]');
+	   $txt2=explode('[cut]', $txt1);
+       $ourTxt=$txt2[0];
+       $finalTxt=$ourTxt.$msg;
+   }
+   else
+   {
+       $finalTxt=$text;
+   }
+   return $finalTxt;
+}
+
+?>
+
+<script type="text/javascript">
+			
+		  (function () 
+		  {
+			  jQuery('.nav-container').addClass('js').ready(function ()
+			  {	
+			   	   jQuery(this).find('#nav > li').hoverIntent(
+				   {
+					   over: function () 
+					   {		
+					   		var self = this; var $this = jQuery(this);			
+							$this.addClass('hover').siblings().removeClass('hover').each(function () 
+							{ 
+								if (self != this) { clearTimeout(this.hoverIntent_s); } 
+							});
+							$this.siblings().not(this).find('.menu').stop(true, true).slideUp(200, function ()
+							{ 
+								jQuery(this).parent().removeClass('hover'); 
+							});
+							$this.find('.menu').css({'height': '', 'padding': ''}).hide().stop(true, false).slideDown(10);		
+						}, 
+						
+						out: function () 
+						{	
+						  	
+							var $self = jQuery(this);			
+							$self.find('.menu').stop(true, true).slideUp(30, function () 
+							{ 
+								$self.removeClass('hover'); 
+							});		
+						}, 
+						
+						timeout: 400,		
+						
+						sensitivity: 7,		
+						
+						interval: 50		
+						
+					}).find('.menu').hide().each(function () 
+					{			
+						/* Add vertical line as separator. */			
+						var $lists = jQuery(this).find('.categoriesHead, .themesHead, .brandsHead');			
+						var $wideMenu = jQuery(this);			
+						var $category = $lists.filter('.categoriesHead');			
+						var $theme = $lists.filter('.themesHead');			
+						var $brand = $lists.filter('.brandsHead');			
+						var $separator = jQuery('<div />').css({
+							'position': 'absolute',
+							'top': '15px',
+							'z-index': 60,
+							'border-left': '1px solid #ddd'	
+							});			
+							$wideMenu.css('z-index', -10).show();
+						/* Temporarily show parent to calculate position. */			
+						$theme.size() && $separator.css({'height': $wideMenu.height() - $wideMenu.find('.menuBanner').height() - 20, 'left': $theme.position().left - 10}).insertBefore($theme);			
+						$brand.size() && $separator.clone().css({'left': $brand.position().left - 10}).insertBefore($brand);			
+						$wideMenu.css('z-index', '').hide();		
+					
+					});
+				});
+			}());
+</script>
+

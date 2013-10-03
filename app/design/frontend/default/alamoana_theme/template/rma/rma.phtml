@@ -1,0 +1,95 @@
+<div class="padder">
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<?php $_rmas = $this->getRmas(); ?>
+<?php 
+	//$_rmas->setPageSize(1);
+    //$_rmas->setCurPage(1);
+?>
+<div class="page-head button-level">
+    <h3><?php echo $this->__('My Returns') ?></h3>
+</div>
+    <a href="<?php echo $this->getUrl('rma/pickorder') ?>" style="font-size: 16px; text-decoration:underline; font-weight: bold;color:#007A4D;"><?php echo $this->__('> File New Return'); ?></a>
+
+<br /><i>Instructions:</i>
+<br />1. Click "File New Return" above.
+<br />2. This will take you to a "Create Return" page that lists all of the orders you have placed with us. Find the order you would like to return merchandise from, and click "Request Return" on the right.
+<br />3. Check the item (or items) you'd like to return, enter a quantity, give a reason for return, and select the type of return (Replacement or Refund).
+<br />4. Check the box under the Return Policy to signify that you agree to it, and click "Submit".
+<br />
+
+<?php if($_rmas->getSize()): ?>
+<table cellspacing="0" class="data-table" id="my-orders-table" style="margin-top: 10px;">
+    <thead>
+        <tr>
+            <th><?php echo $this->__('Date Filed') ?></th>
+            <th><?php echo $this->__('Order #') ?></th>
+            <th><?php echo $this->__('Return  #') ?></th>
+            <th class="a-center"><?php echo $this->__('Items') ?></th>
+            <th><?php echo $this->__('Return Status') ?></th>
+            <th>&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php $_odd = ''; ?>
+        <?php foreach ($_rmas as $_rma): ?>
+             <tr>
+                <td>
+         	    <?php echo date('M d, Y', strtotime($_rma->getDateCreated()) - (8*60*60))?>
+                </td>
+                <td><?php echo $_rma->getOrderNumber()?></td>
+                <td><?php
+                
+					 $thisRMANum = $_rma->getRmaNumber();
+					 if($thisRMANum == ""){ echo("---"); }
+					 echo($thisRMANum);
+					 
+					 ?></td>
+                <td class="a-center"><?php
+					 
+					$amount = 0;
+					
+					unset($itemIDs);
+					$itemIDs = array();
+					unset($qty);
+					$qty = array();
+					foreach( $_rma->getItemsCollection() as $item )
+						{
+						$qty[$item->getItemId()] = $item->getQty();
+						$itemIDs[$item->getItemId()] = $item->getItemId();
+						}
+					
+					$thisOrderId = $_rma->getOrderId();
+					$order_model = Mage::getModel('sales/order')->load($thisOrderId);
+					$allItems = $order_model->getItemsCollection();
+					
+					foreach( $allItems as $itm )
+						{
+						$thisProductId = $itm->getProductId();
+						$thisPrice = $itm->getPrice();
+						
+						if(in_array($thisProductId, $itemIDs))
+							{
+							$amount += $qty[$thisProductId];
+							}
+						}
+                
+					 echo($amount);
+					 
+					 ?></td>
+                <td><em><?php echo $_rma->getStatus()?></em></td>
+                <td><a href="<?php echo $this->getUrl( '*/view', array( 'id' => $_rma->getId() ) )?>" style="text-decoration:underline;"><?php echo $this->__('View RMA'); ?></a></td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+<script type="text/javascript">decorateTable('my-orders-table')</script>
+<?php echo $this->getPagerHtml(); ?>
+<?php else: ?>
+<div class="padder"> <p><?php echo $this->__('You have not placed any Return(s).'); ?></p></div>
+<?php endif ?>
+
+</div>
+
+            <?php
+
+            ?> 

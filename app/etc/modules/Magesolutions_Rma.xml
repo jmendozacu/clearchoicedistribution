@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * @category   Magesolutions
+ * @package    Magesolutions_Rma
+ * @author     ModuleCreator
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+ -->
+<config>
+    <modules>
+        <Magesolutions_Rma>
+            <active>false</active>
+            <codePool>local</codePool>
+        </Magesolutions_Rma>
+    </modules>
+</config> 

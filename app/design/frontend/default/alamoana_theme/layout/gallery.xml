@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default> 
+    </default>
+    <gallery_index_index>
+    <remove name="footer" />
+	<remove name="header" />
+	<remove name="right" />
+	<remove name="left" />
+	<remove name="head" />
+
+        <reference name="content">
+            <block type="gallery/gallery" name="gallery" template="gallery/gallery.phtml" />
+			
+        </reference>
+
+    </gallery_index_index>
+</layout> 
+

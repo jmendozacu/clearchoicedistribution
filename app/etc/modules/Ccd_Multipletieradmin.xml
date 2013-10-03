@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Ccd_Multipletieradmin>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Ccd_Multipletieradmin>
+    </modules>
+</config> 

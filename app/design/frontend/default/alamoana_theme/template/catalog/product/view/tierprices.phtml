@@ -1,0 +1,430 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2011 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+
+<?php
+/**
+ * @see Mage_Catalog_Block_Product_View
+ */
+$_product = $this->getProduct();
+
+ $producttype=$_product->getTypeId();
+
+ 
+$_tierPrices = $this->getTierPrices();
+$_finalPriceInclTax = $this->helper('tax')->getPrice($_product, $_product->getFinalPrice(), true);
+
+/** @var $_catalogHelper Mage_Catalog_Helper_Data */
+$_catalogHelper = Mage::helper('catalog');
+
+$_weeeTaxAmount = Mage::helper('weee')->getAmountForDisplay($_product);
+
+if (Mage::helper('weee')->typeOfDisplay($_product, array(1,2,4))) {
+    $_weeeTaxAttributes = Mage::helper('weee')->getProductWeeeAttributesForDisplay($_product);
+}
+$i=0;
+?>
+<?php $tiercountvalue= count($_tierPrices); ?> 
+	<?php if (count($_tierPrices) > 0): ?>
+		<ul class="<?php echo ($this->getInGrouped() ? 'tier-prices-grouped product-pricing-grouped' : 'tier-prices product-pricing'); ?>" style="max-height:250px;overflow:auto; margin-left:inherit;">
+		<?php if ($this->getInGrouped()): ?>
+			<?php $_tierPrices = $this->getTierPrices($_product); ?>
+		<?php endif; ?>
+		<?php Mage::helper('weee')->processTierPrices($_product, $_tierPrices); ?>
+
+		<table width="100%">
+			<tr>
+				<td style="border-bottom:1px #999 dotted;padding-bottom:10px;padding-top:10px;font-weight: bold;">Quantity</td>
+				<?php foreach ($_tierPrices as $_price): ?>
+				
+				
+				<td style="text-align: center;border-bottom:1px #999 dotted;padding-bottom:10px;padding-top:10px;font-weight: bold;">
+				
+					<?php if ($_catalogHelper->canApplyMsrp($_product)): ?>
+						<?php if ($this->getInGrouped()): ?>
+							<?php echo $this->__('%1$s', $_price['price_qty']) ?>:
+						<?php else: ?>
+							<?php echo $this->__('%1$s', $_price['price_qty']) ?>
+						<?php endif; ?>
+					<?php else: ?>
+
+					<?php if ($this->helper('tax')->displayBothPrices()): ?>
+						<?php if (Mage::helper('weee')->typeOfDisplay($_product, 0)): ?>
+							<?php echo $this->__('%1$s', $_price['price_qty']) ?>
+						<?php elseif(Mage::helper('weee')->typeOfDisplay($_product, 1)): ?>
+								<?php echo $this->__('%1$s', $_price['price_qty']); ?>
+								<?php if ($_weeeTaxAttributes): ?>
+								(<small>
+								<?php echo $this->__('%1$s', $_price['formated_price_incl_weee']); ?>
+								<?php $separator = ' + '; foreach ($_weeeTaxAttributes as $_attribute): ?>
+									<?php echo $separator; ?>
+									<?php echo $_attribute->getName(); ?>: <?php echo Mage::helper('core')->currency($_attribute->getAmount()); ?>
+								<?php endforeach; ?>
+								</small>)
+								<?php endif; ?>
+						<?php elseif(Mage::helper('weee')->typeOfDisplay($_product, 4)): ?>
+								<?php echo $this->__('%1$s', $_price['price_qty']); ?>
+								<?php if ($_weeeTaxAttributes): ?>
+								(<small>
+								<?php echo $this->__('%1$s', $_price['formated_price_incl_weee']); ?>
+								<?php $separator = ' + '; foreach ($_weeeTaxAttributes as $_attribute): ?>
+									<?php echo $separator; ?>
+									<?php echo $_attribute->getName(); ?>: <?php echo Mage::helper('core')->currency($_attribute->getAmount()+$_attribute->getTaxAmount()); ?>
+								<?php endforeach; ?>
+								</small>)
+								<?php endif; ?>
+						<?php elseif(Mage::helper('weee')->typeOfDisplay($_product, 2)): ?>
+								<?php echo $this->__('%1$s', $_price['price_qty']); ?>
+								<?php if ($_weeeTaxAttributes): ?>
+								(<small>
+								<?php foreach ($_weeeTaxAttributes as $_attribute): ?>
+									<?php echo $_attribute->getName(); ?>: <?php echo Mage::helper('core')->currency($_attribute->getAmount()); ?>
+								<?php endforeach; ?>
+								<?php echo $this->__('%1$s', $_price['formated_price_incl_weee']); ?>
+								</small>)
+								<?php endif; ?>
+						<?php else: ?>
+								<?php echo $this->__('%1$s', $_price['price_qty']) ?>
+						<?php endif; ?>
+					<?php else: ?>
+						<?php if ($this->helper('tax')->displayPriceIncludingTax()): ?>
+							<?php if (Mage::helper('weee')->typeOfDisplay($_product, 0)): ?>
+									<?php echo $this->__('%1$s', $_price['price_qty']) ?>
+							<?php elseif(Mage::helper('weee')->typeOfDisplay($_product, 1)): ?>
+									<?php echo $this->__('%1$s', $_price['price_qty']); ?>
+									<?php if ($_weeeTaxAttributes): ?>
+									(<small>
+									<?php $separator = ''; foreach ($_weeeTaxAttributes as $_attribute): ?>
+										<?php echo $separator; ?>
+										<?php echo $_attribute->getName(); ?>: <?php echo Mage::helper('core')->currency($_attribute->getAmount()); ?>
+									<?php $separator = ' + '; endforeach; ?>
+									</small>)
+									<?php endif; ?>
+							<?php elseif(Mage::helper('weee')->typeOfDisplay($_product, 4)): ?>
+									<?php echo $this->__('%1$s', $_price['price_qty']); ?>
+									<?php if ($_weeeTaxAttributes): ?>
+									(<small>
+									<?php $separator = ''; foreach ($_weeeTaxAttributes as $_attribute): ?>
+										<?php echo $separator; ?>
+										<?php echo $_attribute->getName(); ?>: <?php echo Mage::helper('core')->currency($_attribute->getAmount()+$_attribute->getTaxAmount()); ?>
+									<?php $separator = ' + '; endforeach; ?>
+									</small>)
+									<?php endif; ?>
+							<?php elseif(Mage::helper('weee')->typeOfDisplay($_product, 2)): ?>
+									<?php echo $this->__('%1$s', $_price['price_qty']); ?>
+									<?php if ($_weeeTaxAttributes): ?>
+									(<small>
+									<?php foreach ($_weeeTaxAttributes as $_attribute): ?>
+										<?php echo $_attribute->getName(); ?>: <?php echo Mage::helper('core')->currency($_attribute->getAmount()); ?>
+									<?php endforeach; ?>
+									<?php echo $this->__('%1$s', $_price['formated_price_incl_weee']); ?>
+									</small>)
+									<?php endif; ?>
+							<?php else: ?>
+									<?php echo $this->__('%1$s', $_price['price_qty']) ?>
+							<?php endif; ?>
+						<?php else: ?>
+							<?php if (Mage::helper('weee')->typeOfDisplay($_product, 0)): ?>
+									<?php echo $this->__('%1$s', $_price['price_qty']) ?>
+							<?php elseif(Mage::helper('weee')->typeOfDisplay($_product, 1)): ?>
+									<?php echo $this->__('%1$s', $_price['price_qty']); ?>
+									<?php if ($_weeeTaxAttributes): ?>
+									(<small>
+									<?php $separator = ''; foreach ($_weeeTaxAttributes as $_attribute): ?>
+										<?php echo $separator; ?>
+										<?php echo $_attribute->getName(); ?>: <?php echo Mage::helper('core')->currency($_attribute->getAmount()); ?>
+									<?php $separator = ' + '; endforeach; ?>
+									</small>)
+									<?php endif; ?>
+							<?php elseif(Mage::helper('weee')->typeOfDisplay($_product, 4)): ?>
+									<?php echo $this->__('%1$s', $_price['price_qty']); ?>
+									<?php if ($_weeeTaxAttributes): ?>
+									(<small>
+									<?php $separator = ''; foreach ($_weeeTaxAttributes as $_attribute): ?>
+										<?php echo $separator; ?>
+										<?php echo $_attribute->getName(); ?>: <?php echo Mage::helper('core')->currency($_attribute->getAmount()+$_attribute->getTaxAmount()); ?>
+									<?php $separator = ' + '; endforeach; ?>
+									</small>)
+									<?php endif; ?>
+							<?php elseif(Mage::helper('weee')->typeOfDisplay($_product, 2)): ?>
+									<?php echo $this->__('%1$s', $_price['price_qty']); ?>
+									<?php if ($_weeeTaxAttributes): ?>
+									(<small>
+									<?php foreach ($_weeeTaxAttributes as $_attribute): ?>
+										<?php echo $_attribute->getName(); ?>: <?php echo Mage::helper('core')->currency($_attribute->getAmount()); ?>
+									<?php endforeach; ?>
+									<?php echo $this->__('%1$s', $_price['formated_price_incl_weee_only']); ?>
+									</small>)
+									<?php endif; ?>
+							<?php else: ?>
+									<?php echo $this->__('%1$s', $_price['price_qty']) ?>
+									
+								<?php if($tiercountvalue == 3){
+									if($this->getInGrouped()){
+										$i++;
+								?>
+								
+						<?php 	 $pro=Mage::getModel('catalog/product')->load($_product->getId());
+					$product_help_cases=$pro->getproduct_help_cases();
+					$product_help_unit=$pro->getproduct_help_units();
+					 ?>
+		<?php
+		if($i==1){
+		?>
+         <div></div>
+        
+       <?php
+		}
+		if($i==2){?>
+        <?php if($product_help_cases) { ?>
+         <div style="font-style:italic;  font-size:11px;">(Case = <?php echo $product_help_cases; ?> Cases)</div>
+         <?php }
+		 ?>
+        <?php
+		}
+		if($i==3){?>
+        <?php if($product_help_unit) { ?>
+         <div style="font-style:italic;  font-size:11px;">(Case = <?php echo $product_help_unit; ?> Units)</div>
+         <?php }
+		 ?>
+        <?php
+		}
+		}
+		 }	?>
+							<?php endif; ?>
+						<?php endif; ?>
+					<?php endif; ?>
+
+					<?php endif; // Can apply MSRP ?>
+				
+				</td>
+						<?php endforeach ?>
+			</tr>
+			<tr>
+				<td style="border-bottom:1px #999 dotted;padding-bottom:10px;padding-top:10px;font-weight: bold;">Unit Cost</td>
+						<?php foreach ($_tierPrices as $_price): ?>
+				<td style="text-align: center;border-bottom:1px #999 dotted;padding-bottom:10px;padding-top:10px;">
+					<?php if ($this->helper('tax')->displayBothPrices()): ?>
+						<?php if (Mage::helper('weee')->typeOfDisplay($_product, 0)): ?>
+							<?php echo $this->__('%1$s',$_price['formated_price_incl_weee_only']) ?>
+						<?php elseif(Mage::helper('weee')->typeOfDisplay($_product, 1)): ?>
+								<?php echo $this->__('%1$s',$_price['formated_price_incl_weee_only']); ?>
+								<?php if ($_weeeTaxAttributes): ?>
+								(<small>
+								<?php echo $this->__('%1$s incl tax.', $_price['formated_price_incl_weee']); ?>
+								<?php $separator = ' + '; foreach ($_weeeTaxAttributes as $_attribute): ?>
+									<?php echo $separator; ?>
+									<?php echo $_attribute->getName(); ?>: <?php echo Mage::helper('core')->currency($_attribute->getAmount()); ?>
+								<?php endforeach; ?>
+								</small>)
+								<?php endif; ?>
+						<?php elseif(Mage::helper('weee')->typeOfDisplay($_product, 4)): ?>
+								<?php echo $this->__('%1$s', $_price['formated_price_incl_weee_only']); ?>
+								<?php if ($_weeeTaxAttributes): ?>
+								(<small>
+								<?php echo $this->__('%1$s incl tax.', $_price['formated_price_incl_weee']); ?>
+								<?php $separator = ' + '; foreach ($_weeeTaxAttributes as $_attribute): ?>
+									<?php echo $separator; ?>
+									<?php echo $_attribute->getName(); ?>: <?php echo Mage::helper('core')->currency($_attribute->getAmount()+$_attribute->getTaxAmount()); ?>
+								<?php endforeach; ?>
+								</small>)
+								<?php endif; ?>
+						<?php elseif(Mage::helper('weee')->typeOfDisplay($_product, 2)): ?>
+								<?php echo $this->__('%1$s', $_price['formated_price']); ?>
+								<?php if ($_weeeTaxAttributes): ?>
+								(<small>
+								<?php foreach ($_weeeTaxAttributes as $_attribute): ?>
+									<?php echo $_attribute->getName(); ?>: <?php echo Mage::helper('core')->currency($_attribute->getAmount()); ?>
+								<?php endforeach; ?>
+								</small>)
+								<?php endif; ?>
+						<?php else: ?>
+								<?php echo $this->__('%1$s', $_price['price_qty'], $_price['formated_price']) ?>
+						<?php endif; ?>
+					<?php else: ?>
+						<?php if ($this->helper('tax')->displayPriceIncludingTax()): ?>
+							<?php if (Mage::helper('weee')->typeOfDisplay($_product, 0)): ?>
+									<?php echo $this->__('%1$s',$_price['formated_price_incl_weee']) ?>
+							<?php elseif(Mage::helper('weee')->typeOfDisplay($_product, 1)): ?>
+									<?php echo $this->__('%1$s', $_price['formated_price_incl_weee']); ?>
+									<?php if ($_weeeTaxAttributes): ?>
+									(<small>
+									<?php $separator = ''; foreach ($_weeeTaxAttributes as $_attribute): ?>
+										<?php echo $separator; ?>
+										<?php echo $_attribute->getName(); ?>: <?php echo Mage::helper('core')->currency($_attribute->getAmount()); ?>
+									<?php $separator = ' + '; endforeach; ?>
+									</small>)
+									<?php endif; ?>
+							<?php elseif(Mage::helper('weee')->typeOfDisplay($_product, 4)): ?>
+									<?php echo $this->__('%1$s', $_price['formated_price_incl_weee']); ?>
+									<?php if ($_weeeTaxAttributes): ?>
+									(<small>
+									<?php $separator = ''; foreach ($_weeeTaxAttributes as $_attribute): ?>
+										<?php echo $separator; ?>
+										<?php echo $_attribute->getName(); ?>: <?php echo Mage::helper('core')->currency($_attribute->getAmount()+$_attribute->getTaxAmount()); ?>
+									<?php $separator = ' + '; endforeach; ?>
+									</small>)
+									<?php endif; ?>
+							<?php elseif(Mage::helper('weee')->typeOfDisplay($_product, 2)): ?>
+									<?php echo $this->__('%1$s',$_price['formated_price_incl_tax']); ?>
+									<?php if ($_weeeTaxAttributes): ?>
+									(<small>
+									<?php foreach ($_weeeTaxAttributes as $_attribute): ?>
+										<?php echo $_attribute->getName(); ?>: <?php echo Mage::helper('core')->currency($_attribute->getAmount()); ?>
+									<?php endforeach; ?>
+									<?php echo $this->__('Total incl. Tax: %1$s', $_price['formated_price_incl_weee']); ?>
+									</small>)
+									<?php endif; ?>
+							<?php else: ?>
+									<?php echo $this->__('%1$s', $_price['formated_price_incl_tax']) ?>
+							<?php endif; ?>
+						<?php else: ?>
+							<?php if (Mage::helper('weee')->typeOfDisplay($_product, 0)): ?>
+									<?php echo $this->__('%1$s', $_price['formated_price_incl_weee_only']) ?>
+							<?php elseif(Mage::helper('weee')->typeOfDisplay($_product, 1)): ?>
+									<?php echo $this->__('%1$s', $_price['formated_price_incl_weee_only']); ?>
+									<?php if ($_weeeTaxAttributes): ?>
+									(<small>
+									<?php $separator = ''; foreach ($_weeeTaxAttributes as $_attribute): ?>
+										<?php echo $separator; ?>
+										<?php echo $_attribute->getName(); ?>: <?php echo Mage::helper('core')->currency($_attribute->getAmount()); ?>
+									<?php $separator = ' + '; endforeach; ?>
+									</small>)
+									<?php endif; ?>
+							<?php elseif(Mage::helper('weee')->typeOfDisplay($_product, 4)): ?>
+									<?php echo $this->__('%1$s',$_price['formated_price_incl_weee_only']); ?>
+									<?php if ($_weeeTaxAttributes): ?>
+									(<small>
+									<?php $separator = ''; foreach ($_weeeTaxAttributes as $_attribute): ?>
+										<?php echo $separator; ?>
+										<?php echo $_attribute->getName(); ?>: <?php echo Mage::helper('core')->currency($_attribute->getAmount()+$_attribute->getTaxAmount()); ?>
+									<?php $separator = ' + '; endforeach; ?>
+									</small>)
+									<?php endif; ?>
+							<?php elseif(Mage::helper('weee')->typeOfDisplay($_product, 2)): ?>
+									<?php echo $this->__('%1$s', $_price['formated_price']); ?>
+									<?php if ($_weeeTaxAttributes): ?>
+									(<small>
+									<?php foreach ($_weeeTaxAttributes as $_attribute): ?>
+										<?php echo $_attribute->getName(); ?>: <?php echo Mage::helper('core')->currency($_attribute->getAmount()); ?>
+									<?php endforeach; ?>
+									</small>)
+									<?php endif; ?>
+							<?php else: ?>
+									<?php echo $this->__('%1$s',$_price['formated_price']) ?>
+							<?php endif; ?>
+						<?php endif; ?>
+					<?php endif; ?>					
+				</td>
+						<?php endforeach ?>
+			</tr>
+		</table>
+			<li>
+
+
+			<?php/* if (!$this->getInGrouped()): ?>
+				<?php if(($_product->getPrice() == $_product->getFinalPrice() && $_product->getPrice() > $_price['price'])
+				|| ($_product->getPrice() != $_product->getFinalPrice() &&  $_product->getFinalPrice() > $_price['price'])): ?>
+					<?php echo $this->__('and') ?>&nbsp;<strong class="benefit"><?php echo $this->__('save')?>&nbsp;<?php echo $_price['savePercent']?>%
+				<?php endif ?></strong>
+			<?php endif; */?>
+
+			<?php if ($_catalogHelper->isShowPriceOnGesture($_product)):?>
+				<?php $popupId = 'msrp-popup-' . $_product->getId() . $this->helper('core')->getRandomString(20); ?>
+				<a href="#" id="<?php echo($popupId);?>"><?php echo $this->__('Click for price'); ?></a>
+				<script type="text/javascript">
+				<?php if (!$this->getInGrouped()): ?>
+					var newLink = {
+						url: "<?php echo $this->getAddToCartUrl($_product, array('qty' => $_price['price_qty'])); ?>",
+						qty: "<?php echo $_price['price_qty']?>"
+					};
+				<?php else: ?>
+					var newLink = {
+						url: "<?php echo $this->getAddToCartUrl($_product, array('qty' => $_price['price_qty'])); ?>",
+						notUseForm: true
+					};
+				<?php endif ?>
+					Catalog.Map.addHelpLink(
+						$('<?php echo $popupId ?>'),
+						"<?php echo $_product->getName() ?>",
+						<?php echo json_encode($_price['real_price_html']) ?>,
+						"<?php echo $this->helper('core')->currency($_product->getMsrp(),true,false) ?>",
+						newLink
+					);
+				</script>
+			<?php else: ?>
+				<span class="msrp-price-hide-message">
+					<?php echo $_catalogHelper->getMsrpPriceMessage($_product) ?>
+				</span>
+			<?php endif; ?>
+
+
+			</li>
+			<?php
+			
+			$productSku	=	$_product->getSku();
+			 $query 		= 	"select * from `multipletier` where product_sku = '$productSku'";
+			$connection = 	Mage::getSingleton('core/resource')->getConnection('core_read');
+			 $exists		=	$connection->fetchAll($query);
+			
+		 $catId		=	$exists[0]['cat_id'];
+	if(count($exists)){
+				$query 		= 	"select * from `multipletier` where cat_id = '$catId'";
+				$result		=	$connection->fetchAll($query);
+			
+					
+				if(count($result)>1){?>
+					<div style="font-style:italic">
+					You may combine this item with the following items to obtain multi-unit pricing:
+					</div>
+					<dd class="last odd">
+						<ol>
+							<?php
+							foreach($result as $val){
+								$sku		=	$val['product_sku'];
+								$id = Mage::getResourceSingleton('catalog/product')->getIdBySku($sku);
+								if(!$id){
+									continue;
+								}								
+								if($sku==$productSku) continue;
+								$product 	= 	Mage::getModel('catalog/product')->loadByAttribute('sku',$sku); 
+								 
+								$url		=	$this->htmlEscape($product->getProductUrl());
+								?>
+								<li style="background:none;">
+									<a href="<?=$url?>" class="mptpProducts" target="_blank"><?=$product->getName();?></a>
+								</li>
+								<?php
+							}
+							?>
+						</ol>
+					</dd><?php
+				}			
+		}	
+			?>
+		</ul>
+	<?php endif;?>
+

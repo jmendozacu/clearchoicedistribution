@@ -1,0 +1,66 @@
+<?php
+
+echo $this->getMessagesBlock()->getGroupedHtml();
+
+$thisRMA_customerId = $this->getRma()->getCustomerId();
+$thisRMA_storeId = $this->getRma()->getStoreId();
+$this_customer = Mage::getSingleton('customer/session')->getCustomer()->getId();
+$this_store = Mage::app()->getStore()->getStoreId();
+
+if( ($thisRMA_customerId == $this_customer)
+ && ($thisRMA_storeId    == $this_store) )
+	{
+	?>
+<div class="padder">
+    <div class="page-head button-level">
+        <h3>Return for Order #: <?php echo $this->getRma()->getOrderNumber()?></h3>
+    </div>
+    <div class="col2-set generic-box">
+        <div class="col-1">
+            <h4><?php echo $this->__('Return Details') ?></h4>
+            <?php if ( strlen(trim($this->getRma()->getRmaNumber())) > 0 ): ?>
+                <em><?php echo $this->__('Return #:');?></em> &nbsp;&nbsp;<?php echo $this->getRma()->getRmaNumber()?><br/>
+            <?php endif; ?>
+            <em><?php echo $this->__('Order:');?></em> &nbsp;&nbsp;<?php echo $this->getRma()->getOrderNumber()?><br/>
+            <em><?php echo $this->__('Date Filed:');?></em> &nbsp;&nbsp;<?php echo date('M d, Y', strtotime($this->getRma()->getDateCreated()) - (8*60*60))?><br/>
+            <?php if (strtotime($this->getRma()->getDateCreated()) <= strtotime($this->getRma()->getDateLastupdated())):?>
+                <em><?php echo $this->__('Updated:');?></em> &nbsp;&nbsp;<?php echo date('M d, Y', strtotime($this->getRma()->getDateLastupdated()) - (8*60*60))?><br/>
+            <?php endif;?>
+        </div>
+        <div class="col-2">
+            <h4><?php echo $this->__('Return Status') ?></h4>
+            <i><?php echo $this->getRma()->getStatus()?></i>
+        </div>
+    </div>
+    <br/>
+    <h4><?php echo $this->__('Item(s) to return:');?></h4>
+        <?php echo $this->helper('rma/ListItems')->listRmaItems( $this->getRma()->getItemsCollection(), $this->getRma()->getOrderId() ); ?>
+    <br/>
+    <?php if ( strlen(trim($this->getRma()->getRemarks())) > 0 ): ?>
+        <div class="generic-box">
+            <h4><?php echo $this->__('Remarks') ?></h4>
+            <?php echo $this->htmlEscape($this->getRma()->getRemarks())?>
+        </div>
+    <?php endif; ?>
+</div>   
+<?php
+	}
+else
+	{
+	$notCustomer = false;
+	$notStore = false;
+	if($thisRMA_customerId != $this_customer) {$notCustomer = true;}
+	if($thisRMA_storeId    != $this_store) {$notStore = true;}	
+	
+	?>
+   <div class="padder">
+    <div class="page-head button-level">
+        <h3>Access Denied.</h3>
+        <?php if($notCustomer) { ?><br /><b>You are not the customer associated with this order.</b><? } ?>
+        <?php if($notStore) { ?><br /><b>You are not viewing the correct store associated with this order.</b><? } ?>
+    </div>
+    </div>
+
+<?php
+	}
+?>

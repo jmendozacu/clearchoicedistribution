@@ -1,0 +1,19 @@
+/* bottom center */
+#wowslider-container1  .ws_bullets {bottom:0;left:50%;}
+#wowslider-container1  .ws_bullets div{left:-50%;}
+#wowslider-container1 { position: relative; width:940px;height:330px;margin:0 auto;z-index:100;}
+#wowslider-container1 .ws_images{position: absolute;width:940px;height:330px;overflow:hidden;}
+
+#wowslider-container1 .ws_images a{color:transparent;}
+
+#wowslider-container1 .ws_images img{top:0;left:0;border:none 0;}
+
+#wowslider-container1 a{ text-decoration: none; outline: none; border: none; }
+
+#wowslider-container1  .ws_bullets { font-size: 0px; padding: 0px; float: left;position:absolute;z-index:70;
+}
+#wowslider-container1  .ws_bullets div{position:relative;float:left;}
+#wowslider-container1 .ws_bullets a { margin-left: 0; width:20px;height:20px;background: url(./bullet.png) right top;float: left; text-indent: -1000px; position:relative;}
+* html #wowslider-container1 .ws_bullets a {background-image: url(./bullet.gif)}
+#wowslider-container1 .ws_bullets a.ws_selbull{background-position: left top;}
+#wowslider-container1 .ws_bullets a:hover{background-position: left top;}

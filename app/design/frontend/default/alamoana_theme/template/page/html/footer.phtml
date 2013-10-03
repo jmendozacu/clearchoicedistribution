@@ -1,0 +1,266 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2011 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+
+<?php 
+
+	$footerClass = Mage::getStoreConfig('customadmin/design/footer_skin', Mage::app()->getStore()->getId());
+	$footerheight = trim(Mage::getStoreConfig('customadmin/footer/links_column_footer_height', Mage::app()->getStore()->getId()));
+	$footercolHeight = 'style="min-height:' . $footerheight.'px;"';
+
+?>
+<div class="footer-container<?php if($footerClass) echo ' '.$footerClass.'-footer'; ?>" <?php if($footercolHeight) echo $footercolHeight; ?>>
+
+<?php
+$back_to_top_on_off = Mage::getStoreConfig('customadmin/responsiveness/back_to_top_on_off', Mage::app()->getStore()->getId());
+if($back_to_top_on_off)
+{
+?>
+ <p id="back-top" style="float:right"><a href="#top"><span>Back to top</span></a></p>
+<?php
+}
+?>
+
+<?php
+ $footer_facebook = Mage::getStoreConfig('customadmin/followus/links_column_footer_facebook', Mage::app()->getStore()->getId());
+ if($footer_facebook)
+ {
+	  $facebook =$footer_facebook;
+}
+else
+{
+	$facebook = '#';
+}
+ $footer_twitter = Mage::getStoreConfig('customadmin/followus/links_column_footer_twitter', Mage::app()->getStore()->getId());
+
+ if($footer_twitter)
+ {
+	  $twitter =$footer_twitter;
+}
+else
+{
+	$twitter = '#';
+}
+
+ $footer_linkedin = Mage::getStoreConfig('customadmin/followus/links_column_footer_linkedin', Mage::app()->getStore()->getId());
+if($footer_linkedin)
+ {
+	  $linkedin =$footer_linkedin;
+}
+else
+{
+	$linkedin = '#';
+}
+ 
+
+ $footer_google = Mage::getStoreConfig('customadmin/followus/links_column_footer_google', Mage::app()->getStore()->getId());
+ if($footer_google)
+ {
+	  $google =$footer_google;
+}
+else
+{
+	$google = '#';
+}
+ 
+?>
+  	<div class="main">
+		<div class="foot">
+        	
+			<div class="block first">
+			<span style="font-size:14px;font-weight:bold;color:#b8b8b8;">Shop</span>
+            <?php
+				$_helper 			= 	Mage::helper('catalog/category'); 
+				$counter			=	1;
+				$_categories_main 	= 	$_helper->getStoreCategories(); 
+						echo '<ul style="margin-top:5px;">';
+						foreach($_categories_main as $category_one):
+							if($counter>6) break;
+							echo '<li class="footer_listing_li"><a href="'.Mage::getModel("catalog/category")->load($category_one->getId())->getUrl().'">'.$category_one->getName() .'</a></li>';
+							$counter++;
+						endforeach;
+						echo '</ul>';
+				
+			?> 
+            </div>
+            
+			<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('Footer_block_1')->toHtml() ?>
+            
+            <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('Footer_block_2')->toHtml() ?>
+            
+            <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('Footer_block_3')->toHtml() ?>
+            
+            <div class="cls">&nbsp;</div>
+            
+            <div class="footer_bottom">
+            <?php /*?><p class="copyright-txt"><?php echo $this->getCopyright() ?></p><?php */?>
+            <div><img src="<?php echo $this->getSkinUrl('images/logo1.png') ?>"></div>     
+            <div class="cls">&nbsp;</div>
+            <p class="copyright-txt"><?php echo $this->getCopyright() ?></p><p class="copyright-txt-continued"><a href="<?php echo $this->getUrl('privacy-policy-cookie-restriction-mode'); ?>">Privacy Policy</a> | <a href="<?php echo $this->getUrl('terms_of_use'); ?>">Terms of Use</a> | <a href="<?php echo $this->getUrl('sitemap'); ?>">Sitemap</a></p>
+            <div class="cls">&nbsp;</div>
+            <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('Footer_payment')->toHtml() ?>
+            
+            </div>      
+		</div>
+	</div>
+</div>
+</div>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/jquery.js')?>"></script>
+<script type="text/javascript">
+	jQuery(function() {
+		jQuery("#mini-cart").hover(function() {
+			jQuery(this).addClass('hover');
+			jQuery("#mini-cart .block-content").stop(true, true).delay(300).slideDown(500, "easeOutBounce");
+		}, function() {
+			jQuery("#mini-cart .block-content").stop(true, true).delay(300).fadeOut(800, "easeInCubic");
+		});
+		
+		jQuery(".jewelry").hover(function() {
+			jQuery(this).addClass('hover');
+			jQuery(".dropdwnjew").stop(true, true).delay(300).slideDown(500, "easeOutBounce");
+		}, function() {
+			jQuery(".dropdwnjew").fadeOut(100, "easeInCubic");
+		});
+
+		jQuery(".baby-shop").hover(function() {
+			jQuery(this).addClass('hover');
+			jQuery(".drop-dwnbaby").stop(true, true).delay(300).slideDown(500, "easeOutBounce");
+		}, function() {
+			jQuery(".drop-dwnbaby").fadeOut(100, "easeInCubic");
+		});
+
+
+		jQuery(".watches").hover(function() {
+			jQuery(this).addClass('hover');
+			jQuery(".dropdwnwatches").stop(true, true).delay(300).slideDown(500, "easeOutBounce");
+		}, function() {
+			jQuery(".dropdwnwatches").fadeOut(100, "easeInCubic");
+		});
+
+		jQuery(".fashion").hover(function() {
+			jQuery(this).addClass('hover');
+			jQuery(".dropdwnfashion").stop(true, true).delay(300).slideDown(500, "easeOutBounce");
+		}, function() {
+			jQuery(".dropdwnfashion").fadeOut(100, "easeInCubic");
+		});
+		
+		jQuery(".languagepack").hover(function() {
+			jQuery(this).addClass('hover');
+			jQuery(".lng-box").stop(true, true).delay(300).slideDown(500, "easeOutBounce");
+		}, function() {
+			jQuery(".lng-box").fadeOut(100, "easeInCubic");
+		});
+		
+		jQuery("#back-top").hide();
+		jQuery(window).scroll(function () {
+			if (jQuery(this).scrollTop() > 100) {
+				jQuery('#back-top').fadeIn();
+			} else {
+				jQuery('#back-top').fadeOut();
+			}
+		});
+		jQuery('#back-top a').click(function () {
+			jQuery('body,html').animate({
+				scrollTop: 0
+			}, 800);
+			return false;
+		});
+
+	});
+</script>
+
+
+<script type="text/javascript">
+ jQuery.noConflict();
+	jQuery(document).ready(function() {
+	 // jQuery('div.children3').delay(99999999999999998000000);
+	  jQuery('ul#nav').css({ display: "block"});
+    });
+</script>
+
+
+
+<!--<script type="text/javascript">
+			
+		  (function () 
+		  {
+			  jQuery('.nav-container').addClass('js').ready(function ()
+			  {	
+			   	   jQuery(this).find('#nav > li').hoverIntent(
+				   {
+					   over: function () 
+					   {	alert("fine");		
+					   		var self = this; var $this = jQuery(this);			
+							$this.addClass('hover').siblings().removeClass('hover').each(function () 
+							{ 
+								if (self != this) { clearTimeout(this.hoverIntent_s); } 
+							});
+							$this.siblings().not(this).find('.menu').stop(true, true).slideUp(30, function ()
+							{ 
+								jQuery(this).parent().removeClass('hover'); 
+							});
+							$this.find('.menu').css({'height': '', 'padding': ''}).hide().stop(true, false).slideDown(10);		
+						}, 
+						
+						out: function () 
+						{	
+							var $self = jQuery(this);			
+							$self.find('.menu').stop(true, true).slideUp(200, function () 
+							{ 
+								$self.removeClass('hover'); 
+							});		
+						}, 
+						
+						timeout: 400,		
+						
+						sensitivity: 7,		
+						
+						interval: 50		
+						
+					}).find('.menu').hide().each(function () 
+					{			
+						/* Add vertical line as separator. */			
+						var $lists = jQuery(this).find('.categoriesHead, .themesHead, .brandsHead');			
+						var $wideMenu = jQuery(this);			
+						var $category = $lists.filter('.categoriesHead');			
+						var $theme = $lists.filter('.themesHead');			
+						var $brand = $lists.filter('.brandsHead');			
+						var $separator = jQuery('<div />').css({
+							'position': 'absolute',
+							'top': '15px',
+							'z-index': 60,
+							'border-left': '1px solid #ddd'	
+							});			
+							$wideMenu.css('z-index', -10).show();
+						/* Temporarily show parent to calculate position. */			
+						$theme.size() && $separator.css({'height': $wideMenu.height() - $wideMenu.find('.menuBanner').height() - 20, 'left': $theme.position().left - 10}).insertBefore($theme);			
+						$brand.size() && $separator.clone().css({'left': $brand.position().left - 10}).insertBefore($brand);			
+						$wideMenu.css('z-index', '').hide();		
+					
+					});
+				});
+			}())
+</script>

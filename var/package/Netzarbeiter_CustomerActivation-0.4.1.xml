@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<package>
+    <name>Netzarbeiter_CustomerActivation</name>
+    <version>0.4.1</version>
+    <stability>stable</stability>
+    <license uri="http://opensource.org/licenses/osl-3.0.php">OSL v3.0</license>
+    <channel>community</channel>
+    <extends/>
+    <summary>This small extension makes it impossible for a customer to log in to magento until the account has been activated in the adminhtml interface.</summary>
+    <description>This small extension makes it impossible for a customer to log in to magento,&#xD;
+until the account has been activated in the adminhtml interface.&#xD;
+&#xD;
+Customers &gt; Manage Customers &gt; (select customer) &gt; Account Information &gt; Is activated&#xD;
+&#xD;
+You can disable the Extension on a global or website level using the options found under&#xD;
+System &gt; Configuration &gt; Customer &gt; Customer Activation&#xD;
+&#xD;
+You can also select email notifications for the admin (when a new customer registers) and&#xD;
+for the customer (wehn her account has been activated).&#xD;
+&#xD;
+The Extension was designed to be used together with the Netzarbeiter_LoginCatalog extension&#xD;
+Netzarbeiter_LoginCatalog only shows products to customers that are logged in.&#xD;
+There also is the Extension Netzarbeiter_GroupsCatalog which may suit your needs better,&#xD;
+you have to evaluate yourself what is the best solution for your case.</description>
+    <notes>This small extension makes it impossible for a customer to log in to magento,&#xD;
+until the account has been activated in the adminhtml interface.&#xD;
+&#xD;
+Customers &gt; Manage Customers &gt; (select customer) &gt; Account Information &gt; Is activated&#xD;
+&#xD;
+The Extension was designed to be used together with the Netzarbeiter_LoginCatalog extension&#xD;
+Netzarbeiter_LoginCatalog only shows products to customers that are logged in.&#xD;
+There also is the Extension Netzarbeiter_GroupsCatalog which may suit your needs better,&#xD;
+you have to evaluate yourself what is the best solution for your case.&#xD;
+&#xD;
+You can disable the Extension on a global or website level using the options found under&#xD;
+System &gt; Configuration &gt; Customer &gt; Customer Activation&#xD;
+&#xD;
+You can also select email notifications for the admin (when a new customer registers) and&#xD;
+for the customer (wehn her account has been activated).&#xD;
+&#xD;
+With the latest release this module now also works when customer email confirmation is turned&#xD;
+off.&#xD;
+&#xD;
+KNOWN BUGS:&#xD;
+- None! :D&#xD;
+&#xD;
+If you have ideas for improvements or find bugs, please send them to vinai@netzarbeiter.com,&#xD;
+with Netzarbeiter_CustomerActivation as part of the subject line.</notes>
+    <authors><author><name>Vinai Kopp</name><user>auto-converted</user><email>vinai@netzarbeiter.com</email></author></authors>
+    <date>2012-12-05</date>
+    <time>07:20:05</time>
+    <contents><target name="magecommunity"><dir name="Netzarbeiter"><dir name="CustomerActivation"><dir name="Block"><dir name="Adminhtml"><dir name="Widget"><dir name="Grid"><dir name="Column"><dir name="Renderer"><file name="Boolean.php" hash="39548dc2f41d6033aef2e05e26fc971f"/></dir></dir></dir></dir></dir></dir><dir name="Helper"><file name="Data.php" hash="4329db194e8c4cb3e5418ad0214f903c"/></dir><dir name="Model"><file name="Observer.php" hash="3d8c4dbefcb18a0058d4d5b0c71c4792"/></dir><dir name="controllers"><file name="AdminController.php" hash="5215b1a7cc166f7696d41c69231f79a0"/></dir><dir name="etc"><file name="config.xml" hash="481cd4e46f65d4f0ed307eb05f8ab3ed"/><file name="system.xml" hash="12e0e6a74f8f06553f2e778d41890ded"/></dir><dir name="sql"><dir name="customeractivation_setup"><file name="mysql4-install-0.1.0.php" hash="ed63401cff66c7f714b953cbe15fc040"/><file name="mysql4-upgrade-0.2.3-0.2.4.php" hash="80e9a7b7e9960f322a302e959c8b4123"/><file name="mysql4-upgrade-0.2.4-0.2.5.php" hash="3317195d8a9113d8853653b9cba49f8b"/><file name="mysql4-upgrade-0.2.7-0.2.8.php" hash="debaebd1d935f1fdb37a3ae4d325448c"/></dir></dir><file name="Changelog" hash="42e3f3dd88eb35383532dd9c73d7fb1c"/><file name="README.md" hash="084039d5dc582f1339d06d72b83abed5"/></dir></dir></target><target name="mageetc"><dir name="modules"><file name="Netzarbeiter_CustomerActivation.xml" hash="4a304b03ed57bf0ac363506c2e7bf27d"/></dir></target><target name="magelocale"><dir name="en_US"><dir name="template"><dir name="email"><dir name="netzarbeiter"><dir name="customeractivation"><file name="customer_activation.html" hash="f8ea352be21ebb07b0d4ad4cfecc1841"/><file name="customer_registration_admin.html" hash="9d0d4da25354560bc2abf2390ebafdcf"/></dir></dir></dir></dir><file name="Netzarbeiter_CustomerActivation.csv" hash="90cd93ee9528b681083273c9361e18ff"/></dir><dir name="de_DE"><dir name="template"><dir name="email"><dir name="netzarbeiter"><dir name="customeractivation"><file name="customer_activation.html" hash="ae984d081b7b7b1ebb15c03e0fc9852a"/><file name="customer_registration_admin.html" hash="b41b3862e7de1a72879dae4363878048"/></dir></dir></dir></dir><file name="Netzarbeiter_CustomerActivation.csv" hash="c18ac50920a75c83a3b7370ab7bf1fe9"/></dir><dir name="fr_FR"><file name="Netzarbeiter_CustomerActivation.csv" hash="dee49b02bae106066daca193bb2f9956"/></dir><dir name="nl_NL"><file name="Netzarbeiter_CustomerActivation.csv" hash="c4d4ac59e52cd88da56bf4d172a9502a"/></dir><dir name="el_GR"><file name="Netzarbeiter_CustomerActivation.csv" hash="182b91397e9c875c0e587b881c267b49"/></dir><dir name="ja_JP"><file name="Netzarbeiter_CustomerActivation.csv" hash="f13643696b523185f2131b4193ede237"/></dir><dir name="it_IT"><dir name="template"><dir name="email"><dir name="netzarbeiter"><dir name="customeractivation"><file name="customer_activation.html" hash="5a76c24b81f6e05a44e9518592e414b1"/><file name="customer_registration_admin.html" hash="8cc8c74dd246ee21af9b0961a29e10a6"/></dir></dir></dir></dir><file name="Netzarbeiter_CustomerActivation.csv" hash="3a8a7b5736b6ac2615b780e30123ab8c"/></dir></target></contents>
+    <compatible/>
+    <dependencies/>
+</package>

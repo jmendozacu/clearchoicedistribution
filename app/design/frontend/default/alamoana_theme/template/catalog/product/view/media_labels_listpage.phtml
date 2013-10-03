@@ -1,0 +1,30 @@
+<?php
+	// New product set start and end date of the product
+	$isnewproduct = false;
+	if (Mage::getStoreConfig('customadmin/products/label_new_enabled', Mage::app()->getStore()->getId()))
+	{
+		if ($_product->getData('news_from_date') == true)
+		{
+			$current_date = date("Y-m-d H:i:s");
+			$newpro_start = $_product->getResource()->getAttribute('news_from_date')->getFrontend()->getValue($_product);
+			$newpro_end = $_product->getResource()->getAttribute('news_to_date')->getFrontend()->getValue($_product);
+			if ($current_date >= $newpro_start && $current_date <= $newpro_end)
+				$isnewproduct = true;
+		}
+	}
+	// if product define special price thats products is a sale product
+	$isSpecialprice = false;
+	if (Mage::getStoreConfig('customadmin/products/label_sale_enabled', Mage::app()->getStore()->getId()))
+	{
+		$Prospecialprice = number_format($_product->getFinalPrice(), 2);
+		$old_price = number_format($_product->getPrice(), 2);
+		if ($Prospecialprice != $old_price)
+		$isSpecialprice = true;
+	}
+?>
+<?php if ($isnewproduct == true): ?>
+	<img src="<?php echo $this->getSkinUrl("images/ribbon/ribbon_new.png"); ?>" alt="<?php echo $this->__('New'); ?>" class="ribbon ribbon-top-left" />
+<?php endif; ?>
+<?php if ($isSpecialprice == true): ?>
+	<img src="<?php echo $this->getSkinUrl("images/ribbon/ribbon_sale.png"); ?>" alt="<?php echo $this->__('Sale'); ?>" class="ribbon ribbon-top-right" />
+<?php endif; ?>

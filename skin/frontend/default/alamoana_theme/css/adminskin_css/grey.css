@@ -1,0 +1,78 @@
+body{
+	margin: 0;
+	padding: 0;
+	font-family:Arial, fruit, fruitB;
+	font-size: 12px;
+	color:#343434;
+	background: #ececec url(../../images/main-bg-black.jpg) repeat-x left 43px;
+}
+
+#nav a { color: #fff; }
+
+#nav li:hover a{ color:#343434 !important; }
+
+.mnu ul li a{ color: #fff; }
+
+#mini-cart:hover .block-title .heading { background-position:left -50px; }
+
+.top-grey-bar { background:url(../../images/top-black-belt.jpg) repeat-x left top; height:43px; color:#fff;}
+
+.mainBox h2{margin:0 0 5px; font:bold 16px Arial, Helvetica, sans-serif; color:#222;}
+
+.jcarousel-skin-tango .jcarousel-prev-horizontal { background-position:left -147px;}
+.jcarousel-skin-tango .jcarousel-next-horizontal { background-position:right -147px;}
+
+.jcarousel-skin-tango .jcarousel-prev-horizontal:hover, 
+.jcarousel-skin-tango .jcarousel-prev-horizontal:focus {
+    background-position:-49px -147px;
+}
+
+.jcarousel-skin-tango .jcarousel-next-horizontal:hover,
+.jcarousel-skin-tango .jcarousel-next-horizontal:focus {
+    background-position: -49px -147px;
+}
+
+
+.slideshow-wrapper a.backward { position:absolute; left:-12px; top:144px; z-index:999; background:url(../../images/prev-btn.png) no-repeat left -147px; width:49px; height:49px; text-indent:-9999px; }
+.slideshow-wrapper a.backward:hover{background:url(../../images/prev-btn.png) no-repeat -49px -147px;}
+.slideshow-wrapper a.forward { position:absolute; right:-12px; top:144px; z-index:999; background:url(../../images/next-btn.png) no-repeat right -147px; width:49px; height:49px; text-indent:-9999px;}
+.slideshow-wrapper a.forward:hover {background:url(../../images/next-btn.png) no-repeat -49px -147px;}
+
+
+.mainBox .prodts h2.product-name  { margin:15px 0 5px 0 !important; line-height:normal !important; font:normal 13px Arial, Helvetica, sans-serif !important; text-transform:capitalize !important;}
+
+.mainBox .prodts li span.old_price { font:normal 14px/22px Arial, Helvetica, sans-serif; color:#222; text-decoration:line-through;}
+.mainBox .prodts li span.specialprice { font:normal 18px Arial, Helvetica, sans-serif; color:#222; }
+
+.block-cart .summary { background: none; margin:-1px 0 0; position:relative; z-index:1; }
+
+.fltR .topMnu a { color:#fff;}
+
+#mini-cart .block-title .empty { color:#fff;}
+#mini-cart:hover .block-title .empty { color:#343434;}
+
+.logo-main .logo a.logo  { color:#fff;}
+
+.left_subcat p.main_curr_cat,.block-compare .block-title,.add_tobtn a.link-learnmore{background:#1E1E1E !important}
+
+.left_subcat ul li a:hover{color:#6F8384 !important;}
+
+.block-compare .block-title span{color:#fff !important;}
+
+.product-view .product-img-box{position:relative;border:solid 1px #1E1E1E ;padding-left:8px;}
+
+.product-view .product-img-box .ribbon-top-right{position:absolute;right:-1px;top:-1px;}
+
+.product-view .product-shop .add-to-cart .detail_page_addbtn a span{background:#1E1E1E !important}
+.product-view .product-shop .add-to-cart .detail_page_addbtn a span:hover{opacity:0.8;}
+
+#facebox .content a:hover, #facebox .content a#hidewindow:hover{background:#1e1e1e !important}
+
+.tabs li.active a, .tabs li.active a:hover{background:#1e1e1e !important}
+.tabs{border-bottom:solid 1px #1e1e1e !important}
+
+.wrapper button.button span{background:#1e1e1e !important}
+
+#mini-cart .mini-products-list li div.text p a{color:#343434 !important}
+
+.opc .allow .step-title{background:#1E1E1E !important;}

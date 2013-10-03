@@ -1,0 +1,97 @@
+<?php 
+	$rmadata = $this->getRmadata();
+	$rmacustomer = $this->getRmaCustomer();
+	
+	// function found in adminhtml/rma/edit/tab/view.php
+	//$storename = $this->updateStoreName();
+	
+	$storeID = $rmadata->getStoreId();
+	$storeName = Mage::getModel('core/store_group')->load($storeID)->getData('name');
+	
+?>
+<?php
+$thisCustomerId = $rmadata->getCustomerId();
+
+$thisCustomerName = $rmadata["customer_name"];
+$thisCustomerEmail = $rmadata["customer_email"];
+
+?>
+<div class="box-left">
+    <div class="entry-edit-head"><h4 class="icon-head head-customer-view"><?php echo Mage::helper('rma')->__('Order Information') ?></h4></div>
+    <fieldset>
+        <table cellspacing="0" class="form-list">
+            <tr>
+                <td class="label"><?php echo $this->__('Order #:');?></td>
+                <td><strong><!--<a href="<?php
+                     $frontname = Mage::getConfig()->getNode('admin/routers/adminhtml/args/frontName');
+							$route = $frontname."/sales_order/view";
+							$params = array("order_id"=>$rmadata['order_id']);
+							echo( Mage::helper('adminhtml')->getUrl($route, $params) );
+							?>" target="_blank"><?php echo $rmadata->getOrderNumber(); ?></a>--><?php echo $rmadata->getOrderNumber(); ?></strong></td>
+            </tr>
+            <tr>
+            	<td class="label"><?php echo $this->__('Customer Name:');?></td>
+                <td>
+                		<?php
+							
+							if($rmadata['customer_id'] == 0)
+								{
+								?>
+                        <strong><?php echo $thisCustomerName; ?></strong> (guest)
+                        <?php
+								}
+							else
+								{
+								?>
+                        <strong><!--<a href="<?php
+                     $frontname = Mage::getConfig()->getNode('admin/routers/adminhtml/args/frontName');
+							$route = $frontname."/customer/edit";
+							$params = array("id"=>$rmadata['customer_id']);
+							echo( Mage::helper('adminhtml')->getUrl($route, $params) );
+							?>" target="_blank"><?php echo $thisCustomerName; ?></a>--><?php echo $thisCustomerName; ?></strong>
+                        <?php
+								}
+								?>
+               	</td>
+            </tr>
+            <tr>
+            	<td class="label"><?php echo $this->__('Customer Email:');?></td>
+                <td><a href="mailto:<?php echo $thisCustomerEmail; ?>"><strong><?php echo $thisCustomerEmail; ?></strong></a></td>
+            </tr>
+            <tr>
+            	<td class="label"><?php echo $this->__('Store Name:');?></td>
+                <td><strong><?php echo $storeName; ?></strong></a></td>
+            </tr>
+        </table>
+    </fieldset>
+</div>
+<div class="box-right">
+    <div class="entry-edit-head"><h4 class="icon-head head-customer-view"><?php echo Mage::helper('rma')->__('Date Information') ?></h4></div>
+    <fieldset>
+        <table cellspacing="0" class="form-list">
+            <tr>
+                <td class="label"><?php echo $this->__('Date Filed:'); ?></td>
+                <td><strong><?php echo Mage::helper('core')->formatDate($rmadata->getDateCreated(), 'long', true) ?></strong></td>
+            </tr>
+           	<tr>
+           		<td class="label"><?php echo $this->__('Last Updated:'); ?></td>	
+                <td><strong><?php echo Mage::helper('core')->formatDate($rmadata->getDateLastupdated(), 'long', true) ?></strong></td>
+           	</tr>
+        </table>
+    </fieldset>
+</div>
+<div class="clear"></div>
+<?php echo $this->getFormHtml(); ?>
+<?php echo $this->getItemsHtml(); ?>
+<?php echo $this->getRemarksHtml(); ?>
+<!--<div class="box-edit">
+    <div class="entry-edit-head"><h4 class="icon-head head-customer-view"><?php echo Mage::helper('rma')->__('RMA Details') ?></h4></div>
+    <fieldset>
+        <table cellspacing="2" class="box-left">
+            <tr>
+                <td>Sample</td>
+                <td>Lang</td>
+            </tr>
+        </table>
+    </fieldset>
+</div>-->

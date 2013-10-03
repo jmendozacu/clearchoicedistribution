@@ -1,0 +1,88 @@
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/queckview/js/queckbox.js')?>"></script>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('featured_slider/jquery.jcarousel.min.js')?>"></script> 
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('home-slider/skin.css')?>">
+	<script type="text/javascript">
+	function mycarousel_initCallback(carousel)
+	{
+		// Disable autoscrolling if the user clicks the prev or next button.
+		carousel.buttonNext.bind('click', function() {
+			carousel.startAuto(0);
+		});
+
+		carousel.buttonPrev.bind('click', function() {
+			carousel.startAuto(0);
+		});
+
+		// Pause autoscrolling if the user moves with the cursor over the clip.
+		carousel.clip.hover(function() {
+			carousel.stopAuto();
+		}, function() {
+			carousel.startAuto();
+		});
+	};
+
+	jQuery(document).ready(function() {
+	   //jQuery.noConflict();
+		jQuery('#mycarousel').jcarousel({
+			auto: 5,
+			scroll: 1,
+			wrap: 'circular',
+			itemFallbackDimension: 578, //it's the size of jCarousel clip
+			initCallback: mycarousel_initCallback
+		});
+	});
+</script> 
+
+<!-- <script type="text/javascript" src="<?php //echo $this->getSkinUrl('additional_slider/jquery-1.js')?>"></script> -->
+
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('additional_slider/jquery.js')?>"></script>
+
+<script type="text/javascript">
+		jQuery(document).ready(function() {
+			jQuery('#mycarousel111').jcarousel();
+	});
+</script>
+
+</div><?php /*?><div class="new-product"><?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('new_product')->toHtml() ?></div><?php */?>
+<div class="homCnt"> <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('about_alamoana')->toHtml() ?> </div>
+<div class="banner_company"> <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('company_banner')->toHtml() ?> </div>
+<div class="cls"></div>
+<div class="new-product"><?php require('new_product.phtml');  ?></div>
+
+<!-- <div class="new-product"><?php //require('inchoo_bestselling_product.phtml');  ?></div> -->
+
+<!-- <div class="home-banner">
+<div class="prodts">
+<?php  //require('featured_product.phtml');  ?><?php //echo $this->getLayout()->createBlock('cms/block')->setBlockId('home_banner')->toHtml() ?>
+  <div class="cls"></div>
+</div>
+<?php /*?><div class="homCnt"> <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('over_wonova')->toHtml() ?> </div><?php */?>
+
+<div class="cls"></div>
+</div>
+-->
+
+<?php
+    $_productCollection=$this->getLoadedProductCollection();
+    $_helper = $this->helper('catalog/output');
+?>
+
+
+
+<script type="text/javascript">
+					//jQuery.noConflict();
+                    jQuery(document).ready(function() {
+                        jQuery('#logo_slider').jcarousel();
+                    });
+                    </script>
+<div class="logoIcns">
+<!--<ul id="logo_slider" class="jcarousel-clip jcarousel-clip-horizontal"> -->
+  <ul>
+	<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('home_page_brand')->toHtml() ?>
+  </ul>
+</div>
+<div disabled="disabled" style="display: block;" class="jcarousel-prev jcarousel-prev-horizontal jcarousel-prev-disabled jcarousel-prev-disabled-horizontal"></div>
+<div style="display: block;" class="jcarousel-next jcarousel-next-horizontal"></div>
+
+</div>
+</div>

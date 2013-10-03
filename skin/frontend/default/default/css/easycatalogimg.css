@@ -1,0 +1,10 @@
+.catalogimg-listing {line-height:1.35em;}
+.listing-catalogimg-grid {overflow: hidden; zoom: 1;}
+.listing-catalogimg-grid .grid-row { border-bottom:1px solid #d9dde3; }
+.listing-catalogimg-grid li.item { float:left; padding:12px 10px; line-height:1.6em; overflow:hidden; text-align:left;}
+.listing-catalogimg-grid .last { border-bottom:0 none;}
+
+.col-3-layout .listing-catalogimg-grid li.item {width:138px;}
+.col-2-right-layout .listing-catalogimg-grid li.item {width:205px;}
+
+.listing-catalogimg-grid .grid-row:after { content:"."; display:block; clear:both; font-size:0; line-height:0; height:0; overflow:hidden; }

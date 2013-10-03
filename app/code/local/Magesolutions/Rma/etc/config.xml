@@ -1,0 +1,198 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * @category   Magesolutions
+ * @package    Magesolutions_Rma
+ * @author     ModuleCreator
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+ -->
+<config>
+    <modules>
+        <Magesolutions_Rma>
+            <version>0.4.0</version>
+        </Magesolutions_Rma>
+    </modules> 
+    <frontend>
+		<translate>
+			<modules>
+				<Magesolutions_Rma>
+					<files>
+						<default>Magesolutions_Rma.csv</default>
+					</files>
+				</Magesolutions_Rma>
+			</modules>
+		</translate>
+        <routers>
+            <rma>
+                <use>standard</use>
+                <args>
+                    <module>Magesolutions_Rma</module>
+                    <frontName>rma</frontName>
+                </args>
+            </rma>
+        </routers>
+        <layout>
+            <updates>
+                <rma>
+                    <file>rma.xml</file>
+                </rma>
+            </updates>
+        </layout>
+    </frontend>
+    <admin>
+        <routers>
+			<rma>
+				<use>admin</use>
+				<args>
+					<module>Magesolutions_Rma</module>
+					<frontName>rma</frontName>
+					<!--<frontName><![CDATA[admin]]></frontName>-->
+				</args>
+			</rma>
+        </routers>
+    </admin>
+    <adminhtml>
+		<translate>
+			<modules>
+				<Magesolutions_Rma>
+					<files>
+						<default>Magesolutions_Rma.csv</default>
+					</files>
+				</Magesolutions_Rma>
+			</modules>
+		</translate>
+		<menu>
+			<magesolutions module="rma">
+				<title>Mage Solutions</title>
+				<sort_order>71</sort_order>               
+				<children>
+					<items module="rma">
+						<title>RMA Manager</title>
+						<sort_order>1</sort_order>
+						<action>rma/adminhtml_rma</action>
+					</items>
+				</children>
+			</magesolutions>
+		</menu>
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+						<magesolutions module="rma">
+							<title>Mage Solutions</title>
+							<children>
+								<items module="rma">
+									<title>RMA Manager</title>
+									<sort_order>1</sort_order>
+								</items>
+							</children>
+						</magesolutions>
+						<magesolutions module="rma" translate="title">
+							<title>Rma Module</title>
+							<sort_order>10</sort_order>
+						</magesolutions>
+						<system>
+						  <children>
+							<config>
+							  <children>
+								<rma>
+								  <title>RMA Configuration Section</title>
+								</rma>
+								<rma2>
+								  <title>Included in the box Section</title>
+								</rma2>
+							  </children>
+							</config>
+						  </children>
+						</system>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+		<layout>
+			<updates>
+				<rma>
+					<file>rma.xml</file>
+				</rma>
+			</updates>
+		</layout>
+    </adminhtml>   
+	<default>
+		<rma>
+		  <rma>
+			<emailname>RMA Department</emailname>
+			<emailaddress>rmadepartment@magento.com</emailaddress>
+		  </rma>
+		  <rma2>
+			<includedbox>Poster, Users Manual, CD, DVD, Cartridges, Toner, Power Cord, USB Cable</includedbox>
+		  </rma2>
+		  <rma3>
+			<returndays>15</returndays>
+			<returnpolicy>Please refer to our Return Policy page for more details.</returnpolicy>
+		  </rma3>
+		</rma>
+	  </default>
+    <global>
+        <models>
+            <rma>
+                <class>Magesolutions_Rma_Model</class>
+                <resourceModel>rma_mysql4</resourceModel>
+            </rma>
+            <rma_mysql4>
+                <class>Magesolutions_Rma_Model_Mysql4</class>
+                <entities>
+                    <rma>
+                        <table>rma</table>
+                    </rma>
+					<rma_items>
+                        <table>rma_items</table>
+                    </rma_items>
+					<rma_emails>
+                        <table>rma_emails</table>
+                    </rma_emails>
+                </entities>
+            </rma_mysql4>
+        </models>
+        <resources>
+            <rma_setup>
+                <setup>
+                    <module>Magesolutions_Rma</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </rma_setup>
+            <rma_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </rma_write>
+            <rma_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </rma_read>
+        </resources>
+        <blocks>
+            <rma>
+                <class>Magesolutions_Rma_Block</class>
+            </rma>
+        </blocks>
+		<blocks>
+	    	<adminhtml>
+	    		<rewrite>
+	    			<sales_order_view>Magesolutions_Rma_Block_Adminhtml_Sales_Order_View</sales_order_view>
+	    		</rewrite>
+	    	</adminhtml>
+    	</blocks>
+        <helpers>
+            <rma>
+                <class>Magesolutions_Rma_Helper</class>
+            </rma>
+        </helpers>
+    </global>
+</config>

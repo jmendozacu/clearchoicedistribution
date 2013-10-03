@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<package>
+    <name>Frontend_Links_Manager</name>
+    <version>0.2.0</version>
+    <stability>stable</stability>
+    <license uri="http://www.opensource.org/licenses/osl-3.0.php">OSL v3.0</license>
+    <channel>community</channel>
+    <extends/>
+    <summary>Frontend Links Manager extension is used to turn on/off the frontend links(top links, footer links, customer navigation links &amp; catalog navigation links) is easier way via backend.</summary>
+    <description>Frontend Links Manager extension is used to turn on/off the frontend links(top links, footer links, customer navigation links &amp; catalog navigation links) is easier way via backend.</description>
+    <notes>&lt;strong&gt;0.1.0 - 0.2.0&lt;/strong&gt;&lt;br /&gt;&#xD;
+- Add/Remove option for My Account &gt; My Applications&lt;br /&gt;&#xD;
+- Add/Remove option for My Account &gt; Log Out&lt;br /&gt;&#xD;
+- Add/Remove option for My Account &gt; Store Credit (EE only)&lt;br /&gt;&#xD;
+- Add/Remove option for My Account &gt; Gift Card (EE only)&lt;br /&gt;&#xD;
+- Add/Remove option for My Account &gt; Gift Registry (EE only)&lt;br /&gt;&#xD;
+- Add/Remove option for My Account &gt; Reward Points (EE only)&lt;br /&gt;&#xD;
+- Add/Remove option for My Account &gt; My Invitations (EE only)&lt;br /&gt;&#xD;
+- Add/Remove option for Footer &gt; Orders and Returns&lt;br /&gt;&#xD;
+- Add/Remove option for Footer &gt; Rss&lt;br /&gt;&#xD;
+- Overriding of catalog navigation template only if Home link is enabled&lt;br /&gt;</notes>
+    <authors><author><name>MagePsycho</name><user>magepsycho</user><email>rajen_k_bhtt@hotmail.com</email></author></authors>
+    <date>2013-07-26</date>
+    <time>11:15:57</time>
+    <contents><target name="mageetc"><dir name="modules"><file name="MagePsycho_Xmllinks.xml" hash="4f432c754ea77467f58f5936850b843a"/></dir></target><target name="magelocal"><dir name="MagePsycho"><dir name="Xmllinks"><dir name="Block"><dir name="Account"><file name="Navigation.php" hash="76400cc7cea603eb2af77f9ad3046040"/></dir><dir name="System"><dir name="Config"><file name="Heading.php" hash="409f5b54fd0e4407c4daf89f387cdd67"/><file name="Info.php" hash="a50db944e0b876d60848ff4c3753a50b"/></dir></dir><file name="Xmllinks.php" hash="eac9037445d98ef284b593cf595f5ce5"/></dir><dir name="Helper"><file name="Data.php" hash="772190e03f041fdded937900ea7d5c55"/></dir><dir name="Model"><dir name="System"><dir name="Config"><dir name="Source"><file name="Noyes.php" hash="d190b7d3278f07bc770b381927238d9c"/><file name="Yesno.php" hash="cc0e6b14a0c3e5fb80a89ec776e1ebe7"/></dir></dir></dir><file name="Xmllinks.php" hash="6865ffdcae13236daff8ae96e7004948"/></dir><dir name="controllers"><file name="IndexController.php" hash="fb4c6d7603ed06f25d5eb4965f969938"/></dir><dir name="etc"><file name="adminhtml.xml" hash="4b2879fef1d0e50f1e9bd4bc5b9a71cb"/><file name="config.xml" hash="142600cd67c5abab7911e16f3921807b"/><file name="system.xml" hash="d626987c6fe5ffa1d274f4cc2da41d4f"/></dir></dir></dir></target><target name="magedesign"><dir name="frontend"><dir name="default"><dir name="default"><dir name="layout"><file name="xmllinks.xml" hash="1ac376aa3223b872659cbb06593c9e6d"/></dir><dir name="template"><dir name="xmllinks"><file name="blank-link.phtml" hash="68b329da9893e34099c7d8ad5cb9c940"/><dir name="catalog"><dir name="navigation"><file name="top.phtml" hash="2579e73ca413f2950d1cfcae7d0a6d1f"/></dir></dir></dir></dir></dir></dir></dir></target></contents>
+    <compatible/>
+    <dependencies><required><php><min>5.2.0</min><max>6.0.0</max></php></required></dependencies>
+</package>

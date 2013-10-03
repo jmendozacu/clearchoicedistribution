@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Ccd_MPTP>
+            <active>false</active>
+            <codePool>local</codePool>
+        </Ccd_MPTP>
+    </modules>
+</config> 

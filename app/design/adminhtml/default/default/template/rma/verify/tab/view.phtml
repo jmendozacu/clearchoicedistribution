@@ -1,0 +1,119 @@
+<script type="text/javascript">
+
+	function item_included(curr_item)
+	{
+		if (document.getElementsByName('check_'+curr_item)[0].checked == true)
+		{
+			document.getElementsByName('radio_'+curr_item)[0].checked = true;
+		}
+		
+	}
+	
+	function item_radio(curr_item)
+	{
+		if (document.getElementsByName('radio_'+curr_item)[0].checked == true)
+		{
+			document.getElementsByName('check_'+curr_item)[0].checked = true;
+		}
+		if (document.getElementsByName('radio_'+curr_item)[1].checked == true)
+		{
+			document.getElementsByName('check_'+curr_item)[0].checked = true;
+		}
+	}
+
+</script>
+
+<?php 
+	$rmadata = $this->getRmadata(); 
+	$rmaitem = $this->getRmaitem(); 
+	$storeID = $rmadata->getStoreId();
+	$product = Mage::getModel('catalog/product')->load($rmaitem->getItemId());
+	
+	
+	
+	$included_row = Mage::getSingleton('core/resource')->getConnection('core_read')->fetchAll("SELECT `value` FROM `core_config_data` WHERE `scope`='stores' AND `scope_id`='" . $storeID . "' AND `path`='rma/rma2/includedbox'");
+	if(empty($included_row)) {$included_row = Mage::getSingleton('core/resource')->getConnection('core_read')->fetchAll("SELECT `value` FROM `core_config_data` WHERE `scope`='default' AND `scope_id`='0' AND `path`='rma/rma2/includedbox'");}
+	
+	
+	//Mage::log("SELECT `value` FROM `core_config_data` WHERE `scope`='stores' AND `scope_id`='" . $storeID . "' AND `path`='rma/rma2/includedbox'");
+	
+	
+	
+?>
+<div class="box-left">
+	<?php echo $this->getInfoHtml();?>
+</div>
+<div class="box-right">
+	<?php echo $this->getReasonHtml();?>
+</div>
+<div class="clear"></div>
+<?php echo $this->getFormHtml();?>
+<div class="clear"></div>
+<?php //if (isset($include_array)): ?>
+        	<?php
+         
+			if(empty($included_row))
+				{
+				?>
+<div class="entry-edit">
+    <div class="entry-edit-head"><h4 class="icon-head head-customer-view"><?php echo Mage::helper('rma')->__('Error') ?></h4></div>
+    <fieldset>
+        <table cellspacing="0" class="form-list">
+				<tr>
+				<td colspan="4"><span style="color:#900; font-weight: bold; font-size: 14px;">RMA Module has not been properly configured</span><br /><br />Go to <i>"System"</i>&rarr;<i>"Configuration"</i>&rarr;<i>"RMA Configuration" (under "Sales")</i>, fill out the two sections, and make sure to <b>Save Config</b>.</td>
+            </tr>
+            
+        </table>
+            <?php
+				}
+			else
+				{
+				$included = $included_row[0]['value'];
+				
+				if(strlen(trim($included)) > 0)
+				{
+					$included = ltrim(rtrim(trim($included), ','), ',');
+					$include_array = explode(",", $included);
+				}
+				if(strlen(trim($rmaitem->getShippingIncluded())) > 0)
+				{
+					$array1 = explode("|", $rmaitem->getShippingIncluded());
+					$included_array = array();
+					foreach($array1 as $arr)
+					{
+						$arr2 = explode(":", $arr);
+						$included_array[$arr2[0]] = $arr2[1];
+					}
+				}
+				?>
+            
+<div class="entry-edit">
+    <div class="entry-edit-head"><h4 class="icon-head head-customer-view"><?php echo Mage::helper('rma')->__('Included in the Box') ?></h4></div>
+    <fieldset>
+        <table cellspacing="0" class="form-list">
+            <?php
+				foreach ($include_array as $key => $incl) {
+					?>
+						<tr>
+							<td style="width:25px;" class="a-center"><input type="checkbox" name="check_<?php echo $key ?>" id="checkbox" <?php echo ( isset($included_array) == true && array_key_exists($incl, $included_array)== true ) ? "checked='checked'" : "";   ?> onclick="item_included(<?php echo $key ?>)"/></td>
+							  <td style="padding-right:20px;"><?php echo $incl ?></td>
+							  <td style="padding-right:30px;"><input type="radio" name="radio_<?php echo $key ?>" value="Present" <?php echo ( isset($included_array) == true && array_key_exists($incl, $included_array)== true && $included_array[$incl] == "Present") ? "checked='checked'" : "";   ?> onclick="item_radio(<?php echo $key ?>)"/> <?php echo Mage::helper('rma')->__('Present') ?></td>
+							  <td style="padding-right:10px;"><input type="radio" name="radio_<?php echo $key ?>" value="Missing" <?php echo ( isset($included_array) == true && array_key_exists($incl, $included_array)== true && $included_array[$incl] == "Missing") ? "checked='checked'" : "";   ?> onclick="item_radio(<?php echo $key ?>)"/> <?php echo Mage::helper('rma')->__('Missing') ?></td>
+						 </tr>
+					<?php
+					}
+				?>
+            
+        </table>
+        <br/>
+        <i><?php echo Mage::helper('rma')->__("* If you want to add more 'Included in the box' items, go to System -> Configuration, then under the 'Sales' tab, select 'RMA Configuration'. ") ?></i>
+				<?php
+				}
+				
+				?>
+    </fieldset>
+</div>
+<?php //	endif; ?>
+
+<div class="clear"></div>
+<?php echo $this->getRemarksHtml();?>

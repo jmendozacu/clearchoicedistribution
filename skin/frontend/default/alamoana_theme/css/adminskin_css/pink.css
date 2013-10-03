@@ -1,0 +1,72 @@
+body{
+	margin: 0;
+	padding: 0;
+	font-family:Arial, fruit, fruitB;
+	font-size: 12px;
+	color:#343434;
+	background: #fff url(../../images/main-bg-pink.jpg) repeat-x left 43px;
+}
+
+#nav a { color: #fff; }
+
+#nav li:hover a{ color:#343434 !important; }
+
+.mnu ul li a{ color: #fff; }
+
+#mini-cart:hover .block-title .heading { background-position:left -25px; }
+
+.top-grey-bar { background:url(../../images/top-pink-belt.jpg) repeat-x left top; height:43px; color:#fff;}
+
+.mainBox h2{margin:0 0 5px; font:bold 16px Arial, Helvetica, sans-serif; color:#dd2b66;}
+
+.jcarousel-skin-tango .jcarousel-prev-horizontal { background-position:left -49px;}
+.jcarousel-skin-tango .jcarousel-next-horizontal { background-position:left -49px;}
+
+.jcarousel-skin-tango .jcarousel-prev-horizontal:hover, 
+.jcarousel-skin-tango .jcarousel-prev-horizontal:focus {
+    background-position:-49px -49px;
+}
+
+.jcarousel-skin-tango .jcarousel-next-horizontal:hover,
+.jcarousel-skin-tango .jcarousel-next-horizontal:focus {
+    background-position: -49px -49px;
+}
+
+.jcarousel-skin-tango .jcarousel-prev-horizontal:active {
+    background-position: -49px -49px;
+}
+
+.slideshow-wrapper a.backward { position:absolute; left:-12px; top:144px; z-index:999; background:url(../../images/prev-btn.png) no-repeat left -49px; width:49px; height:49px; text-indent:-9999px; }
+.slideshow-wrapper a.backward:hover{background:url(../../images/prev-btn.png) no-repeat -49px -49px;}
+.slideshow-wrapper a.forward { position:absolute; right:-12px; top:144px; z-index:999; background:url(../../images/next-btn.png) no-repeat right -49px; width:49px; height:49px; text-indent:-9999px;}
+.slideshow-wrapper a.forward:hover {background:url(../../images/next-btn.png) no-repeat -49px -49px;}
+
+
+.mainBox .prodts h2.product-name  { margin:15px 0 5px 0 !important; line-height:normal !important; font:normal 13px Arial, Helvetica, sans-serif !important; text-transform:capitalize !important;}
+
+.mainBox .prodts li span.old_price { font:normal 14px/22px Arial, Helvetica, sans-serif; color:#dd2b66; text-decoration:line-through;}
+.mainBox .prodts li span.specialprice { font:normal 18px Arial, Helvetica, sans-serif; color:#2b93bf; }
+
+.fltR .topMnu a { color:#343434;}
+.logo-main .logo a.logo  { color:#343434;}
+
+.left_subcat p.main_curr_cat,.block-compare .block-title,.add_tobtn a.link-learnmore{background:#DD2B67 !important}
+
+.left_subcat ul li a:hover{color:#DD2B67 !important;}
+
+.block-compare .block-title span{color:#fff !important;}
+
+.product-view .product-img-box {background: url("../../images/big-pro-bg.png") no-repeat scroll 0 0 transparent;height: 353px;padding-top: 10px;position: relative;width: 492px;}
+.product-view .product-img-box .ribbon-top-right{position:absolute;right:6px;top:-1px;}
+
+.product-view .product-shop .add-to-cart .detail_page_addbtn a span{background:#DD2B67 !important}
+.product-view .product-shop .add-to-cart .detail_page_addbtn a span:hover{opacity:0.8;}
+
+#facebox .content a:hover, #facebox .content a#hidewindow:hover{background:#DD2B67 !important}
+.wrapper button.button span{background:#DD2B67 !important}
+
+.opc .allow .step-title{background:#DD2B67 !important;}
+.opc .active .step-title .number{background:#a10036 !important; border:1px solid #a10036 !important;}
+
+.tabs{border-bottom:none; position:relative; margin-bottom:-1px; z-index:9999;}
+.tabs li.active a, .tabs li.active a:hover{background:#FFF; border:1px solid #AFAFAF; border-bottom:none !important; padding:5px 9px 6px; color:#FF4A4A;}

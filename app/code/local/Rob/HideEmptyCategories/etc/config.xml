@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Hide Empty Categories
+ *
+ * @category    Rob
+ * @package     Rob_HideEmptyCategories
+ * @copyright   Copyright (c) 2011 Rob 
+ * @author      Ravi
+ */
+-->
+<config>
+    <modules>
+        <Rob_HideEmptyCategories>
+            <version>1.0.0</version>
+        </Rob_HideEmptyCategories>
+    </modules>
+    <global>
+        <models>
+            <hideemptycategories>
+                <class>Rob_HideEmptyCategories_Model</class>
+            </hideemptycategories>
+            <catalog_resource>
+                <rewrite>
+                    <category_flat>Rob_HideEmptyCategories_Model_Catalog_Resource_Category_Flat</category_flat>
+                </rewrite>
+            </catalog_resource>
+        </models>
+    </global>
+    <frontend>
+        <events>
+            <catalog_category_collection_load_after>
+                <observers>
+                    <hideemptycategories>
+                        <type>singleton</type>
+                        <class>hideemptycategories/observer</class>
+                        <method>catalogCategoryCollectionLoadAfter</method>
+                    </hideemptycategories>
+                </observers>
+            </catalog_category_collection_load_after>
+        </events>
+    </frontend>
+</config>

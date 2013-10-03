@@ -1,0 +1,152 @@
+<script type="text/javascript">
+
+function validate_form(curr_qty, curr_value, curr_item)
+	{
+	//alert(curr_value);
+	//alert(document.getElementById("addtorma_"+curr_item).checked);
+	if (curr_value > curr_qty)
+		{
+		alert ("The quantity you are trying to return is greater than what is shipped.");
+		document.getElementsByName('quantity_'+curr_item)[0].value = curr_qty;
+		document.getElementById("addtorma_"+curr_item).checked = true;
+		}
+	
+	if (curr_value == 0 && document.getElementById("addtorma_"+curr_item).checked==true)
+		{
+		document.getElementById("addtorma_"+curr_item).checked = false;
+		}
+	if (curr_value>0)
+		{
+		document.getElementById("addtorma_"+curr_item).checked = true;
+		}
+		
+	}
+
+function isNumberKey(textboxIn, evt)
+{
+	   if (!evt)
+	   	evt = window.event;
+	   var charCode = (evt.which) ? evt.which : evt.keyCode;
+		 if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode != 46) {
+			return false;
+		}
+	
+		if(charCode == 46 && textboxIn.indexOf(".") != -1) {
+			return false;
+		}
+	  
+	return true;
+}
+
+function checkboxupdate(checkbox, qty_to_return, curr_item)
+	{
+	if(checkbox)
+		{
+		document.getElementsByName('quantity_'+curr_item)[0].value = qty_to_return;
+		}
+	else
+		{
+		document.getElementsByName('quantity_'+curr_item)[0].value = "0";
+		}
+	}
+
+</script>
+<?php 
+	//$orderitems = $this->getOrderItems(); // ORIGINAL
+	//$orderitems = Mage::getModel("sales/order")->load($this->getRequest()->getParam('order_id'));
+	//$orderitems = Mage::getModel("sales/order")->getCollection()->addFieldToFilter('entity_id', $this->getRequest()->getParam('order_id'));
+	$orderitems = Mage::getModel("sales/order_item")->getCollection()->addFieldToFilter('order_id', $this->getRequest()->getParam('order_id'));
+?>
+
+
+
+<pre><?php //var_dump($orderitems->getData()); ?></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="entry-edit">
+    <div class="entry-edit-head"><h4 class="icon-head head-customer-sales-statistics"><?php echo Mage::helper('rma')->__('Ordered Item(s)') ?></h4></div>
+    <div class="grid">
+        <table cellspacing="0" class="data">
+            <thead>
+                <tr class="headings">
+                    <th><?php echo Mage::helper('rma')->__('Product Details') ?></th>
+                	  <th><?php echo Mage::helper('rma')->__('Add to RMA?') ?></th>
+                    <th><?php echo Mage::helper('rma')->__('Qty Shipped') ?></th>
+                    <th><?php echo Mage::helper('rma')->__('Qty To Return') ?></th>
+                </tr>
+            </thead>
+			<tbody>
+            	<?php foreach($orderitems as $item): ?>
+                <?php $product_id = $item->getProductId(); ?>
+                <?php $product = Mage::getModel('catalog/product')->load($product_id); ?>
+                <tr>
+                <td colspan="4"><pre><?php //var_dump($product->getData()); ?></pre></td>
+                </tr>
+                <?php //if (!$product->getHasOptions()):?>
+                <tr>
+						<td style="padding-left:10px;">
+                     <h6><?php echo htmlentities( $item->getName() ) . " (" . htmlentities( $item->getSku() ) . ")"?> </h6>
+                     
+                     <i><?php echo $this->__('Serial #:'); ?></i> <input type="text" name="serial_<?php echo $product_id?>"  value="" class="input_serial" style="margin-right: 20px;" />
+                     
+                     <i><?php echo $this->__('Type of Return:');?></i>
+                     <input type="radio" name="type1_<?php echo $product_id?>" value="Replacement" checked="checked" style="margin-left: 10px;" /> <?php echo $this->__('Replacement'); ?>
+                     <input type="radio" name="type1_<?php echo $product_id?>" value="Refund" style="margin-left: 10px;" /> <?php echo $this->__('Refund'); ?>
+                     
+                     <br/><i><?php echo $this->__('Reason for Return:');?></i>
+                     <br/> <textarea name="reason_<?php echo $product_id?>" style="width:465px;" rows="5"></textarea>
+                     
+						</td>
+                	<td class="a-center"><input type="checkbox" name="items[]" value="<?php echo $product_id?>" checked="checked" id="addtorma_<?php echo $product_id?>" onclick="checkboxupdate(this.checked, <?php echo($item->getQtyShipped() - $item->getQtyRefunded()); ?>, <?php echo $product_id?>);"/></td>
+                    <td class="a-center"><?php echo number_format($item->getQtyShipped()); ?></td>
+                    <td align="center">
+                    	<input style="width:40px; align: center;" type="text" name="quantity_<?php echo $product_id?>" value="<?php echo $item->getQtyShipped() - $item->getQtyRefunded()?>" class="input_qty" onchange="validate_form(<?php echo $item->getQtyShipped() - $item->getQtyRefunded() ?>, quantity_<?php echo $product_id?>.value, <?php echo $product_id?>)" onkeypress="return isNumberKey(quantity_<?php echo $product_id?>.value, event)"/><span class="required">&nbsp;*</span>
+                    </td>
+                </tr>
+                <?php //endif; ?>
+                <?php endforeach; ?>
+            </tbody>
+			<!--<tbody>
+            	<?php foreach($orderitems as $item): ?>
+                <?php $product_id = $item->getProductId(); ?>
+                <?php $product = Mage::getModel ('catalog/product')->load($product_id); ?>
+                <?php if (!$product->getHasOptions()):?>
+                <tr>
+                    <td style="padding-left:10px;">
+                    	<h6><?php echo htmlentities( $item->getName() ) . " (" . htmlentities( $item->getSku() ) . ")"?> </h6>
+                        <?php echo $this->__('Serial #:'); ?> <input type="text" name="serial_<?php echo $product_id?>"  value="" class="input_serial" /><br/>
+                        <i><?php echo $this->__('Reason for Return');?></i><br/> 
+                        <textarea name="reason_<?php echo $product_id?>" style="width:465px;" rows="5"></textarea><br/><br/>
+                    </td>
+                	<td class="a-center"><input type="checkbox" name="items[]" value="<?php echo $product_id?>" checked="checked"/></td>
+                    <td class="a-center"><?php echo number_format($item->getQtyShipped()); ?></td>
+                    <td align="center">
+                    	<input style="width:40px;" type="text" name="quantity_<?php echo $product_id?>"  value="<?php echo $item->getQtyShipped() - $item->getQtyRefunded()?>" class="input_qty" onchange="validate_form(<?php echo $item->getQtyShipped() - $item->getQtyRefunded() ?>, quantity_<?php echo $product_id?>.value, <?php echo $product_id?>)" onkeypress="return isNumberKey(quantity_<?php echo $product_id?>.value, event)" style="align: center;"/><span class="required">&nbsp;*</span>
+                    </td>
+                    <td style="padding-left:10px;">
+                    	<input type="radio" name="type1_<?php echo $product_id?>" value="Replacement" checked="checked"/> <?php echo $this->__('Replacement'); ?> <br/>
+                        <input type="radio" name="type1_<?php echo $product_id?>" value="Refund" /> <?php echo $this->__('Refund'); ?>
+                    </td>
+                </tr>
+                <?php endif; ?>
+                <?php endforeach; ?>
+            </tbody>-->
+        </table>
+    </div>
+</div>
+
+
+<div class="clear"></div>
+<br/>

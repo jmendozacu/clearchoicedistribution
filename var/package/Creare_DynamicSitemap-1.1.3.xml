@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package>
+    <name>Creare_DynamicSitemap</name>
+    <version>1.1.3</version>
+    <stability>stable</stability>
+    <license uri="http://www.opensource.org/licenses/osl-3.0.php">OSL v3.0</license>
+    <channel>community</channel>
+    <extends/>
+    <summary>A dynamic sitemap which lists all categories and main pages automatically.</summary>
+    <description>This dynamic sitemap lists all of your categories in cascading style. Nicely styled on a dedicated sitemap page. This sitemap is SEO friendly and is intended to replace the default Magento paginated sitemap.&#xD;
+&#xD;
+It lists all of your CMS pages and also a few static pages that need a mention.&#xD;
+&#xD;
+The purpose of this extension is to make sure that your categories are indexed correctly as well as making your website more user-friendly.</description>
+    <notes>Updated to work with 1.3 &amp; 1.4 &amp; 1.5 &amp; 1.6&#xD;
+&#xD;
+Included Check for enabled pages and stores</notes>
+    <authors><author><name>E-Commerce Web Design</name><user>EcommerceWD</user><email>dev@e-commercewebdesign.co.uk</email></author></authors>
+    <date>2012-02-13</date>
+    <time>13:18:03</time>
+    <contents><target name="magelocal"><dir name="Creare"><dir name="DynamicSitemap"><dir name="Block"><file name="Dynamicsitemap.php" hash="cd84149049c5b31e40f3eb34ffa7eef7"/></dir><dir name="controllers"><file name="IndexController.php" hash="95ff6b1aacceb990e3fb92ffd88cdb43"/></dir><dir name="etc"><file name="config.xml" hash="e9d0142ab70ad5ec7f75a89abbe6b590"/></dir></dir></dir></target><target name="magedesign"><dir name="frontend"><dir name="default"><dir name="default"><dir name="template"><dir name="dynamicsitemap"><file name="sitemap.phtml" hash="c116f0991378cc9910b07eda6e9fb684"/></dir></dir><dir name="layout"><file name="dynamicsitemap.xml" hash="817f2de40f841369ff6165908a19766e"/></dir></dir></dir></dir></target><target name="mageetc"><dir name="modules"><file name="Creare_DynamicSitemap.xml" hash="de1cdb59ce6cdfd540055534f1aa1d9c"/></dir></target><target name="mageskin"><dir name="frontend"><dir name="default"><dir name="default"><dir name="css"><file name="dynamicsitemap.css" hash="85ace1d1d4c2d0a074fa4fce5dfd2175"/></dir></dir></dir></dir></target></contents>
+    <compatible/>
+    <dependencies><required><php><min>5.2.0</min><max>6.0.0</max></php></required></dependencies>
+</package>

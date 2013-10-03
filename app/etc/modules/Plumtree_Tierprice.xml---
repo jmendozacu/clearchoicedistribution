@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Plumtree_Tierprice>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Plumtree_Tierprice>
+    </modules>
+</config>

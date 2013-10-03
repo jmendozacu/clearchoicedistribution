@@ -1,0 +1,119 @@
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @copyright  Copyright (c) 2008 Irubin Consulting Inc. DBA Varien (http://www.varien.com)
+ * @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+  .nav-container {
+    background: none;
+    margin: 0 auto;
+    width: 956px;
+}
+#anav { font-size:13px; margin:0 auto 0 4px; padding:0; width:731px; min-height:41px; }
+
+/************** ALL LEVELS  *************/ /* Style consistent throughout all nav levels */
+#anav li { position:relative; text-align:left; }
+#anav li.over { z-index:999; }
+#anav a,
+#anav a:hover { display:block; line-height:1.3em; text-decoration:none; }
+#anav li.nav-home span{display:none;}
+#anav span { cursor: pointer;display: block; padding: 6px 14px 11px 9px; text-align: center;
+    white-space: nowrap;}
+#anav li ul span {white-space:normal; }
+
+/************ 0 LEVEL  ***************/
+#anav li.start { margin-left:144px; }
+#anav li { float:left;margin-right: 5px; }
+#anav li.drop  span { background:url("../images/menu_arrow.gif") no-repeat scroll 100% 10px transparent;}
+#anav li.active a { color:#d96708; }
+#anav a {     color: #FFFFFF;
+    float: left;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 0 0 0 8px;
+    margin-top: 10px;	}
+#anav li.over a,
+#anav a:hover { color:#DF0403; }
+
+/************ 1ST LEVEL ************/
+#anav ul li,
+#anav ul li.active { float:left; padding-bottom:1px; }
+/*#anav ul li.over { background:#d5e4eb url(../images/nav_divider.gif) repeat-x 0 100%; }*/
+#anav ul li.last { padding-bottom:0; }
+
+#anav ul a,
+#anav ul a:hover { float:none; padding:0; background:none; }
+#anav ul li a { font-weight:normal !important; }
+
+/************ 2ND LEVEL ************/
+#anav ul { position:absolute; width:600px; top:41px; left:-10000px; border:none; background-color: #575757;border-bottom:3px solid #333;padding-bottom:5px;}
+
+/* Show menu */
+#anav li.over > ul { left:0; }
+#anav li.over > ul.nav6 { left:-25px; }
+#anav li.over > ul.nav5 { left:-243px; }
+#anav li.over > ul.nav4 { left:-265px; }
+#anav li.over > ul.nav3 { left:-200px; }
+#anav li.over > ul.nav2 { left:-140px; }
+#anav li.over > ul.nav1 { left:-82px; }
+#anav li.over > ul.nav0 { left:-6px; }
+#anav li ul.nav6 {width:150px;}
+#anav li ul.nav5 {width:450px;}
+#anav li ul.nav4 {width:450px;}
+<<<<<<< .mine
+#anav li ul.nav3 {width:450px;}
+#anav li ul.nav2 {width:450px;}
+=======
+#anav li ul.nav3 {width:600px;}
+#anav li ul.nav2 {width:450px;}
+>>>>>>> .r730
+/* #anav li.over ul ul { left:-10000px; } */
+
+/* #anav ul li a { background:#0A263D; } */
+/* #anav ul li a:hover { background:#d5e4eb; } */
+#anav ul li a { color: #EBBC58 !important; }
+#anav ul li a:hover { color: #A7C6DD !important; }
+#anav ul span, #anav ul li.last li span { padding:3px 15px 4px 15px;}
+/#anav li.columns { width:600px; }
+#anav li.columns ul { width: auto; }
+#anav li li li li span { padding:0 0 0 8px;   text-align: left;}
+
+
+/************ 3RD+ LEVEL ************/
+#anav ul ul { border: 0px; left:0; position: relative; top:0; background: none; }
+#anav ul ul li { float: none; width:auto; }
+#anav ul ul ul { margin-left: 10px; }
+#anav ul ul ul li a { color: #FFFFFF !important; font-size: 0.95em; }
+
+/** ie6 hack */
+#anav li.over ul.shown-sub { left:0; }
+#anav li.over li li ul.shown-sub { left:100px; }
+
+/************ custom css ************/
+#anav li.top_level ul li.columns {width: 600px;}
+#anav li.top_level ul li.columns ul li.level1{width: 150px;float:left; }
+#anav li.over a { background:#575757 url(../images/navHoverL.gif) no-repeat -1px 0;}
+#anav li.over a span{ background:#575757 url(../images/navHoverR.gif) no-repeat 100% 0;}
+#anav li.over ul li.columns a { background:none;}
+#anav li.over ul li.columns a span{ background:none;}
+#anav li.over ul li.columns ul li.level1 a span{text-align:left;font-weight:bold;text-decoration:underline;font-size:14px;color:#fff;line-height:18px;} 
+#anav li.over ul li.columns ul li.level1 ul li.level2 a span{font-size:12px;text-decoration:none;font-weight:normal;line-height:12px;} 
+#anav li.over ul li.columns ul li.level1 ul li.level2 a:hover{background-color:#fff;}
+#anav li.over ul li.columns ul li.level1 ul li.level2 a:hover span{color:#333 !important;}
+#anav li.over ul li.columns ul li.level1 ul li.level2 a{padding:5px 0;margin:0;}

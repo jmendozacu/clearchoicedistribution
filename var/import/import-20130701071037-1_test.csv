@@ -1,0 +1,44 @@
+store,websites,attribute_set,type,category_ids,sku,has_options,name,meta_title,meta_description,image,small_image,thumbnail,gallery,url_key,url_path,custom_design,page_layout,options_container,image_label,small_image_label,thumbnail_label,country_of_manufacture,gift_message_available,limited_stock,length,width,height,brand,manufacturer,shipping_length,shipping_width,shipping_height,capacity,short_name,special_shipping,special_price_case_qty,map,power_consumption,product_weight,compatible_products,warranty,status,visibility,enable_googlecheckout,inchoo_bestselling_product,new_product,description,short_description,meta_keyword,custom_layout_update,description_specs,description_related,description_addon_title,news_from_date,news_to_date,custom_design_from,custom_design_to,qty,min_qty,use_config_min_qty,is_qty_decimal,backorders,use_config_backorders,min_sale_qty,use_config_min_sale_qty,max_sale_qty,use_config_max_sale_qty,is_in_stock,low_stock_date,notify_stock_qty,use_config_notify_stock_qty,manage_stock,use_config_manage_stock,stock_status_changed_auto,use_config_qty_increments,qty_increments,use_config_enable_qty_inc,enable_qty_increments,is_decimal_divided,stock_status_changed_automatically,use_config_enable_qty_increments,product_name,store_id,product_type_id,product_status_changed,product_changed_websites,price,special_price,weight,color,tax_class_id,special_from_date,special_to_date,msrp_enabled,msrp_display_actual_price_type,msrp,is_recurring,product_help_units,product_help_cases,product_help_intro1,product_help_intro2,product_help_happy,product_help_unhappy1,product_help_unhappy2
+admin,base,Default,simple,,testing111-test2222,0,test,,,,,,,test,test.html,,No layout updates,Block after Info Column,,,, ,No,50,22,22,22,,,23,233,23,22,test,,,,,344,,1 Year Manufacturer's Limited Warranty,Enabled,Not Visible Individually,No,No,No,test,test,,,testing1,,,,,,,10,0,1,0,0,1,1,1,0,1,1,,,1,0,1,0,1,0,1,0,0,0,1,test,0,simple,,,100,,333,,None,,,Use config,Use config,,No,12,15,Mix and match pricing for this item is available for<br />CASE QUANTITIES ONLY.,"<p>You Must order a COMPLETE CASE (1 case = XX units) of a single item to qualify for the case pricing. You may not combine single units of Mix and Match items to create a case.</p>
+
+<p>
+For items offering Mix & Match pricing, you may combine COMPLETE CASES (1 case = XX units) of that item with full cases of other available items listed.
+</p>","<p>Example of Qualifying Mix & Match:</p>
+ <p>+ 60 ATI Coral Plus T5 bulbs</p>
+ <p>+ 40 ATI Blue Plus T5 bulbs</p>
+ <div class=""break""></div>
+ <p>= 100 Units / 10 cases</p>
+ <p class=""green"">Qualifies for Mix & Match 10+ Cases Pricing!</p>"," <p>Example of Non-Qualifying Mix & Match:</p>
+ <p>+ 59 ATI Coral Plus T5 bulbs</p>
+ <p>+ 41 ATI Blue Plus T5 bulbs</p>
+ <div class=""break""></div>
+ <p>= 100 Units / 9 Cases + 10 Units, NOT 10 Cases</p>
+ <p class=""red"">Does Not Qualify for Mix and Match 10+ Case Pricing</p>
+ <p class=""green"">Qualifies for Mix & Match 1+ Case Pricing!</p>"," <p>Example of Non-Qualifying Mix & Match:</p>
+ <p>+ 6 ATI Coral Plus T5 bulbs</p>
+ <p>+ 4 ATI Blue Plus T5 bulbs</p>
+ <div class=""break""></div>
+ <p>= 10 Units, NOT 1 case</p>
+ <p class=""red"">Does Not Qualify for 1+ Case Pricing</p>"
+admin,base,Default,simple,,testing111-testtss,0,test1,,,,,,,test,test.html,,No layout updates,Block after Info Column,,,, ,No,50,20,20,20,,ati,23,233,23,2220,test1,,,,,344,,1 Year Manufacturer's Limited Warranty,Enabled,Not Visible Individually,No,No,No,test1,test,,,testing1,,,,,,,111,0,1,0,0,1,1,1,0,1,1,,,1,0,1,0,1,0,1,0,0,0,1,test1,0,simple,,,100,,333,,None,,,Use config,Use config,,No,121,10,Mix and match pricing for this item is available for<br />CASE QUANTITIES ONLY.,"<p>You Must order a COMPLETE CASE (1 case = XX units) of a single item to qualify for the case pricing. You may not combine single units of Mix and Match items to create a case.</p>
+
+<p>
+For items offering Mix & Match pricing, you may combine COMPLETE CASES (1 case = XX units) of that item with full cases of other available items listed.
+</p>","<p>Example of Qualifying Mix & Match:</p>
+ <p>+ 60 ATI Coral Plus T5 bulbs</p>
+ <p>+ 40 ATI Blue Plus T5 bulbs</p>
+ <div class=""break""></div>
+ <p>= 100 Units / 10 cases</p>
+ <p class=""green"">Qualifies for Mix & Match 10+ Cases Pricing!</p>"," <p>Example of Non-Qualifying Mix & Match:</p>
+ <p>+ 59 ATI Coral Plus T5 bulbs</p>
+ <p>+ 41 ATI Blue Plus T5 bulbs</p>
+ <div class=""break""></div>
+ <p>= 100 Units / 9 Cases + 10 Units, NOT 10 Cases</p>
+ <p class=""red"">Does Not Qualify for Mix and Match 10+ Case Pricing</p>
+ <p class=""green"">Qualifies for Mix & Match 1+ Case Pricing!</p>"," <p>Example of Non-Qualifying Mix & Match:</p>
+ <p>+ 6 ATI Coral Plus T5 bulbs</p>
+ <p>+ 4 ATI Blue Plus T5 bulbs</p>
+ <div class=""break""></div>
+ <p>= 10 Units, NOT 1 case</p>
+ <p class=""red"">Does Not Qualify for 1+ Case Pricing</p>"
+admin,base,Default,grouped,15,testing111,0,testing,,,,,,,testing,testing.html,,No layout updates,Block after Info Column,,,, ,No,0,,,,ATI,ATI,,,,,testing,,,,,,,1 year,Enabled,"Catalog, Search",Yes,No,No,testing,testing,,,,,,,,,,0,0,1,0,0,1,1,1,0,1,1,,,1,0,1,0,1,0,1,0,0,0,1,testing,0,grouped,,,,,,,,,,,,,,12,13,,,,,

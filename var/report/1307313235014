@@ -1,0 +1,11 @@
+a:4:{i:0;s:63:"SQLSTATE[HY000]: General error: 2006 MySQL server has gone away";i:1;s:1508:"#0 /chroot/home/clearcho/clearchoicedistribution.com/html/lib/Varien/Db/Statement/Pdo/Mysql.php(110): Zend_Db_Statement_Pdo->_execute(Array)
+#1 /chroot/home/clearcho/clearchoicedistribution.com/html/lib/Zend/Db/Statement.php(300): Varien_Db_Statement_Pdo_Mysql->_execute(Array)
+#2 /chroot/home/clearcho/clearchoicedistribution.com/html/lib/Zend/Db/Adapter/Abstract.php(479): Zend_Db_Statement->execute(Array)
+#3 /chroot/home/clearcho/clearchoicedistribution.com/html/lib/Zend/Db/Adapter/Pdo/Abstract.php(238): Zend_Db_Adapter_Abstract->query('SELECT `core_we...', Array)
+#4 /chroot/home/clearcho/clearchoicedistribution.com/html/lib/Varien/Db/Adapter/Pdo/Mysql.php(419): Zend_Db_Adapter_Pdo_Abstract->query('SELECT `core_we...', Array)
+#5 /chroot/home/clearcho/clearchoicedistribution.com/html/lib/Zend/Db/Adapter/Abstract.php(773): Varien_Db_Adapter_Pdo_Mysql->query(Object(Varien_Db_Select), Array)
+#6 /chroot/home/clearcho/clearchoicedistribution.com/html/app/code/core/Mage/Core/Model/Resource/Config.php(63): Zend_Db_Adapter_Abstract->fetchAssoc(Object(Varien_Db_Select))
+#7 /chroot/home/clearcho/clearchoicedistribution.com/html/app/code/core/Mage/Core/Model/Config.php(354): Mage_Core_Model_Resource_Config->loadToXml(Object(Mage_Core_Model_Config))
+#8 /chroot/home/clearcho/clearchoicedistribution.com/html/app/code/core/Mage/Core/Model/Config.php(260): Mage_Core_Model_Config->loadDb()
+#9 /chroot/home/clearcho/clearchoicedistribution.com/html/cron.php(44): Mage_Core_Model_Config->init()
+#10 {main}";s:11:"script_name";s:64:"/chroot/home/clearcho/clearchoicedistribution.com/html/index.php";s:4:"skin";s:5:"admin";}

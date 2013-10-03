@@ -1,0 +1,26 @@
+<div class="block block-layered-nav">
+
+        <p class="main">Shop By</p>
+    <div class="block-content">
+        <dl id="narrow-by-list2">
+            <dt>Category</dt>
+            <dd>
+                <ol>
+                                                        <li>
+                        <a href="http://clearcho.nextmp.net/index.php/led-lighting/powermodule.html?___SID=U">Powermodule</a> (4)
+                    </li>
+                                                                            <li>
+                        <a href="http://clearcho.nextmp.net/index.php/led-lighting/vega.html?___SID=U">Vega</a> (19)
+                    </li>
+                                                                            <li>
+                        <a href="http://clearcho.nextmp.net/index.php/led-lighting/sol.html?___SID=U">Sol</a> (24)
+                    </li>
+                                                                            <li>
+                        <a href="http://clearcho.nextmp.net/index.php/led-lighting/nano.html?___SID=U">Nano</a> (6)
+                    </li>
+                                                    </ol>
+            </dd>
+        </dl>
+        <script type="text/javascript">decorateDataList('narrow-by-list2')</script>
+    </div>
+</div>

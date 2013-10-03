@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+    </default>
+	<customer_account>
+
+        <reference name="customer_account_navigation">
+            <action method="addLink"><name>rma</name><path>rma/index</path><label>My RMA</label></action>
+        </reference>
+
+    </customer_account>
+	
+    <rma_index_index>
+		<update handle="customer_account"/>
+        <reference name="content">
+            <block type="rma/rma" name="rma" template="rma/rma.phtml" />
+			<block type="customer/account_dashboard" name="customer.account.link.back" template="customer/account/link/back.phtml"/>
+        </reference>
+    </rma_index_index>
+	
+	<rma_view_index>
+		<update handle="customer_account"/>
+		<reference name="content">
+            <block type="rma/view" name="rma.view" template="rma/view.phtml"/>
+            <block type="customer/account_dashboard" name="customer.account.link.back" template="customer/account/link/back.phtml"/>
+        </reference>
+	</rma_view_index>
+	
+	<rma_pickorder_index>
+        <update handle="customer_account"/>
+        <reference name="content">
+            <block type="rma/pickorder" name="rma.pickorder" template="rma/pick_order.phtml"/>
+            <block type="customer/account_dashboard" name="customer.account.link.back" template="customer/account/link/back.phtml"/>
+        </reference>
+    </rma_pickorder_index>
+	
+	<rma_pickitems_index>
+		<update handle="customer_account"/>
+		<reference name="content">
+            <block type="rma/pickitems" name="rma.pickitems" template="rma/pick_items.phtml"/>
+        </reference>
+    </rma_pickitems_index>
+    
+    <rma_done_index>
+        <update handle="customer_account"/>
+        <reference name="content">
+            <block type="rma/done" name="rma.done"/>
+            <block type="customer/account_dashboard" name="customer.account.link.back" template="customer/account/link/back.phtml"/>
+        </reference>
+    </rma_done_index>
+	
+</layout> 

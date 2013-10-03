@@ -1,0 +1,447 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2011 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<meta http-equiv="Content-Type" content="<?php echo $this->getContentType() ?>" />
+<title><?php echo $this->getTitle() ?></title>
+<meta name="description" content="<?php echo htmlspecialchars($this->getDescription()) ?>" />
+<meta name="keywords" content="<?php echo htmlspecialchars($this->getKeywords()) ?>" />
+<meta name="robots" content="<?php echo htmlspecialchars($this->getRobots()) ?>" />
+<link rel="icon" href="<?php echo $this->getFaviconFile(); ?>" type="image/x-icon" />
+<link rel="shortcut icon" href="<?php echo $this->getFaviconFile(); ?>" type="image/x-icon" />
+
+<!--[if lt IE 7]>
+<script type="text/javascript">
+//<![CDATA[
+    var BLANK_URL = '<?php echo $this->helper('core/js')->getJsUrl('blank.html') ?>';
+    var BLANK_IMG = '<?php echo $this->helper('core/js')->getJsUrl('spacer.gif') ?>';
+//]]>
+</script>
+<![endif]-->
+
+<?php /*?><script type="text/javascript" src="<?php echo $this->getSkinUrl('additional_slider/js/jquery-1.3.2.min.js')?>"></script><?php */?>
+<?php /*?><script type="text/javascript" src="<?php echo $this->getSkinUrl('js/rbadmin/jquery/jquery-1.7.1.min.js')?>"></script><?php */?>
+
+<?php /*?><script type="text/javascript" src="<?php echo $this->getSkinUrl('css/cufon/Century_Gothic_400.font.js')?>"></script><?php */?>
+<?php /*?><script type="text/javascript" src="<?php echo $this->getSkinUrl('js/cufone/Bebas_Neue_400.font.js')?>"></script>
+<script type="text/javascript">
+	Cufon.replace('.logo-main .logo a.logo',{fontFamily:'Century Gothic', font-weight:'400'});
+</script><?php */?>
+<?php  
+	$responsiveness = Mage::getStoreConfig('customadmin/responsiveness/responsive_on_off', Mage::app()->getStore()->getId());
+?>
+
+<?php 
+if($responsiveness) 
+	{
+	?>
+		<link rel="stylesheet" type="text/css" media="screen" href="<?php echo $this->getSkinUrl('')?>css/media.css">
+	<?php 
+	}
+?>
+
+
+<!-- Select font family Start -->
+
+<?php  
+	$font_top_menu = Mage::getStoreConfig('customadmin/font_family/font_top_menu', Mage::app()->getStore()->getId());
+?>
+
+<?php 
+if($font_top_menu) 
+	{
+	?>
+<style type="text/css">
+
+.topMnu a	
+{
+	font-family:<?=$font_top_menu?> !important;
+}
+</style>
+
+	<?php 
+	}
+?>
+
+<?php  
+	$font_main_menu = Mage::getStoreConfig('customadmin/font_family/font_main_menu', Mage::app()->getStore()->getId());
+?>
+
+<?php 
+if($font_main_menu) 
+	{
+	?>
+<style type="text/css">
+
+#nav span	
+{
+	font-family:<?=$font_main_menu?> !important;
+}
+</style>
+
+	<?php 
+	}
+?>
+
+
+
+<?php  
+	$font_desc_text = Mage::getStoreConfig('customadmin/font_family/font_desc_text', Mage::app()->getStore()->getId());
+?>
+
+<?php 
+if($font_desc_text) 
+{
+?>
+<style type="text/css">
+
+p, .std	
+{
+	font-family:<?=$font_desc_text?> !important;
+}
+</style>
+
+<?php 
+}
+?>
+<?php  
+	$font_heading_font = Mage::getStoreConfig('customadmin/font_family/font_heading_font', Mage::app()->getStore()->getId());
+?>
+
+<?php 
+if($font_heading_font) 
+{
+?>
+<style type="text/css">
+
+h1	
+{
+	font-family:<?=$font_heading_font?> !important;
+}
+</style>
+
+<?php 
+}
+?>
+
+<?php  
+	$font_heading2_font = Mage::getStoreConfig('customadmin/font_family/font_heading2_font', Mage::app()->getStore()->getId());
+?>
+
+<?php 
+if($font_heading2_font) 
+{
+?>
+<style type="text/css">
+
+h2	
+{
+	font-family:<?=$font_heading2_font?> !important;
+}
+</style>
+
+<?php 
+}
+?>
+<?php  
+	$font_heading3_font = Mage::getStoreConfig('customadmin/font_family/font_heading3_font', Mage::app()->getStore()->getId());
+?>
+
+<?php 
+if($font_heading3_font) 
+{
+?>
+<style type="text/css">
+
+h3	
+{
+	font-family:<?=$font_heading3_font?> !important;
+}
+</style>
+
+<?php 
+}
+?>
+
+<?php  
+	$font_header_font = Mage::getStoreConfig('customadmin/font_family/font_header_font', Mage::app()->getStore()->getId());
+?>
+
+<?php 
+if($font_header_font) 
+{
+?>
+<style type="text/css">
+
+.logo-main	
+{
+	font-family:<?=$font_header_font?> !important;
+}
+</style>
+
+<?php 
+}
+?>
+
+<?php  
+	$font_footer_font = Mage::getStoreConfig('customadmin/font_family/font_footer_font', Mage::app()->getStore()->getId());
+?>
+
+<?php 
+if($font_footer_font) 
+{
+?>
+<style type="text/css">
+
+.footer-container	
+{
+	font-family:<?=$font_footer_font?> !important;
+}
+</style>
+
+<?php 
+}
+?>
+
+
+
+<?php  
+	$fontfamily = Mage::getStoreConfig('customadmin/font_family/font_family', Mage::app()->getStore()->getId());
+?>
+
+<?php 
+if($fontfamily) 
+{
+?>
+<style type="text/css">
+
+body	
+{
+	font-family:<?=$fontfamily?> !important;
+}
+</style>
+
+<?php 
+}
+?>
+
+
+
+<!-- Select font family End -->
+
+
+<?php  
+	$quickview_enable = Mage::getStoreConfig('customadmin/quickview/quickview_enable', Mage::app()->getStore()->getId());
+?>
+
+<?php 
+if(!$quickview_enable) 
+{
+?>
+<style type="text/css">
+.quickview	
+{
+	display:none !important;
+}
+</style>
+<?php 
+}
+?>
+
+
+
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/cufone/cufon-yui.js')?>"></script>
+
+
+<?php  
+	$cufon_top_menu = Mage::getStoreConfig('customadmin/font_family/cufon_top_menu', Mage::app()->getStore()->getId());
+?>
+
+<?php 
+if($cufon_top_menu) 
+{
+?>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/cufone/'.$cufon_top_menu.'.js')?>"></script>
+<script type="text/javascript">
+Cufon.replace('.topMnu a');
+</script>
+
+<?php 
+}
+?>
+<?php  
+	$cufon_main_menu = Mage::getStoreConfig('customadmin/font_family/cufon_main_menu', Mage::app()->getStore()->getId());
+?>
+
+<?php 
+if($cufon_main_menu) 
+{
+?>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/cufone/'.$cufon_main_menu.'.js')?>"></script>
+<script type="text/javascript">
+Cufon.replace('#nav span');
+</script>
+<?php 
+}
+?>
+<?php  
+	$cufon_desc_text = Mage::getStoreConfig('customadmin/font_family/cufon_desc_text', Mage::app()->getStore()->getId());
+?>
+
+<?php 
+if($cufon_desc_text) 
+{
+?>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/cufone/'.$cufon_desc_text.'.js')?>"></script>
+<script type="text/javascript">
+Cufon.replace('p,.std');
+</script>
+<?php 
+}
+?>
+<?php  
+	$cufon_heading_font = Mage::getStoreConfig('customadmin/font_family/cufon_heading_font', Mage::app()->getStore()->getId());
+?>
+
+<?php 
+if($cufon_heading_font) 
+{
+?>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/cufone/'.$cufon_heading_font.'.js')?>"></script>
+<script type="text/javascript">
+Cufon.replace('h1');
+</script>
+<?php 
+}
+?>
+<?php  
+	$cufon_heading2_font = Mage::getStoreConfig('customadmin/font_family/cufon_heading2_font', Mage::app()->getStore()->getId());
+?>
+
+<?php 
+if($cufon_heading2_font) 
+{
+?>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/cufone/'.$cufon_heading2_font.'.js')?>"></script>
+<script type="text/javascript">
+Cufon.replace('h2');
+</script>
+<?php 
+}
+?>
+<?php  
+	$cufon_heading3_font = Mage::getStoreConfig('customadmin/font_family/cufon_heading3_font', Mage::app()->getStore()->getId());
+?>
+
+<?php 
+if($cufon_heading3_font) 
+{
+?>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/cufone/'.$cufon_heading3_font.'.js')?>"></script>
+<script type="text/javascript">
+Cufon.replace('h3');
+</script>
+<?php 
+}
+?>
+<?php  
+	$cufon_footer_font = Mage::getStoreConfig('customadmin/font_family/cufon_footer_font', Mage::app()->getStore()->getId());
+?>
+
+<?php 
+if($cufon_footer_font) 
+{
+?>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/cufone/'.$cufon_footer_font.'.js')?>"></script>
+<script type="text/javascript">
+Cufon.replace('.footer-container');
+</script>
+<?php 
+}
+?>
+
+<?php /*?><script type="text/javascript" src="http://alamoana-magento.gothemeteam.com/skin/frontend/default/wonova_theme/js/cufone/Century_Gothic_400.font.js"></script><?php */?>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/cufone/Century_Gothic_400.font.js')?>"></script>
+<script type="text/javascript">
+Cufon.replace('.logo-main .logo a.logo');
+</script>
+
+
+<?php /*?><script type="text/javascript" src="<?php echo $this->getSkinUrl('js/engine1/jquery.js')?>"></script>
+
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('home-slider/jquery_pol.js')?>"></script>
+<?php */?><link href="<?php echo $this->getSkinUrl('home-slider/skin1.css')?>" rel="stylesheet" type="text/css">
+
+<meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
+
+
+<?php echo $this->getCssJsHtml() ?>
+<?php echo $this->getChildHtml() ?>
+<?php echo $this->helper('core/js')->getTranslatorScript() ?>
+<?php echo $this->getIncludes() ?>
+
+<?php /*?><script type="text/javascript" src="<?php echo $this->getSkinUrl('js/shop.js')?>"></script><?php */?>
+
+<?php
+if($_REQUEST['skin'] != '')
+{
+	$_SESSION['skin']=$_REQUEST['skin'];
+}
+if($_SESSION['skin']=='default')
+{
+?>
+	<link href="<?php echo $this->getSkinUrl('css/adminskin_css/default.css') ?>" rel="stylesheet" type="text/css" />
+<?php
+}
+
+else if($_SESSION['skin']=='grey')
+{
+?>
+	<link href="<?php echo $this->getSkinUrl('css/adminskin_css/grey.css') ?>" rel="stylesheet" type="text/css" />
+<?php
+}
+else if($_SESSION['skin']=='pink')
+{
+?>
+	<link href="<?php echo $this->getSkinUrl('css/adminskin_css/pink.css') ?>" rel="stylesheet" type="text/css" />
+<?php
+}
+else if($_SESSION['skin']=='brown')
+{
+?>
+	<link href="<?php echo $this->getSkinUrl('css/adminskin_css/brown.css') ?>" rel="stylesheet" type="text/css" />
+<?php
+}
+?>
+
+<?php
+$topnavskin			= Mage::getStoreConfig('customadmin/design/navbar_skin', Mage::app()->getStore()->getId());
+if($topnavskin !='' && $_SESSION['skin']=='')
+{
+?>
+	<link href="<?php echo $this->getSkinUrl('css/adminskin_css/'.$topnavskin.'.css') ?>" rel="stylesheet" type="text/css" />
+<?php
+}
+?>

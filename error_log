@@ -1,0 +1,61 @@
+[22-Apr-2013 11:15:51] PHP Fatal error:  Uncaught exception 'Exception' with message 'File '/home2/ccdydode/public_html/media/catalog/product/' does not exists.' in /home2/ccdydode/public_html/lib/Varien/File/Transfer/Adapter/Http.php:96
+Stack trace:
+#0 /home2/ccdydode/public_html/get.php(205): Varien_File_Transfer_Adapter_Http->send('/home2/ccdydode...')
+#1 /home2/ccdydode/public_html/get.php(165): sendFile('/home2/ccdydode...')
+#2 {main}
+  thrown in /home2/ccdydode/public_html/lib/Varien/File/Transfer/Adapter/Http.php on line 96
+[23-Apr-2013 13:19:49] PHP Fatal error:  Uncaught exception 'Exception' with message 'File '/home2/ccdydode/public_html/media/catalog/product/' does not exists.' in /home2/ccdydode/public_html/lib/Varien/File/Transfer/Adapter/Http.php:96
+Stack trace:
+#0 /home2/ccdydode/public_html/get.php(205): Varien_File_Transfer_Adapter_Http->send('/home2/ccdydode...')
+#1 /home2/ccdydode/public_html/get.php(165): sendFile('/home2/ccdydode...')
+#2 {main}
+  thrown in /home2/ccdydode/public_html/lib/Varien/File/Transfer/Adapter/Http.php on line 96
+[23-Apr-2013 13:37:19] PHP Parse error:  syntax error, unexpected '}', expecting ',' or ';' in /home2/ccdydode/public_html/app/design/frontend/default/alamoana_theme/template/catalog/product/view/addtocart.phtml on line 82
+[23-Apr-2013 21:50:33] PHP Fatal error:  Uncaught exception 'Exception' with message 'File '/home2/ccdydode/public_html/media/catalog/product/' does not exists.' in /home2/ccdydode/public_html/lib/Varien/File/Transfer/Adapter/Http.php:96
+Stack trace:
+#0 /home2/ccdydode/public_html/get.php(205): Varien_File_Transfer_Adapter_Http->send('/home2/ccdydode...')
+#1 /home2/ccdydode/public_html/get.php(165): sendFile('/home2/ccdydode...')
+#2 {main}
+  thrown in /home2/ccdydode/public_html/lib/Varien/File/Transfer/Adapter/Http.php on line 96
+[25-Apr-2013 15:34:05] PHP Fatal error:  Uncaught exception 'Exception' with message 'File '/home2/ccdydode/public_html/media/catalog/product/' does not exists.' in /home2/ccdydode/public_html/lib/Varien/File/Transfer/Adapter/Http.php:96
+Stack trace:
+#0 /home2/ccdydode/public_html/get.php(205): Varien_File_Transfer_Adapter_Http->send('/home2/ccdydode...')
+#1 /home2/ccdydode/public_html/get.php(165): sendFile('/home2/ccdydode...')
+#2 {main}
+  thrown in /home2/ccdydode/public_html/lib/Varien/File/Transfer/Adapter/Http.php on line 96
+[03-May-2013 02:47:09] PHP Fatal error:  Uncaught exception 'Exception' with message 'File '/home2/ccdydode/public_html/media/catalog/product/' does not exists.' in /home2/ccdydode/public_html/lib/Varien/File/Transfer/Adapter/Http.php:96
+Stack trace:
+#0 /home2/ccdydode/public_html/get.php(205): Varien_File_Transfer_Adapter_Http->send('/home2/ccdydode...')
+#1 /home2/ccdydode/public_html/get.php(165): sendFile('/home2/ccdydode...')
+#2 {main}
+  thrown in /home2/ccdydode/public_html/lib/Varien/File/Transfer/Adapter/Http.php on line 96
+[03-May-2013 06:37:15] PHP Fatal error:  Uncaught exception 'Exception' with message 'File '/home2/ccdydode/public_html/media/catalog/product/' does not exists.' in /home2/ccdydode/public_html/lib/Varien/File/Transfer/Adapter/Http.php:96
+Stack trace:
+#0 /home2/ccdydode/public_html/get.php(205): Varien_File_Transfer_Adapter_Http->send('/home2/ccdydode...')
+#1 /home2/ccdydode/public_html/get.php(165): sendFile('/home2/ccdydode...')
+#2 {main}
+  thrown in /home2/ccdydode/public_html/lib/Varien/File/Transfer/Adapter/Http.php on line 96
+[03-May-2013 10:53:59] PHP Fatal error:  Uncaught exception 'Exception' with message 'File '/home2/ccdydode/public_html/media/catalog/product/' does not exists.' in /home2/ccdydode/public_html/lib/Varien/File/Transfer/Adapter/Http.php:96
+Stack trace:
+#0 /home2/ccdydode/public_html/get.php(205): Varien_File_Transfer_Adapter_Http->send('/home2/ccdydode...')
+#1 /home2/ccdydode/public_html/get.php(165): sendFile('/home2/ccdydode...')
+#2 {main}
+  thrown in /home2/ccdydode/public_html/lib/Varien/File/Transfer/Adapter/Http.php on line 96
+[04-May-2013 00:30:02] PHP Fatal error:  Uncaught exception 'Exception' with message 'File '/home2/ccdydode/public_html/media/catalog/product/' does not exists.' in /home2/ccdydode/public_html/lib/Varien/File/Transfer/Adapter/Http.php:96
+Stack trace:
+#0 /home2/ccdydode/public_html/get.php(205): Varien_File_Transfer_Adapter_Http->send('/home2/ccdydode...')
+#1 /home2/ccdydode/public_html/get.php(165): sendFile('/home2/ccdydode...')
+#2 {main}
+  thrown in /home2/ccdydode/public_html/lib/Varien/File/Transfer/Adapter/Http.php on line 96
+[06-May-2013 06:54:41] PHP Fatal error:  Uncaught exception 'Exception' with message 'File '/home2/ccdydode/public_html/media/catalog/product/' does not exists.' in /home2/ccdydode/public_html/lib/Varien/File/Transfer/Adapter/Http.php:96
+Stack trace:
+#0 /home2/ccdydode/public_html/get.php(205): Varien_File_Transfer_Adapter_Http->send('/home2/ccdydode...')
+#1 /home2/ccdydode/public_html/get.php(165): sendFile('/home2/ccdydode...')
+#2 {main}
+  thrown in /home2/ccdydode/public_html/lib/Varien/File/Transfer/Adapter/Http.php on line 96
+[09-May-2013 21:21:37] PHP Fatal error:  Uncaught exception 'Exception' with message 'File '/home2/ccdydode/public_html/media/catalog/product/' does not exists.' in /home2/ccdydode/public_html/lib/Varien/File/Transfer/Adapter/Http.php:96
+Stack trace:
+#0 /home2/ccdydode/public_html/get.php(205): Varien_File_Transfer_Adapter_Http->send('/home2/ccdydode...')
+#1 /home2/ccdydode/public_html/get.php(165): sendFile('/home2/ccdydode...')
+#2 {main}
+  thrown in /home2/ccdydode/public_html/lib/Varien/File/Transfer/Adapter/Http.php on line 96

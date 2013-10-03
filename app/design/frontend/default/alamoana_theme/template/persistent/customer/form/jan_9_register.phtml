@@ -1,0 +1,296 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     default_layover
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Create account form template
+ *
+ * @see Mage_Customer_Block_Form_Register
+ */
+?>
+<style>
+.customfield{
+	margin-bottom:15px;
+}
+</style>
+<div class="account-create">
+    <div class="page-title">
+        <h1><?php echo $this->__('New Dealer Application') ?></h1>
+    </div>
+    <?php echo $this->getChildHtml('form_fields_before')?>
+    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    <form action="<?php echo $this->getPostActionUrl() ?>" method="post" id="form-validate">
+        <div class="fieldset">
+            <input type="hidden" name="success_url" value="<?php echo $this->getSuccessUrl() ?>" />
+            <input type="hidden" name="error_url" value="<?php echo $this->getErrorUrl() ?>" />
+            <h2 class="legend"><?php echo $this->__('Enter Information About the Business') ?></h2>
+            <ul class="form-list">
+                <li class="fields">
+                    <?php echo $this->getLayout()->createBlock('customer/widget_name')->setObject($this->getFormData())->toHtml() ?>
+                </li>
+                <li>
+                    <div class="field customfield">
+						<label for="businessname"><?php echo $this->__('Business Name') ?></label>
+						<input type="text" name="businessname" id="businessname" value="<?php echo $this->htmlEscape($this->getFormData()->getBusinessname()) ?>" title="<?php echo $this->__('Business Name') ?>" class="input-text" />
+					</div>
+                    <div class="field customfield">
+						<label for="ownername"><?php echo $this->__('Owner/Manager') ?></label>
+						<input type="text" name="ownername" id="ownername" value="<?php echo $this->htmlEscape($this->getFormData()->getBusinessname()) ?>" title="<?php echo $this->__('Owner/Manager') ?>" class="input-text" />
+					</div>
+					<div style="clear:both;"></div>
+                    <div class="field customfield">
+						<label for="email_address" class="required"><em>*</em><?php echo $this->__('Email Address') ?></label>
+                        <input type="text" name="email" id="email_address" value="<?php echo $this->htmlEscape($this->getFormData()->getEmail()) ?>" title="<?php echo $this->__('Email Address') ?>" class="input-text validate-email required-entry" />
+                    </div>
+                    <div class="field customfield">
+						<label for="businesswebsite"><?php echo $this->__('Business Web-Site') ?></label>
+                        <input type="text" name="businesswebsite" id="businesswebsite" value="<?php echo $this->htmlEscape($this->getFormData()->getEmail()) ?>" title="<?php echo $this->__('Business Web-Site') ?>" class="input-text" />
+                    </div>
+                    <div style="clear:both;"></div>
+                    <div class="field customfield">
+						<label for="typeofbusiness" class="required"><?php echo $this->__('Type of Business (i.e. retail store, internet, maintenance)') ?></label>
+                        <input type="text" name="typeofbusiness" id="typeofbusiness" value="<?php echo $this->htmlEscape($this->getFormData()->getEmail()) ?>" title="<?php echo $this->__('Type of Business (i.e. retail store, internet, maintenance)') ?>" class="input-text" />
+                    </div>
+                    <div class="field customfield">
+						<label for="dateestdmonth dateestdyear" class="required"><?php echo $this->__('Date Established (month & year)') ?></label>
+                        <div style="clear:both;"></div>
+                        <input type="text" name="dateestdmonth" id="dateestdmonth" value="<?php echo $this->htmlEscape($this->getFormData()->getEmail()) ?>" title="<?php echo $this->__('Month') ?>" class="input-text" style="width:40px;float:left;"placeholder='month' />
+						<input type="text" name="dateestdyear" id="dateestdyear" value="<?php echo $this->htmlEscape($this->getFormData()->getEmail()) ?>" title="<?php echo $this->__('Year') ?>" class="input-text" style="width:65px;float:left;margin-left:5px;"placeholder='year'; />
+                    </div>
+                    <div style="clear:both;"></div>
+                    <div class="field customfield">
+						<label for="businesslicensenumber" class="required"><?php echo $this->__('Business License Number (please provide copy)') ?></label>
+                        <input type="text" name="businesslicensenumber" id="businesslicensenumber" value="<?php echo $this->htmlEscape($this->getFormData()->getEmail()) ?>" title="<?php echo $this->__('Business License Number (please provide copy)') ?>" class="input-text" />
+						<input type="file" name="businesslicensecopy" id="businesslicensecopy">
+                    </div>
+                    <div class="field customfield">
+						<label for="sellerpermitnumber"><?php echo $this->__('Sellers Permit Number (CA only; resale certificate required)') ?></label>
+                        <input type="text" name="sellerpermitnumber" id="sellerpermitnumber" value="<?php echo $this->htmlEscape($this->getFormData()->getEmail()) ?>" title="<?php echo $this->__('Sellers Permit Number (CA only; resale certificate required)') ?>" class="input-text" />
+						<input type="file" name="sellerpermitnumbercopy" id="sellerpermitnumbercopy">
+                    </div>
+                    <div style="clear:both;"></div>
+                    <div class="field customfield">
+						<label for="ein"><?php echo $this->__('Federal Tax ID Number (EIN)') ?></label>
+                        <input type="text" name="ein" id="ein" value="<?php echo $this->htmlEscape($this->getFormData()->getEmail()) ?>" title="<?php echo $this->__('Federal Tax ID Number (EIN)') ?>" class="input-text" />
+                    </div>
+                    <div class="field customfield">
+						<label for="legalstatus"><?php echo $this->__('Company Type/Legal Status') ?></label>
+                        <input type="text" name="legalstatus" id="legalstatus" value="<?php echo $this->htmlEscape($this->getFormData()->getEmail()) ?>" title="<?php echo $this->__('Company Type/Legal Status') ?>" class="input-text" />
+                    </div>                                                                                   
+                </li>
+            <?php $_dob = $this->getLayout()->createBlock('customer/widget_dob') ?>
+            <?php if ($_dob->isEnabled()): ?>
+                <li><?php echo $_dob->setDate($this->getFormData()->getDob())->toHtml() ?></li>
+            <?php endif ?>
+            <?php $_taxvat = $this->getLayout()->createBlock('customer/widget_taxvat') ?>
+            <?php if ($_taxvat->isEnabled()): ?>
+                <li><?php echo $_taxvat->setTaxvat($this->getFormData()->getTaxvat())->toHtml() ?></li>
+            <?php endif ?>
+            <?php $_gender = $this->getLayout()->createBlock('customer/widget_gender') ?>
+            <?php if ($_gender->isEnabled()): ?>
+                <li><?php echo $_gender->setGender($this->getFormData()->getGender())->toHtml() ?></li>
+            <?php endif ?>
+            </ul>
+        </div>
+    <?php if(true): ?>
+    <?php //if($this->getShowAddressFields()): ?>
+        <div class="fieldset">
+            <input type="hidden" name="create_address" value="1" />
+            <h2 class="legend"><?php echo $this->__('Shipping Information') ?></h2>
+            <ul class="form-list">
+                <li class="fields">
+                    <div class="field">
+                        <label for="company"><?php echo $this->__('Company') ?></label>
+                        <div class="input-box">
+                            <input type="text" name="company" id="company" value="<?php echo $this->htmlEscape($this->getFormData()->getCompany()) ?>" title="<?php echo $this->__('Company') ?>" class="input-text" />
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="telephone" class="required"><em>*</em><?php echo $this->__('Telephone') ?></label>
+                        <div class="input-box">
+                            <input type="text" name="telephone" id="telephone" value="<?php echo $this->htmlEscape($this->getFormData()->getTelephone()) ?>" title="<?php echo $this->__('Telephone') ?>" class="input-text required-entry" />
+                        </div>
+                    </div>
+                </li>
+                <li class="wide">
+                    <label for="street_1" class="required"><em>*</em><?php echo $this->__('Street Address') ?></label>
+                    <div class="input-box">
+                        <input type="text" name="street[]" value="<?php echo $this->htmlEscape($this->getFormData()->getStreet(1)) ?>" title="<?php echo $this->__('Street Address') ?>" id="street_1" class="input-text required-entry" />
+                    </div>
+                </li>
+            <?php for ($_i=2, $_n=$this->helper('customer/address')->getStreetLines(); $_i<=$_n; $_i++): ?>
+                <li class="wide">
+                    <div class="input-box">
+                        <input type="text" name="street[]" value="<?php echo $this->htmlEscape($this->getFormData()->getStreet($_i)) ?>" title="<?php echo $this->__('Street Address %s', $_i) ?>" id="street_<?php echo $_i?>" class="input-text" />
+                    </div>
+                </li>
+            <?php endfor ?>
+                <li class="fields">
+                    <div class="field">
+                        <label for="city" class="required"><em>*</em><?php echo $this->__('City') ?></label>
+                        <div class="input-box">
+                            <input type="text" name="city" value="<?php echo $this->htmlEscape($this->getFormData()->getCity()) ?>" title="<?php echo $this->__('City') ?>" class="input-text required-entry" id="city" />
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="region_id" class="required"><em>*</em><?php echo $this->__('State/Province') ?></label>
+                        <div class="input-box">
+                            <select id="region_id" name="region_id" title="<?php echo $this->__('State/Province') ?>" class="validate-select" style="display:none;">
+                                <option value=""><?php echo $this->__('Please select region, state or province') ?></option>
+                            </select>
+                            <script type="text/javascript">
+                            //<![CDATA[
+                                $('region_id').setAttribute('defaultValue', "<?php echo $this->getFormData()->getRegionId() ?>");
+                            //]]>
+                            </script>
+                            <input type="text" id="region" name="region" value="<?php echo $this->htmlEscape($this->getRegion()) ?>" title="<?php echo $this->__('State/Province') ?>" class="input-text" style="display:none;" />
+                        </div>
+                    </div>
+                </li>
+                <li class="fields">
+                    <div class="field">
+                        <label for="zip" class="required"><em>*</em><?php echo $this->__('Zip/Postal Code') ?></label>
+                        <div class="input-box">
+                            <input type="text" name="postcode" value="<?php echo $this->htmlEscape($this->getFormData()->getPostcode()) ?>" title="<?php echo $this->__('Zip/Postal Code') ?>" id="zip" class="input-text validate-zip-international required-entry" />
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="country" class="required"><em>*</em><?php echo $this->__('Country') ?></label>
+                        <div class="input-box">
+                            <?php echo $this->getCountryHtmlSelect() ?>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+           <input type="hidden" name="default_shipping" value="1" />
+        </div>
+    <?php endif; ?>
+<!-- Default Billing Address -->  
+          <div class="fieldset">
+            <input type="hidden" name="create_address1" value="1" />
+            <h2 class="legend"><?php echo $this->__('Billing Information') ?></h2>
+            <ul class="form-list">
+                <li class="fields">
+                    <div class="field">
+                        <label for="company1"><?php echo $this->__('Company') ?></label>
+                        <div class="input-box">
+                            <input type="text" name="company1" id="company1" value="<?php echo $this->htmlEscape($this->getFormData()->getCompany()) ?>" title="<?php echo $this->__('Company') ?>" class="input-text" />
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="telephone1" class="required"><em>*</em><?php echo $this->__('Telephone') ?></label>
+                        <div class="input-box">
+                            <input type="text" name="telephone1" id="telephone1" value="<?php echo $this->htmlEscape($this->getFormData()->getTelephone()) ?>" title="<?php echo $this->__('Telephone') ?>" class="input-text required-entry" />
+                        </div>
+                    </div>
+                </li>
+                <li class="wide">
+                    <label for="street_11" class="required"><em>*</em><?php echo $this->__('Street Address') ?></label>
+                    <div class="input-box">
+                        <input type="text" name="street1[]" value="<?php echo $this->htmlEscape($this->getFormData()->getStreet(1)) ?>" title="<?php echo $this->__('Street Address') ?>" id="street_11" class="input-text required-entry" />
+                    </div>
+                </li>
+            <?php for ($_i=2, $_n=$this->helper('customer/address')->getStreetLines(); $_i<=$_n; $_i++): ?>
+                <li class="wide">
+                    <div class="input-box">
+                        <input type="text" name="street1[]" value="<?php echo $this->htmlEscape($this->getFormData()->getStreet($_i)) ?>" title="<?php echo $this->__('Street Address %s', $_i) ?>" id="street_<?php echo $_i?>1" class="input-text" />
+                    </div>
+                </li>
+            <?php endfor ?>
+                <li class="fields">
+                    <div class="field">
+                        <label for="city1" class="required"><em>*</em><?php echo $this->__('City') ?></label>
+                        <div class="input-box">
+                            <input type="text" name="city1" value="<?php echo $this->htmlEscape($this->getFormData()->getCity()) ?>" title="<?php echo $this->__('City') ?>" class="input-text required-entry" id="city1" />
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="region_id1" class="required"><em>*</em><?php echo $this->__('State/Province') ?></label>
+                        <div class="input-box">
+                            <select id="region_id1" name="region_id1" title="<?php echo $this->__('State/Province') ?>" class="validate-select" style="display:none;">
+                                <option value=""><?php echo $this->__('Please select region, state or province') ?></option>
+                            </select>
+                            <script type="text/javascript">
+                            //<![CDATA[
+                                $('region_id1').setAttribute('defaultValue', "<?php echo $this->getFormData()->getRegionId() ?>");
+                            //]]>
+                            </script>
+                            <input type="text" id="region1" name="region1" value="<?php echo $this->htmlEscape($this->getRegion()) ?>" title="<?php echo $this->__('State/Province') ?>" class="input-text" style="display:none;" />
+                        </div>
+                    </div>
+                </li>
+                <li class="fields">
+                    <div class="field">
+                        <label for="zip1" class="required"><em>*</em><?php echo $this->__('Zip/Postal Code') ?></label>
+                        <div class="input-box">
+                            <input type="text" name="postcode1" value="<?php echo $this->htmlEscape($this->getFormData()->getPostcode()) ?>" title="<?php echo $this->__('Zip/Postal Code') ?>" id="zip1" class="input-text validate-zip-international required-entry" />
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="country1" class="required"><em>*</em><?php echo $this->__('Country') ?></label>
+                        <div class="input-box">
+                            <?php echo $this->getCountryHtmlSelect() ?>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <input type="hidden" name="default_billing" value="1" />
+            
+        </div>  
+            
+        <div class="fieldset">
+            <h2 class="legend"><?php echo $this->__('Login Information') ?></h2>
+            <ul class="form-list">
+                <li class="fields">
+                    <div class="field">
+                        <label for="password" class="required"><em>*</em><?php echo $this->__('Password') ?></label>
+                        <div class="input-box">
+                            <input type="password" name="password" id="password" title="<?php echo $this->__('Password') ?>" class="input-text required-entry validate-password" />
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="confirmation" class="required"><em>*</em><?php echo $this->__('Confirm Password') ?></label>
+                        <div class="input-box">
+                            <input type="password" name="confirmation" title="<?php echo $this->__('Confirm Password') ?>" id="confirmation" class="input-text required-entry validate-cpassword" />
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="buttons-set">
+            <p class="required"><?php echo $this->__('* Required Fields') ?></p>
+            <input type="submit" title="<?php echo $this->__('Submit') ?>" class="submit"  value="Submit"/>
+        </div>
+    </form>
+    <script type="text/javascript">
+    //<![CDATA[
+        var dataForm = new VarienForm('form-validate', true);
+        <?php if(true): ?>
+        new RegionUpdater('country', 'region', 'region_id', <?php echo $this->helper('directory')->getRegionJson() ?>, undefined, 'zip');
+        <?php endif; ?>
+    //]]>
+    </script>
+</div>

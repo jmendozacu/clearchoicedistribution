@@ -1,0 +1,920 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     default_layover
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Create account form template
+ *
+ * @see Mage_Customer_Block_Form_Register
+ */              
+?>
+<style>
+.customfield{
+	margin-bottom:15px;
+}
+</style>
+<div class="account-create">
+    <div class="page-title">
+        <h1><?php echo $this->__('New Dealer Application') ?></h1>
+    </div>
+    <?php echo $this->getChildHtml('form_fields_before')?>
+    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    <form action="<?php echo $this->getPostActionUrl() ?>" method="post" id="form-validate" enctype="multipart/form-data">
+        <div class="fieldset">
+            <input type="hidden" name="success_url" value="<?php echo $this->getSuccessUrl() ?>" />
+            <input type="hidden" name="error_url" value="<?php echo $this->getErrorUrl() ?>" />
+            <h2 class="legend"><?php echo $this->__('Enter Information About the Business') ?></h2>
+            <ul class="form-list" style="background:#F9F9F9;border:1px solid #e2e2e2;padding-left:20px;padding-top:20px;">
+                <li class="fields">
+                    <?php echo $this->getLayout()->createBlock('customer/widget_name')->setObject($this->getFormData())->toHtml() ?>
+                </li>
+                <li>
+                    <div class="field customfield">
+						<label for="businessname"><?php echo $this->__('Business Name') ?></label>
+						<input type="text" name="businessname" id="businessname" value="<?php echo $this->htmlEscape($this->getFormData()->getBusinessname()) ?>" title="<?php echo $this->__('Business Name') ?>" class="input-text" />
+					</div>
+                    <div class="field customfield">
+						<label for="ownername"><?php echo $this->__('Owner/Manager') ?></label>
+						<input type="text" name="ownername" id="ownername" value="<?php echo $this->htmlEscape($this->getFormData()->getBusinessname()) ?>" title="<?php echo $this->__('Owner/Manager') ?>" class="input-text" />
+					</div>
+					<div style="clear:both;"></div>
+                    <div class="field customfield">
+						<label for="email_address" class="required"><em>*</em><?php echo $this->__('Email Address') ?></label>
+                        <input type="text" name="email" id="email_address" value="<?php echo $this->htmlEscape($this->getFormData()->getEmail()) ?>" title="<?php echo $this->__('Email Address') ?>" class="input-text validate-email required-entry" />
+                    </div>
+                    <div class="field customfield">
+						<label for="businesswebsite"><?php echo $this->__('Business Web-Site') ?></label>
+                        <input type="text" name="businesswebsite" id="businesswebsite" value="<?php echo $this->htmlEscape($this->getFormData()->getEmail()) ?>" title="<?php echo $this->__('Business Web-Site') ?>" class="input-text" />
+                    </div>
+                    <div style="clear:both;"></div>
+                    <div class="field customfield">
+						<label for="typeofbusiness" class="required"><?php echo $this->__('Type of Business (i.e. retail store, internet, maintenance)') ?></label>
+                        <input type="text" name="typeofbusiness" id="typeofbusiness" value="<?php echo $this->htmlEscape($this->getFormData()->getEmail()) ?>" title="<?php echo $this->__('Type of Business (i.e. retail store, internet, maintenance)') ?>" class="input-text" />
+                    </div>
+                    <div class="field customfield">
+						<label for="dateestdmonth dateestdyear" class="required"><?php echo $this->__('Date Established (month & year)') ?></label>
+                        <div style="clear:both;"></div>
+                        <input type="text" name="dateestdmonth" id="dateestdmonth" value="<?php echo $this->htmlEscape($this->getFormData()->getEmail()) ?>" title="<?php echo $this->__('Month') ?>" class="input-text" style="width:40px;float:left;"placeholder='month' />
+						<input type="text" name="dateestdyear" id="dateestdyear" value="<?php echo $this->htmlEscape($this->getFormData()->getEmail()) ?>" title="<?php echo $this->__('Year') ?>" class="input-text" style="width:65px;float:left;margin-left:5px;"placeholder='year'; />
+                    </div>
+                    <div style="clear:both;"></div>
+					 <div class="field customfield">
+						<label for="fax"><?php echo $this->__('Fax') ?></label>
+							<input type="text" name="fax" value="<?php echo $this->htmlEscape($this->getFormData()->getFax()); ?>" title="<?php echo $this->__('Fax') ?>" class="input-text" id="fax" />
+					</div> 
+					<div style="clear:both;"></div>                  
+                    <div class="field customfield">
+						<label for="businesslicensenumber" class="required"><?php echo $this->__('Business License Number (please provide copy)') ?></label>
+                        <input type="text" name="businesslicensenumber" id="businesslicensenumber" value="<?php echo $this->htmlEscape($this->getFormData()->getEmail()) ?>" title="<?php echo $this->__('Business License Number (please provide copy)') ?>" class="input-text" />
+						<input type="file" name="businesslicensecopy" id="businesslicensecopy">
+                    </div>
+                    <div class="field customfield">
+						<label for="sellerpermitnumber"><?php echo $this->__('Sellers Permit Number (CA only; resale certificate required)') ?></label>
+                        <input type="text" name="sellerpermitnumber" id="sellerpermitnumber" value="<?php echo $this->htmlEscape($this->getFormData()->getEmail()) ?>" title="<?php echo $this->__('Sellers Permit Number (CA only; resale certificate required)') ?>" class="input-text" />
+						<input type="file" name="sellerpermitnumbercopy" id="sellerpermitnumbercopy">
+						<?php $ur		=	explode('index.php',Mage::getBaseUrl()); ?>
+						<a href="<?php echo $ur[0]; ?>media/Resale_Certificate.pdf" target="_blank">Download Format of Resale Certificate</a>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <div class="field customfield">
+						<label for="ein"><?php echo $this->__('Federal Tax ID Number (EIN)') ?></label>
+                        <input type="text" name="ein" id="ein" value="<?php echo $this->htmlEscape($this->getFormData()->getEmail()) ?>" title="<?php echo $this->__('Federal Tax ID Number (EIN)') ?>" class="input-text" />
+                    </div>
+                    <div class="field customfield">
+						<label for="legalstatus"><?php echo $this->__('Company Type/Legal Status') ?></label>
+                        <input type="text" name="legalstatus" id="legalstatus" value="<?php echo $this->htmlEscape($this->getFormData()->getEmail()) ?>" title="<?php echo $this->__('Company Type/Legal Status') ?>" class="input-text" />
+                    </div>                                                                                   
+                </li>
+            <?php $_dob = $this->getLayout()->createBlock('customer/widget_dob') ?>
+            <?php if ($_dob->isEnabled()): ?>
+                <li><?php echo $_dob->setDate($this->getFormData()->getDob())->toHtml() ?></li>
+            <?php endif ?>
+            <?php $_taxvat = $this->getLayout()->createBlock('customer/widget_taxvat') ?>
+            <?php if ($_taxvat->isEnabled()): ?>
+                <li><?php echo $_taxvat->setTaxvat($this->getFormData()->getTaxvat())->toHtml() ?></li>
+            <?php endif ?>
+            <?php $_gender = $this->getLayout()->createBlock('customer/widget_gender') ?>
+            <?php if ($_gender->isEnabled()): ?>
+                <li><?php echo $_gender->setGender($this->getFormData()->getGender())->toHtml() ?></li>
+            <?php endif ?>
+            </ul>
+        </div>
+    <?php if(true): ?>
+    <?php //if($this->getShowAddressFields()): ?>
+        <div class="fieldset">
+            <input type="hidden" name="create_address" value="1" />
+            <h2 class="legend"><?php echo $this->__('Shipping Information') ?></h2>
+            <ul class="form-list"  style="background:#F9F9F9;border:1px solid #e2e2e2;padding-left:20px;padding-top:20px;">
+                <li class="fields">
+                    <div class="field">
+                        <label for="company"><?php echo $this->__('Company') ?></label>
+                        <div class="input-box">
+                            <input type="text" name="company" id="company" value="<?php echo $this->htmlEscape($this->getFormData()->getCompany()) ?>" title="<?php echo $this->__('Company') ?>" class="input-text" />
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="telephone" class="required"><em>*</em><?php echo $this->__('Telephone') ?></label>
+                        <div class="input-box">
+                            <input type="text" name="telephone" id="telephone" value="<?php echo $this->htmlEscape($this->getFormData()->getTelephone()) ?>" title="<?php echo $this->__('Telephone') ?>" class="input-text required-entry" />
+                        </div>
+                    </div>
+                </li>
+                <li class="wide">
+                    <label for="street_1" class="required"><em>*</em><?php echo $this->__('Street Address') ?></label>
+                    <div class="input-box">
+                        <input type="text" name="street[]" value="<?php echo $this->htmlEscape($this->getFormData()->getStreet(1)) ?>" title="<?php echo $this->__('Street Address') ?>" id="street_1" class="input-text required-entry" />
+                    </div>
+                </li>
+            <?php for ($_i=2, $_n=$this->helper('customer/address')->getStreetLines(); $_i<=$_n; $_i++): ?>
+                <li class="wide">
+                    <div class="input-box">
+                        <input type="text" name="street[]" value="<?php echo $this->htmlEscape($this->getFormData()->getStreet($_i)) ?>" title="<?php echo $this->__('Street Address %s', $_i) ?>" id="street_<?php echo $_i?>" class="input-text" />
+                    </div>
+                </li>
+            <?php endfor ?>
+                <li class="fields">
+                    <div class="field">
+                        <label for="city" class="required"><em>*</em><?php echo $this->__('City') ?></label>
+                        <div class="input-box">
+                            <input type="text" name="city" value="<?php echo $this->htmlEscape($this->getFormData()->getCity()) ?>" title="<?php echo $this->__('City') ?>" class="input-text required-entry" id="city" />
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="region_id" class="required"><em>*</em><?php echo $this->__('State/Province') ?></label>
+                        <div class="input-box">
+                            <select id="region_id" name="region_id" title="<?php echo $this->__('State/Province') ?>" class="validate-select" style="display:none;">
+                                <option value=""><?php echo $this->__('Please select region, state or province') ?></option>
+                            </select>
+                            <script type="text/javascript">
+                            //<![CDATA[
+                                $('region_id').setAttribute('defaultValue', "<?php echo $this->getFormData()->getRegionId() ?>");
+                            //]]>
+                            </script>
+                            <input type="text" id="region" name="region" value="<?php echo $this->htmlEscape($this->getRegion()) ?>" title="<?php echo $this->__('State/Province') ?>" class="input-text" style="display:none;" />
+                        </div>
+                    </div>
+                </li>
+                <li class="fields">
+                    <div class="field">
+                        <label for="zip" class="required"><em>*</em><?php echo $this->__('Zip/Postal Code') ?></label>
+                        <div class="input-box">
+                            <input type="text" name="postcode" value="<?php echo $this->htmlEscape($this->getFormData()->getPostcode()) ?>" title="<?php echo $this->__('Zip/Postal Code') ?>" id="zip" class="input-text validate-zip-international required-entry" />
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="country" class="required"><em>*</em><?php echo $this->__('Country') ?></label>
+                        <div class="input-box">
+                            <?php echo $this->getCountryHtmlSelect() ?>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+           <input type="hidden" name="default_shipping" value="1" />
+           <input type="hidden" name="default_billing" value="1" />
+        </div>
+    <?php endif; ?>
+	
+	<!-- Business/Trade References -->
+	<div class="fieldset">
+		<h2 class="legend"><?php echo $this->__('Business/Trade Reference-1') ?></h2>
+		<ul class="form-list"  style="background:#F9F9F9;border:1px solid #e2e2e2;padding-left:20px;padding-top:20px;">
+			<li class="fields">
+			<li class="fields">
+                    <div class="field">
+                        <label for="btrefrencebusinessname"><?php echo $this->__('Business Name') ?></label>
+                        <div class="input-box">
+                            <input type="text" name="btrefrencebusinessname" id="btrefrencebusinessname" value="<?php echo $this->htmlEscape($this->getFormData()->getCompany()) ?>" title="<?php echo $this->__('Company') ?>" class="input-text" />
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="btrefrencecontactname"><?php echo $this->__('Contact Name') ?></label>
+                        <div class="input-box">
+                            <input type="text" name="btrefrencecontactname" id="btrefrencecontactname" value="<?php echo $this->htmlEscape($this->getFormData()->getCompany()) ?>" title="<?php echo $this->__('Company') ?>" class="input-text" />
+                        </div>
+                    </div>
+                    <div style="clear:both"></div>                    
+                    <div class="field">
+                        <label for="btrefrencetelephone" class="required"><em>*</em><?php echo $this->__('Telephone') ?></label>
+                        <div class="input-box">
+                            <input type="text" name="btrefrencetelephone" id="btrefrencetelephone" value="<?php echo $this->htmlEscape($this->getFormData()->getTelephone()) ?>" title="<?php echo $this->__('Telephone') ?>" class="input-text required-entry" />
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="btrefrencefax" class="required"><em>*</em><?php echo $this->__('Fax Number') ?></label>
+                        <div class="input-box">
+                            <input type="text" name="btrefrencefax" id="btrefrencefax" value="<?php echo $this->htmlEscape($this->getFormData()->getTelephone()) ?>" title="<?php echo $this->__('Telephone') ?>" class="input-text required-entry" />
+                        </div>
+                    </div>                    
+                </li>
+                <li class="wide">
+                    <label for="street_11" class="required"><em>*</em><?php echo $this->__('Street Address') ?></label>
+                    <div class="input-box">
+                        <input type="text" name="street_11" value="<?php echo $this->htmlEscape($this->getFormData()->getStreet(1)) ?>" title="<?php echo $this->__('Street Address') ?>" id="street_11" class="input-text required-entry" />
+                    </div>
+                </li>
+            <?php for ($_i=2, $_n=1; $_i<=1; $_i++): ?>
+                <li class="wide">
+                    <div class="input-box">
+                        <input type="text" name="street_11" value="<?php echo $this->htmlEscape($this->getFormData()->getStreet($_i)) ?>" title="<?php echo $this->__('Street Address %s', $_i) ?>" id="street_11" class="input-text" />
+                    </div>
+                </li>
+            <?php endfor ?>
+                <li class="fields">
+                    <div class="field">
+                        <label for="city1" class="required"><em>*</em><?php echo $this->__('City') ?></label>
+                        <div class="input-box">
+                            <input type="text" name="city1" value="<?php echo $this->htmlEscape($this->getFormData()->getCity()) ?>" title="<?php echo $this->__('City') ?>" class="input-text required-entry" id="city1" />
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="region_id1" class="required"><em>*</em><?php echo $this->__('State/Province') ?></label>
+                        <div class="input-box">
+                            <select id="region_id1" name="region_id1" title="<?php echo $this->__('State/Province') ?>" class="validate-select" style="display:none;">
+                                <option value=""><?php echo $this->__('Please select region, state or province') ?></option>
+                            </select>
+                            <script type="text/javascript">
+                            //<![CDATA[
+                                $('region_id1').setAttribute('defaultValue', "<?php echo $this->getFormData()->getRegionId() ?>");
+                            //]]>
+                            </script>
+                            <input type="text" id="region1" name="region1" value="<?php echo $this->htmlEscape($this->getRegion()) ?>" title="<?php echo $this->__('State/Province') ?>" class="input-text" style="display:none;" />
+                        </div>
+                    </div>
+                </li>
+                <li class="fields">
+                    <div class="field">
+                        <label for="zip1" class="required"><em>*</em><?php echo $this->__('Zip/Postal Code') ?></label>
+                        <div class="input-box">
+                            <input type="text" name="zip1" value="<?php echo $this->htmlEscape($this->getFormData()->getZip1()) ?>" title="<?php echo $this->__('Zip/Postal Code') ?>" id="zip1" class="input-text validate-zip-international required-entry" />
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="country1" class="required"><em>*</em><?php echo $this->__('Country') ?></label>
+						<div class="input-box">
+							<select id="country1" class="validate-select" title="Country" name="country1">
+							<option value=""> </option>
+							<option value="Afghanistan">Afghanistan</option>
+							<option value="Åland Islands">Åland Islands</option>
+							<option value="Albania">Albania</option>
+							<option value="Algeria">Algeria</option>
+							<option value="American">American Samoa</option>
+							<option value="Andorra">Andorra</option>
+							<option value="Angola">Angola</option>
+							<option value="Anguilla">Anguilla</option>
+							<option value="Antarctica">Antarctica</option>
+							<option value="Antigua and Barbuda">Antigua and Barbuda</option>
+							<option value="Argentina">Argentina</option>
+							<option value="Armenia">Armenia</option>
+							<option value="Aruba">Aruba</option>
+							<option value="Australia">Australia</option>
+							<option value="Austria">Austria</option>
+							<option value="Azerbaijan">Azerbaijan</option>
+							<option value="Bahamas">Bahamas</option>
+							<option value="Bahrain">Bahrain</option>
+							<option value="Bangladesh">Bangladesh</option>
+							<option value="Barbados">Barbados</option>
+							<option value="Belarus">Belarus</option>
+							<option value="Belgium">Belgium</option>
+							<option value="Belize">Belize</option>
+							<option value="Benin">Benin</option>
+							<option value="Bermuda">Bermuda</option>
+							<option value="Bhutan">Bhutan</option>
+							<option value="Bolivia">Bolivia</option>
+							<option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
+							<option value="Botswana">Botswana</option>
+							<option value="Bouvet Island">Bouvet Island</option>
+							<option value="Brazil">Brazil</option>
+							<option value="British Indian Ocean Territory">British Indian Ocean Territory</option>
+							<option value="British Virgin Islands">British Virgin Islands</option>
+							<option value="Brunei">Brunei</option>
+							<option value="Bulgaria">Bulgaria</option>
+							<option value="Burkina Faso">Burkina Faso</option>
+							<option value="Burundi">Burundi</option>
+							<option value="Cambodia">Cambodia</option>
+							<option value="Cameroon">Cameroon</option>
+							<option value="Canada">Canada</option>
+							<option value="Cape Verde">Cape Verde</option>
+							<option value="Cayman Islands">Cayman Islands</option>
+							<option value="Central African Republic">Central African Republic</option>
+							<option value="Chad">Chad</option>
+							<option value="Chile">Chile</option>
+							<option value="China">China</option>
+							<option value="Christmas Island">Christmas Island</option>
+							<option value="Cocos [Keeling] Islands">Cocos [Keeling] Islands</option>
+							<option value="Colombia">Colombia</option>
+							<option value="Comoros">Comoros</option>
+							<option value="Congo - Brazzaville">Congo - Brazzaville</option>
+							<option value="Congo - Kinshasa">Congo - Kinshasa</option>
+							<option value="Cook Islands">Cook Islands</option>
+							<option value="Costa Rica">Costa Rica</option>
+							<option value="Côte d’Ivoire">Côte d’Ivoire</option>
+							<option value="Croatia">Croatia</option>
+							<option value="Cuba">Cuba</option>
+							<option value="Cyprus">Cyprus</option>
+							<option value="Czech Republic">Czech Republic</option>
+							<option value="Denmark">Denmark</option>
+							<option value="Djibouti">Djibouti</option>
+							<option value="Dominica">Dominica</option>
+							<option value="Dominican Republic">Dominican Republic</option>
+							<option value="Ecuador">Ecuador</option>
+							<option value="Egypt">Egypt</option>
+							<option value="El Salvador">El Salvador</option>
+							<option value="Equatorial Guinea">Equatorial Guinea</option>
+							<option value="Eritrea">Eritrea</option>
+							<option value="Estonia">Estonia</option>
+							<option value="Ethiopia">Ethiopia</option>
+							<option value="Falkland Islands">Falkland Islands</option>
+							<option value="Faroe Islands">Faroe Islands</option>
+							<option value="Fiji">Fiji</option>
+							<option value="Finland">Finland</option>
+							<option value="France">France</option>
+							<option value="French Guiana">French Guiana</option>
+							<option value="French Polynesia">French Polynesia</option>
+							<option value="French Southern Territories">French Southern Territories</option>
+							<option value="Gabon">Gabon</option>
+							<option value="Gambia">Gambia</option>
+							<option value="Georgia">Georgia</option>
+							<option value="Germany">Germany</option>
+							<option value="Ghana">Ghana</option>
+							<option value="Gibraltar">Gibraltar</option>
+							<option value="Greece">Greece</option>
+							<option value="Greenland">Greenland</option>
+							<option value="Grenada">Grenada</option>
+							<option value="Guadeloupe">Guadeloupe</option>
+							<option value="Guam">Guam</option>
+							<option value="Guatemala">Guatemala</option>
+							<option value="Guernsey">Guernsey</option>
+							<option value="Guinea">Guinea</option>
+							<option value="Guinea-Bissau">Guinea-Bissau</option>
+							<option value="Guyana">Guyana</option>
+							<option value="Haiti">Haiti</option>
+							<option value="Heard Island and McDonald Islands">Heard Island and McDonald Islands</option>
+							<option value="Honduras">Honduras</option>
+							<option value="Hong Kong SAR China">Hong Kong SAR China</option>
+							<option value="Hungary">Hungary</option>
+							<option value="Iceland">Iceland</option>
+							<option value="India">India</option>
+							<option value="Indonesia">Indonesia</option>
+							<option value="Iran">Iran</option>
+							<option value="Iraq">Iraq</option>
+							<option value="Ireland">Ireland</option>
+							<option value="Isle of Man">Isle of Man</option>
+							<option value="Israel">Israel</option>
+							<option value="Italy">Italy</option>
+							<option value="Jamaica">Jamaica</option>
+							<option value="Japan">Japan</option>
+							<option value="Jersey">Jersey</option>
+							<option value="Jordan">Jordan</option>
+							<option value="Kazakhstan">Kazakhstan</option>
+							<option value="Kenya">Kenya</option>
+							<option value="Kiribati">Kiribati</option>
+							<option value="Kuwait">Kuwait</option>
+							<option value="Kyrgyzstan">Kyrgyzstan</option>
+							<option value="Laos">Laos</option>
+							<option value="Latvia">Latvia</option>
+							<option value="Lebanon">Lebanon</option>
+							<option value="Lesotho">Lesotho</option>
+							<option value="Liberia">Liberia</option>
+							<option value="Libya">Libya</option>
+							<option value="Liechtenstein">Liechtenstein</option>
+							<option value="Lithuania">Lithuania</option>
+							<option value="Luxembourg">Luxembourg</option>
+							<option value="Macau SAR China">Macau SAR China</option>
+							<option value="Macedonia">Macedonia</option>
+							<option value="Madagascar">Madagascar</option>
+							<option value="Malawi">Malawi</option>
+							<option value="Malaysia">Malaysia</option>
+							<option value="Maldives">Maldives</option>
+							<option value="Mali">Mali</option>
+							<option value="Malta">Malta</option>
+							<option value="Marshall Islands">Marshall Islands</option>
+							<option value="Martinique">Martinique</option>
+							<option value="Mauritania">Mauritania</option>
+							<option value="Mauritius">Mauritius</option>
+							<option value="Mayotte">Mayotte</option>
+							<option value="Mexico">Mexico</option>
+							<option value="Micronesia">Micronesia</option>
+							<option value="Moldova">Moldova</option>
+							<option value="Monaco">Monaco</option>
+							<option value="Mongolia">Mongolia</option>
+							<option value="Montenegro">Montenegro</option>
+							<option value="Montserrat">Montserrat</option>
+							<option value="Morocco">Morocco</option>
+							<option value="Mozambique">Mozambique</option>
+							<option value="Myanmar [Burma]">Myanmar [Burma]</option>
+							<option value="Namibia">Namibia</option>
+							<option value="Nauru">Nauru</option>
+							<option value="Nepal">Nepal</option>
+							<option value="Netherlands">Netherlands</option>
+							<option value="Netherlands Antilles">Netherlands Antilles</option>
+							<option value="New Caledonia">New Caledonia</option>
+							<option value="New Zealand">New Zealand</option>
+							<option value="Nicaragua">Nicaragua</option>
+							<option value="Niger">Niger</option>
+							<option value="Nigeria">Nigeria</option>
+							<option value="Niue">Niue</option>
+							<option value="Norfolk Island">Norfolk Island</option>
+							<option value="Northern Mariana Islands">Northern Mariana Islands</option>
+							<option value="North Korea">North Korea</option>
+							<option value="Norway">Norway</option>
+							<option value="Oman">Oman</option>
+							<option value="Pakistan">Pakistan</option>
+							<option value="Palau">Palau</option>
+							<option value="Palestinian Territories">Palestinian Territories</option>
+							<option value="Panama">Panama</option>
+							<option value="Papua New Guinea">Papua New Guinea</option>
+							<option value="Paraguay">Paraguay</option>
+							<option value="Peru">Peru</option>
+							<option value="Philippines">Philippines</option>
+							<option value="Pitcairn Islands">Pitcairn Islands</option>
+							<option value="Poland">Poland</option>
+							<option value="Portugal">Portugal</option>
+							<option value="Puerto Rico">Puerto Rico</option>
+							<option value="Qatar">Qatar</option>
+							<option value="Réunion">Réunion</option>
+							<option value="Romania">Romania</option>
+							<option value="Russia">Russia</option>
+							<option value="Rwanda">Rwanda</option>
+							<option value="Saint Barthélemy">Saint Barthélemy</option>
+							<option value="Saint Helena">Saint Helena</option>
+							<option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
+							<option value="Saint Lucia">Saint Lucia</option>
+							<option value="Saint Martin">Saint Martin</option>
+							<option value="Saint Pierre and Miquelon">Saint Pierre and Miquelon</option>
+							<option value="Saint Vincent and the Grenadines">Saint Vincent and the Grenadines</option>
+							<option value="Samoa">Samoa</option>
+							<option value="San Marino">San Marino</option>
+							<option value="São Tomé and Príncipe">São Tomé and Príncipe</option>
+							<option value="Saudi Arabia">Saudi Arabia</option>
+							<option value="Senegal">Senegal</option>
+							<option value="Serbia">Serbia</option>
+							<option value="Seychelles">Seychelles</option>
+							<option value="Sierra Leone">Sierra Leone</option>
+							<option value="Singapore">Singapore</option>
+							<option value="Slovakia">Slovakia</option>
+							<option value="Slovenia">Slovenia</option>
+							<option value="Solomon Islands">Solomon Islands</option>
+							<option value="Somalia">Somalia</option>
+							<option value="South Africa">South Africa</option>
+							<option value="South Georgia and the South Sandwich Islands">South Georgia and the South Sandwich Islands</option>
+							<option value="South Korea">South Korea</option>
+							<option value="Spain">Spain</option>
+							<option value="Sri Lanka">Sri Lanka</option>
+							<option value="Sudan">Sudan</option>
+							<option value="Suriname">Suriname</option>
+							<option value="Svalbard and Jan Mayen">Svalbard and Jan Mayen</option>
+							<option value="Swaziland">Swaziland</option>
+							<option value="Sweden">Sweden</option>
+							<option value="Switzerland">Switzerland</option>
+							<option value="Syria">Syria</option>
+							<option value="Taiwan">Taiwan</option>
+							<option value="Tajikistan">Tajikistan</option>
+							<option value="Tanzania">Tanzania</option>
+							<option value="Thailand">Thailand</option>
+							<option value="Timor-Leste">Timor-Leste</option>
+							<option value="Togo">Togo</option>
+							<option value="Tokelau">Tokelau</option>
+							<option value="Tonga">Tonga</option>
+							<option value="Trinidad and Tobago">Trinidad and Tobago</option>
+							<option value="Tunisia">Tunisia</option>
+							<option value="Turkey">Turkey</option>
+							<option value="Turkmenistan">Turkmenistan</option>
+							<option value="Turks and Caicos Islands">Turks and Caicos Islands</option>
+							<option value="Tuvalu">Tuvalu</option>
+							<option value="Uganda">Uganda</option>
+							<option value="Ukraine">Ukraine</option>
+							<option value="United Arab Emirates">United Arab Emirates</option>
+							<option value="United Kingdom">United Kingdom</option>
+							<option selected="selected" value="United States">United States</option>
+							<option value="Uruguay">Uruguay</option>
+							<option value="U.S. Minor Outlying Islands">U.S. Minor Outlying Islands</option>
+							<option value="U.S. Virgin Islands">U.S. Virgin Islands</option>
+							<option value="Uzbekistan">Uzbekistan</option>
+							<option value="Vanuatu">Vanuatu</option>
+							<option value="Vatican City">Vatican City</option>
+							<option value="Venezuela">Venezuela</option>
+							<option value="Vietnam">Vietnam</option>
+							<option value="Wallis and Futuna">Wallis and Futuna</option>
+							<option value="Western Sahara">Western Sahara</option>
+							<option value="Yemen">Yemen</option>
+							<option value="Zambia">Zambia</option>
+							<option value="Zimbabwe">Zimbabwe</option>
+							</select>
+                        </div>
+                    </div>
+                </li>
+                <li class="fields">
+                    <div class="field customfield">
+						<label for="btrefrenceemail" class="required"><em>*</em><?php echo $this->__('Email Address') ?></label>
+                        <input type="text" name="btrefrenceemail" id="btrefrenceemail" value="<?php echo $this->htmlEscape($this->getFormData()->getBtrefrenceemail()) ?>" title="<?php echo $this->__('Email Address') ?>" class="input-text validate-email required-entry" />
+                    </div>
+                    <div class="field customfield">
+						<label for="btrefrencebusinesswebsite"><?php echo $this->__('Business Web-Site') ?></label>
+                        <input type="text" name="btrefrencebusinesswebsite" id="btrefrencebusinesswebsite" value="<?php echo $this->htmlEscape($this->getFormData()->getBtrefrencebusinesswebsite()) ?>" title="<?php echo $this->__('Business Web-Site') ?>" class="input-text" />
+                    </div>
+                </li>
+			</li>
+		</ul>	
+	</div>
+     <!-- Business/Trade References Ends Here -->       
+	<!-- Business/Trade References 2-->
+	<div class="fieldset">
+		<h2 class="legend"><?php echo $this->__('Business/Trade Reference-2') ?></h2>
+		<ul class="form-list"  style="background:#F9F9F9;border:1px solid #e2e2e2;padding-left:20px;padding-top:20px;">
+			<li class="fields">
+			<li class="fields">
+                    <div class="field">
+                        <label for="btrefrencebusinessname2"><?php echo $this->__('Business Name') ?></label>
+                        <div class="input-box">
+                            <input type="text" name="btrefrencebusinessname2" id="btrefrencebusinessname2" value="<?php echo $this->htmlEscape($this->getFormData()->getCompany()) ?>" title="<?php echo $this->__('Company') ?>" class="input-text" />
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="btrefrencecontactname2"><?php echo $this->__('Contact Name') ?></label>
+                        <div class="input-box">
+                            <input type="text" name="btrefrencecontactname2" id="btrefrencecontactname2" value="<?php echo $this->htmlEscape($this->getFormData()->getCompany()) ?>" title="<?php echo $this->__('Company') ?>" class="input-text" />
+                        </div>
+                    </div>
+                    <div style="clear:both"></div>                    
+                    <div class="field">
+                        <label for="btrefrencetelephone2" class="required"><em>*</em><?php echo $this->__('Telephone') ?></label>
+                        <div class="input-box">
+                            <input type="text" name="btrefrencetelephone2" id="btrefrencetelephone2" value="<?php echo $this->htmlEscape($this->getFormData()->getTelephone()) ?>" title="<?php echo $this->__('Telephone') ?>" class="input-text required-entry" />
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="btrefrencefax2" class="required"><em>*</em><?php echo $this->__('Fax Number') ?></label>
+                        <div class="input-box">
+                            <input type="text" name="btrefrencefax2" id="btrefrencefax2" value="<?php echo $this->htmlEscape($this->getFormData()->getTelephone()) ?>" title="<?php echo $this->__('Telephone') ?>" class="input-text required-entry" />
+                        </div>
+                    </div>                    
+                </li>
+                <li class="wide">
+                    <label for="street_12" class="required"><em>*</em><?php echo $this->__('Street Address') ?></label>
+                    <div class="input-box">
+                        <input type="text" name="street_12" value="<?php echo $this->htmlEscape($this->getFormData()->getStreet(1)) ?>" title="<?php echo $this->__('Street Address') ?>" id="street_12" class="input-text required-entry" />
+                    </div>
+                </li>
+            <?php for ($_i=2, $_n=1; $_i<=1; $_i++): ?>
+                <li class="wide">
+                    <div class="input-box">
+                        <input type="text" name="street_12" value="<?php echo $this->htmlEscape($this->getFormData()->getStreet($_i)) ?>" title="<?php echo $this->__('Street Address %s', $_i) ?>" id="street_12" class="input-text" />
+                    </div>
+                </li>
+            <?php endfor ?>
+                <li class="fields">
+                    <div class="field">
+                        <label for="city2" class="required"><em>*</em><?php echo $this->__('City') ?></label>
+                        <div class="input-box">
+                            <input type="text" name="city2" value="<?php echo $this->htmlEscape($this->getFormData()->getCity()) ?>" title="<?php echo $this->__('City') ?>" class="input-text required-entry" id="city2" />
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="region_id2" class="required"><em>*</em><?php echo $this->__('State/Province') ?></label>
+                        <div class="input-box">
+                            <select id="region_id2" name="region_id2" title="<?php echo $this->__('State/Province') ?>" class="validate-select" style="display:none;">
+                                <option value=""><?php echo $this->__('Please select region, state or province') ?></option>
+                            </select>
+                            <script type="text/javascript">
+                            //<![CDATA[
+                                $('region_id2').setAttribute('defaultValue', "<?php echo $this->getFormData()->getRegionId() ?>");
+                            //]]>
+                            </script>
+                            <input type="text" id="region2" name="region2" value="<?php echo $this->htmlEscape($this->getRegion()) ?>" title="<?php echo $this->__('State/Province') ?>" class="input-text" style="display:none;" />
+                        </div>
+                    </div>
+                </li>
+                <li class="fields">
+                    <div class="field">
+                        <label for="zip2" class="required"><em>*</em><?php echo $this->__('Zip/Postal Code') ?></label>
+                        <div class="input-box">
+                            <input type="text" name="zip2" value="<?php echo $this->htmlEscape($this->getFormData()->getPostcode()) ?>" title="<?php echo $this->__('Zip/Postal Code') ?>" id="zip2" class="input-text validate-zip-international required-entry" />
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="country2" class="required"><em>*</em><?php echo $this->__('Country') ?></label>
+						<div class="input-box">
+							<select id="country2" class="validate-select" title="Country" name="country2">
+							<option value=""> </option>
+							<option value="Afghanistan">Afghanistan</option>
+							<option value="Åland Islands">Åland Islands</option>
+							<option value="Albania">Albania</option>
+							<option value="Algeria">Algeria</option>
+							<option value="American">American Samoa</option>
+							<option value="Andorra">Andorra</option>
+							<option value="Angola">Angola</option>
+							<option value="Anguilla">Anguilla</option>
+							<option value="Antarctica">Antarctica</option>
+							<option value="Antigua and Barbuda">Antigua and Barbuda</option>
+							<option value="Argentina">Argentina</option>
+							<option value="Armenia">Armenia</option>
+							<option value="Aruba">Aruba</option>
+							<option value="Australia">Australia</option>
+							<option value="Austria">Austria</option>
+							<option value="Azerbaijan">Azerbaijan</option>
+							<option value="Bahamas">Bahamas</option>
+							<option value="Bahrain">Bahrain</option>
+							<option value="Bangladesh">Bangladesh</option>
+							<option value="Barbados">Barbados</option>
+							<option value="Belarus">Belarus</option>
+							<option value="Belgium">Belgium</option>
+							<option value="Belize">Belize</option>
+							<option value="Benin">Benin</option>
+							<option value="Bermuda">Bermuda</option>
+							<option value="Bhutan">Bhutan</option>
+							<option value="Bolivia">Bolivia</option>
+							<option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
+							<option value="Botswana">Botswana</option>
+							<option value="Bouvet Island">Bouvet Island</option>
+							<option value="Brazil">Brazil</option>
+							<option value="British Indian Ocean Territory">British Indian Ocean Territory</option>
+							<option value="British Virgin Islands">British Virgin Islands</option>
+							<option value="Brunei">Brunei</option>
+							<option value="Bulgaria">Bulgaria</option>
+							<option value="Burkina Faso">Burkina Faso</option>
+							<option value="Burundi">Burundi</option>
+							<option value="Cambodia">Cambodia</option>
+							<option value="Cameroon">Cameroon</option>
+							<option value="Canada">Canada</option>
+							<option value="Cape Verde">Cape Verde</option>
+							<option value="Cayman Islands">Cayman Islands</option>
+							<option value="Central African Republic">Central African Republic</option>
+							<option value="Chad">Chad</option>
+							<option value="Chile">Chile</option>
+							<option value="China">China</option>
+							<option value="Christmas Island">Christmas Island</option>
+							<option value="Cocos [Keeling] Islands">Cocos [Keeling] Islands</option>
+							<option value="Colombia">Colombia</option>
+							<option value="Comoros">Comoros</option>
+							<option value="Congo - Brazzaville">Congo - Brazzaville</option>
+							<option value="Congo - Kinshasa">Congo - Kinshasa</option>
+							<option value="Cook Islands">Cook Islands</option>
+							<option value="Costa Rica">Costa Rica</option>
+							<option value="Côte d’Ivoire">Côte d’Ivoire</option>
+							<option value="Croatia">Croatia</option>
+							<option value="Cuba">Cuba</option>
+							<option value="Cyprus">Cyprus</option>
+							<option value="Czech Republic">Czech Republic</option>
+							<option value="Denmark">Denmark</option>
+							<option value="Djibouti">Djibouti</option>
+							<option value="Dominica">Dominica</option>
+							<option value="Dominican Republic">Dominican Republic</option>
+							<option value="Ecuador">Ecuador</option>
+							<option value="Egypt">Egypt</option>
+							<option value="El Salvador">El Salvador</option>
+							<option value="Equatorial Guinea">Equatorial Guinea</option>
+							<option value="Eritrea">Eritrea</option>
+							<option value="Estonia">Estonia</option>
+							<option value="Ethiopia">Ethiopia</option>
+							<option value="Falkland Islands">Falkland Islands</option>
+							<option value="Faroe Islands">Faroe Islands</option>
+							<option value="Fiji">Fiji</option>
+							<option value="Finland">Finland</option>
+							<option value="France">France</option>
+							<option value="French Guiana">French Guiana</option>
+							<option value="French Polynesia">French Polynesia</option>
+							<option value="French Southern Territories">French Southern Territories</option>
+							<option value="Gabon">Gabon</option>
+							<option value="Gambia">Gambia</option>
+							<option value="Georgia">Georgia</option>
+							<option value="Germany">Germany</option>
+							<option value="Ghana">Ghana</option>
+							<option value="Gibraltar">Gibraltar</option>
+							<option value="Greece">Greece</option>
+							<option value="Greenland">Greenland</option>
+							<option value="Grenada">Grenada</option>
+							<option value="Guadeloupe">Guadeloupe</option>
+							<option value="Guam">Guam</option>
+							<option value="Guatemala">Guatemala</option>
+							<option value="Guernsey">Guernsey</option>
+							<option value="Guinea">Guinea</option>
+							<option value="Guinea-Bissau">Guinea-Bissau</option>
+							<option value="Guyana">Guyana</option>
+							<option value="Haiti">Haiti</option>
+							<option value="Heard Island and McDonald Islands">Heard Island and McDonald Islands</option>
+							<option value="Honduras">Honduras</option>
+							<option value="Hong Kong SAR China">Hong Kong SAR China</option>
+							<option value="Hungary">Hungary</option>
+							<option value="Iceland">Iceland</option>
+							<option value="India">India</option>
+							<option value="Indonesia">Indonesia</option>
+							<option value="Iran">Iran</option>
+							<option value="Iraq">Iraq</option>
+							<option value="Ireland">Ireland</option>
+							<option value="Isle of Man">Isle of Man</option>
+							<option value="Israel">Israel</option>
+							<option value="Italy">Italy</option>
+							<option value="Jamaica">Jamaica</option>
+							<option value="Japan">Japan</option>
+							<option value="Jersey">Jersey</option>
+							<option value="Jordan">Jordan</option>
+							<option value="Kazakhstan">Kazakhstan</option>
+							<option value="Kenya">Kenya</option>
+							<option value="Kiribati">Kiribati</option>
+							<option value="Kuwait">Kuwait</option>
+							<option value="Kyrgyzstan">Kyrgyzstan</option>
+							<option value="Laos">Laos</option>
+							<option value="Latvia">Latvia</option>
+							<option value="Lebanon">Lebanon</option>
+							<option value="Lesotho">Lesotho</option>
+							<option value="Liberia">Liberia</option>
+							<option value="Libya">Libya</option>
+							<option value="Liechtenstein">Liechtenstein</option>
+							<option value="Lithuania">Lithuania</option>
+							<option value="Luxembourg">Luxembourg</option>
+							<option value="Macau SAR China">Macau SAR China</option>
+							<option value="Macedonia">Macedonia</option>
+							<option value="Madagascar">Madagascar</option>
+							<option value="Malawi">Malawi</option>
+							<option value="Malaysia">Malaysia</option>
+							<option value="Maldives">Maldives</option>
+							<option value="Mali">Mali</option>
+							<option value="Malta">Malta</option>
+							<option value="Marshall Islands">Marshall Islands</option>
+							<option value="Martinique">Martinique</option>
+							<option value="Mauritania">Mauritania</option>
+							<option value="Mauritius">Mauritius</option>
+							<option value="Mayotte">Mayotte</option>
+							<option value="Mexico">Mexico</option>
+							<option value="Micronesia">Micronesia</option>
+							<option value="Moldova">Moldova</option>
+							<option value="Monaco">Monaco</option>
+							<option value="Mongolia">Mongolia</option>
+							<option value="Montenegro">Montenegro</option>
+							<option value="Montserrat">Montserrat</option>
+							<option value="Morocco">Morocco</option>
+							<option value="Mozambique">Mozambique</option>
+							<option value="Myanmar [Burma]">Myanmar [Burma]</option>
+							<option value="Namibia">Namibia</option>
+							<option value="Nauru">Nauru</option>
+							<option value="Nepal">Nepal</option>
+							<option value="Netherlands">Netherlands</option>
+							<option value="Netherlands Antilles">Netherlands Antilles</option>
+							<option value="New Caledonia">New Caledonia</option>
+							<option value="New Zealand">New Zealand</option>
+							<option value="Nicaragua">Nicaragua</option>
+							<option value="Niger">Niger</option>
+							<option value="Nigeria">Nigeria</option>
+							<option value="Niue">Niue</option>
+							<option value="Norfolk Island">Norfolk Island</option>
+							<option value="Northern Mariana Islands">Northern Mariana Islands</option>
+							<option value="North Korea">North Korea</option>
+							<option value="Norway">Norway</option>
+							<option value="Oman">Oman</option>
+							<option value="Pakistan">Pakistan</option>
+							<option value="Palau">Palau</option>
+							<option value="Palestinian Territories">Palestinian Territories</option>
+							<option value="Panama">Panama</option>
+							<option value="Papua New Guinea">Papua New Guinea</option>
+							<option value="Paraguay">Paraguay</option>
+							<option value="Peru">Peru</option>
+							<option value="Philippines">Philippines</option>
+							<option value="Pitcairn Islands">Pitcairn Islands</option>
+							<option value="Poland">Poland</option>
+							<option value="Portugal">Portugal</option>
+							<option value="Puerto Rico">Puerto Rico</option>
+							<option value="Qatar">Qatar</option>
+							<option value="Réunion">Réunion</option>
+							<option value="Romania">Romania</option>
+							<option value="Russia">Russia</option>
+							<option value="Rwanda">Rwanda</option>
+							<option value="Saint Barthélemy">Saint Barthélemy</option>
+							<option value="Saint Helena">Saint Helena</option>
+							<option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
+							<option value="Saint Lucia">Saint Lucia</option>
+							<option value="Saint Martin">Saint Martin</option>
+							<option value="Saint Pierre and Miquelon">Saint Pierre and Miquelon</option>
+							<option value="Saint Vincent and the Grenadines">Saint Vincent and the Grenadines</option>
+							<option value="Samoa">Samoa</option>
+							<option value="San Marino">San Marino</option>
+							<option value="São Tomé and Príncipe">São Tomé and Príncipe</option>
+							<option value="Saudi Arabia">Saudi Arabia</option>
+							<option value="Senegal">Senegal</option>
+							<option value="Serbia">Serbia</option>
+							<option value="Seychelles">Seychelles</option>
+							<option value="Sierra Leone">Sierra Leone</option>
+							<option value="Singapore">Singapore</option>
+							<option value="Slovakia">Slovakia</option>
+							<option value="Slovenia">Slovenia</option>
+							<option value="Solomon Islands">Solomon Islands</option>
+							<option value="Somalia">Somalia</option>
+							<option value="South Africa">South Africa</option>
+							<option value="South Georgia and the South Sandwich Islands">South Georgia and the South Sandwich Islands</option>
+							<option value="South Korea">South Korea</option>
+							<option value="Spain">Spain</option>
+							<option value="Sri Lanka">Sri Lanka</option>
+							<option value="Sudan">Sudan</option>
+							<option value="Suriname">Suriname</option>
+							<option value="Svalbard and Jan Mayen">Svalbard and Jan Mayen</option>
+							<option value="Swaziland">Swaziland</option>
+							<option value="Sweden">Sweden</option>
+							<option value="Switzerland">Switzerland</option>
+							<option value="Syria">Syria</option>
+							<option value="Taiwan">Taiwan</option>
+							<option value="Tajikistan">Tajikistan</option>
+							<option value="Tanzania">Tanzania</option>
+							<option value="Thailand">Thailand</option>
+							<option value="Timor-Leste">Timor-Leste</option>
+							<option value="Togo">Togo</option>
+							<option value="Tokelau">Tokelau</option>
+							<option value="Tonga">Tonga</option>
+							<option value="Trinidad and Tobago">Trinidad and Tobago</option>
+							<option value="Tunisia">Tunisia</option>
+							<option value="Turkey">Turkey</option>
+							<option value="Turkmenistan">Turkmenistan</option>
+							<option value="Turks and Caicos Islands">Turks and Caicos Islands</option>
+							<option value="Tuvalu">Tuvalu</option>
+							<option value="Uganda">Uganda</option>
+							<option value="Ukraine">Ukraine</option>
+							<option value="United Arab Emirates">United Arab Emirates</option>
+							<option value="United Kingdom">United Kingdom</option>
+							<option selected="selected" value="United States">United States</option>
+							<option value="Uruguay">Uruguay</option>
+							<option value="U.S. Minor Outlying Islands">U.S. Minor Outlying Islands</option>
+							<option value="U.S. Virgin Islands">U.S. Virgin Islands</option>
+							<option value="Uzbekistan">Uzbekistan</option>
+							<option value="Vanuatu">Vanuatu</option>
+							<option value="Vatican City">Vatican City</option>
+							<option value="Venezuela">Venezuela</option>
+							<option value="Vietnam">Vietnam</option>
+							<option value="Wallis and Futuna">Wallis and Futuna</option>
+							<option value="Western Sahara">Western Sahara</option>
+							<option value="Yemen">Yemen</option>
+							<option value="Zambia">Zambia</option>
+							<option value="Zimbabwe">Zimbabwe</option>
+							</select>
+                        </div>
+                    </div>
+                </li>
+                <li class="fields">
+                    <div class="field customfield">
+						<label for="btrefrenceemail2" class="required"><em>*</em><?php echo $this->__('Email Address') ?></label>
+                        <input type="text" name="btrefrenceemail2" id="btrefrenceemail2" value="<?php echo $this->htmlEscape($this->getFormData()->getBtrefrenceemail()) ?>" title="<?php echo $this->__('Email Address') ?>" class="input-text validate-email required-entry" />
+                    </div>
+                    <div class="field customfield">
+						<label for="btrefrencebusinesswebsite2"><?php echo $this->__('Business Web-Site') ?></label>
+                        <input type="text" name="btrefrencebusinesswebsite2" id="btrefrencebusinesswebsite2" value="<?php echo $this->htmlEscape($this->getFormData()->getBtrefrencebusinesswebsite()) ?>" title="<?php echo $this->__('Business Web-Site') ?>" class="input-text" />
+                    </div>
+                </li>
+			</li>
+		</ul>	
+	</div>
+     <!-- Business/Trade References2 Ends Here -->       
+        <div class="fieldset">
+            <h2 class="legend"><?php echo $this->__('Login Information') ?></h2>
+            <ul class="form-list"  style="background:#F9F9F9;border:1px solid #e2e2e2;padding-left:20px;padding-top:20px;padding-bottom:20px;">
+                <li class="fields">
+                    <div class="field">
+                        <label for="password" class="required"><em>*</em><?php echo $this->__('Password') ?></label>
+                        <div class="input-box">
+                            <input type="password" name="password" id="password" title="<?php echo $this->__('Password') ?>" class="input-text required-entry validate-password" />
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="confirmation" class="required"><em>*</em><?php echo $this->__('Confirm Password') ?></label>
+                        <div class="input-box">
+                            <input type="password" name="confirmation" title="<?php echo $this->__('Confirm Password') ?>" id="confirmation" class="input-text required-entry validate-cpassword" />
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="buttons-set">
+            <p class="required"><?php echo $this->__('* Required Fields') ?></p>
+            <input type="submit" title="<?php echo $this->__('Submit') ?>" class="submit"  value="Submit"/>
+        </div>
+    </form>
+    <script type="text/javascript">
+    //<![CDATA[
+        var dataForm = new VarienForm('form-validate', true);
+        <?php if(true): ?>
+        new RegionUpdater('country', 'region', 'region_id', <?php echo $this->helper('directory')->getRegionJson() ?>, undefined, 'zip');
+        new RegionUpdater('country1', 'region1', 'region_id1', <?php echo $this->helper('directory')->getRegionJson() ?>, undefined, 'zip');
+        new RegionUpdater('country2', 'region2', 'region_id2', <?php echo $this->helper('directory')->getRegionJson() ?>, undefined, 'zip');
+        <?php endif; ?>
+    //]]>
+    </script>
+</div>

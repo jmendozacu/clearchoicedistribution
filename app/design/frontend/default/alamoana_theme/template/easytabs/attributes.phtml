@@ -1,0 +1,367 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2009 Irubin Consulting Inc. DBA Varien (http://www.varien.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Product additional attributes template
+ *
+ * @see Mage_Catalog_Block_Product_View_Attributes
+ */
+?>
+<?php
+    $_helper = $this->helper('catalog/output');
+    $_product = $this->getProduct();
+	$displayManufacturer				=	false;
+	$displayWarranty					=	false;
+	$displayCompatibleProducts			=	false;    
+	if(!empty($_product->manufacturer) || isset($_product->manufacturer) || $_product->manufacturer!=''){
+		$displayManufacturer			=	true;
+	}
+	if(!empty($_product->warranty) || isset($_product->warranty) || $_product->warranty!=''){
+		$displayWarranty			=	true;
+	}
+	if(!empty($_product->compatible_products) || isset($_product->compatible_products) || $_product->compatible_products!=''){
+		$displayCompatibleProducts			=	true;
+	}    
+?>
+		<ul style="margin-bottom:10px;">
+			<?php if($displayManufacturer): ?>
+				<li>
+					<b>Manufacturer:</b> <?=$_product->manufacturer;?>
+				</li>
+			<?php endif; ?>
+			
+			<?php if($displayWarranty): ?>
+			<li>
+				<b>Warranty:</b> <?=$_product->warranty;?>
+			</li>
+			<?php endif; ?>
+			
+			<?php if($displayCompatibleProducts): ?>
+			<li>
+				<b>Compatible with:</b> <?=$_product->compatible_products;?>
+			</li>
+			<?php endif; ?>
+		</ul>
+<?php /*
+<?php if($_additional = $this->getAdditionalData()): ?>
+<div class="box-collateral box-additional">
+    <table class="data-table" id="product-attribute-specs-table">
+        <col width="25%" />
+        <col />
+        <tbody>
+        <?php foreach ($_additional as $_data): ?>
+            <tr>
+                <th class="label"><?php echo $this->htmlEscape($this->__($_data['label'])) ?></th>
+                <td class="data"><?php echo $_helper->productAttribute($_product, $_data['value'], $_data['code']) ?></td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+    <script type="text/javascript">decorateTable('product-attribute-specs-table')</script>
+</div>
+<?php endif;?>
+* */
+?>
+<?php
+	$type			=	$_product->getTypeId();
+	if($type	== 'grouped'){
+		//if product is grouped then we need to get all associated products and get their specification.
+		$_associatedProducts = $_product->getTypeInstance(true)->getAssociatedProducts($_product);
+		$counter			 =	"#ffffff";
+		?>
+		<?php 
+		$displayShortName					=	false;
+		$displayLength						=	false;
+		$displayWidth						=	false;
+		$displayHeight						=	false;
+		$displayCapacity					=	false;
+		$displayPowerConsumption			=	false;
+		$displayProductWeight				=	false;
+		
+		 ?>
+		<?php foreach($_associatedProducts as $val){
+			if(!empty($val->short_name) || isset($val->short_name) || $val->short_name!=''){
+				$displayShortName			=	true;
+			}			
+			if(!empty($val->length) || isset($val->length) || $val->length!=''){
+				$displayLength			=	true;
+			}
+			if(!empty($val->width) || isset($val->width) || $val->width!=''){
+				$displayWidth			=	true;
+			}
+			if(!empty($val->height) || isset($val->height) || $val->height!=''){
+				$displayHeight			=	true;
+			}
+			if(!empty($val->capacity) || isset($val->capacity) || $val->capacity!=''){
+				$displayCapacity			=	true;
+			}
+			if(!empty($val->power_consumption) || isset($val->power_consumption) || $val->power_consumption!=''){
+				$displayPowerConsumption			=	true;
+			}	
+			if(!empty($val->product_weight) || isset($val->product_weight) || $val->product_weight!=''){
+				$displayProductWeight			=	true;
+			}	
+		}	
+		?>
+
+		<table width="100%">
+			<tr style="background:#007A4D;color:#ffffff;font-size:15px;font-weight:bold;">
+				
+				<th>
+					Item #
+				</th>
+				<?php if($displayShortName): ?>
+				<th>
+					Description
+				</th>
+				<?php endif; ?>
+				
+				<?php if($displayLength): ?>
+				<th>
+					L "
+				</th>
+				<?php endif; ?>
+				
+				<?php if($displayWidth): ?>
+				<th>
+					W "
+				</th>
+				<?php endif; ?>
+				
+				<?php if($displayHeight): ?>
+				<th>
+					H "
+				</th>
+				<?php endif; ?>
+				
+				<?php if($displayProductWeight): ?>
+				<th>
+					Lbs
+				</th>
+				<?php endif; ?>
+				
+				<?php if($displayPowerConsumption): ?>
+				<th>
+					Power Draw
+				</th>
+				<?php endif; ?>
+				
+				
+				<?php if($displayCapacity): ?>
+				<th>
+					Gallons
+				</th>
+				<?php endif; ?>
+			</tr><?php
+			foreach($_associatedProducts as $val){?>
+				<tr style ="background:<?=$counter?>">
+					<td>
+						<?=$val->sku?>
+					</td>
+					
+					<?php if($displayShortName): ?>
+					<td>
+						<?=$val->short_name?>
+					</td>
+					<?php endif; ?>
+					
+					<?php if($displayLength): ?>
+					<td>
+						<?=$val->length?>
+					</td>
+					<?php endif; ?>
+					
+					
+					<?php if($displayWidth): ?>
+					<td>
+						<?=$val->width?>
+					</td>
+					<?php endif; ?>
+					
+					<?php if($displayHeight): ?>
+					<td>
+						<?=$val->height?>
+					</td>
+					<?php endif; ?>
+					
+					<?php if($displayProductWeight): ?>
+						<td>
+							<?=$val->product_weight?>
+						</td>
+					<?php endif; ?>
+
+					<?php if($displayPowerConsumption): ?>
+						<td>
+							<?=$val->power_consumption?>
+						</td>
+					<?php endif; ?>
+					<?php if($displayCapacity): ?>
+						<td>
+							<?=$val->capacity?>
+						</td>
+					<?php endif; ?>
+				</tr><?php
+				if($counter=='#ffffff'){
+					$counter		=	"#EDEDED";
+				}
+				else{
+					$counter		=	"#ffffff";
+				}
+			}?>
+		</table><?php
+	}
+	else{ //if product is simple or any other kind
+		$displayShortName					=	false;
+		$displayLength						=	false;
+		$displayWidth						=	false;
+		$displayHeight						=	false;
+		$displayCapacity					=	false;
+		$displayPowerConsumption			=	false;
+		$displayProductWeight				=	false;
+		$displayManufacturer				=	false;
+		$displayWarranty					=	false;
+		$displayCompatibleProducts			=	false;	
+			if(!empty($_product->short_name) || isset($_product->short_name) || $_product->short_name!=''){
+				$displayShortName			=	true;
+			}			
+			if(!empty($_product->length) || isset($_product->length) || $_product->length!=''){
+				$displayLength			=	true;
+			}
+			if(!empty($_product->width) || isset($_product->width) || $_product->width!=''){
+				$displayWidth			=	true;
+			}
+			if(!empty($_product->height) || isset($_product->height) || $_product->height!=''){
+				$displayHeight			=	true;
+			}
+			if(!empty($_product->capacity) || isset($_product->capacity) || $_product->capacity!=''){
+				$displayCapacity			=	true;
+			}
+			if(!empty($_product->power_consumption) || isset($_product->power_consumption) || $_product->power_consumption!=''){
+				$displayPowerConsumption			=	true;
+			}	
+			if(!empty($_product->product_weight) || isset($_product->product_weight) || $_product->product_weight!=''){
+				$displayProductWeight			=	true;
+			}
+		?>
+		<table width="100%">
+			<tr style="background:#007A4D;color:#ffffff;font-size:15px;font-weight:bold;">
+				<th>
+					Item #
+				</th>
+				<?php if($displayShortName): ?>
+				<th>
+					Description
+				</th>
+				<?php endif; ?>
+				
+				<?php if($displayLength): ?>
+				<th>
+					L "
+				</th>
+				<?php endif; ?>
+				
+				<?php if($displayWidth): ?>
+				<th>
+					W "
+				</th>
+				<?php endif; ?>
+				
+				<?php if($displayHeight): ?>
+				<th>
+					H "
+				</th>
+				<?php endif; ?>
+				
+				<?php if($displayProductWeight): ?>
+				<th>
+					Lbs
+				</th>
+				<?php endif; ?>
+				
+				<?php if($displayPowerConsumption): ?>
+				<th>
+					Power Draw
+				</th>
+				<?php endif; ?>
+				
+				
+				<?php if($displayCapacity): ?>
+				<th>
+					Gallons
+				</th>
+				<?php endif; ?>
+			</tr>
+			<tr>
+					<td>
+						<?=$_product->sku?>
+					</td>
+					
+					<?php if($displayShortName): ?>
+					<td>
+						<?=$_product->short_name?>
+					</td>
+					<?php endif; ?>
+					
+					<?php if($displayLength): ?>
+					<td>
+						<?=$_product->length?>
+					</td>
+					<?php endif; ?>
+					
+					
+					<?php if($displayWidth): ?>
+					<td>
+						<?=$_product->width?>
+					</td>
+					<?php endif; ?>
+					
+					<?php if($displayHeight): ?>
+					<td>
+						<?=$_product->height?>
+					</td>
+					<?php endif; ?>
+					
+					<?php if($displayProductWeight): ?>
+						<td>
+							<?=$_product->product_weight?>
+						</td>
+					<?php endif; ?>
+
+					<?php if($displayPowerConsumption): ?>
+						<td>
+							<?=$_product->power_consumption?>
+						</td>
+					<?php endif; ?>
+					<?php if($displayCapacity): ?>
+						<td>
+							<?=$_product->capacity?>
+						</td>
+					<?php endif; ?>
+			</tr>
+		</table>
+		<?php
+	}
+?>

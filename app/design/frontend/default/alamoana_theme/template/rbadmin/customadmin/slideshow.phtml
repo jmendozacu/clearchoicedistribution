@@ -1,0 +1,90 @@
+<?php
+/* Slidshow is managed from admin panel. but we have used html so deleted that functionality
+ * and added content here. I U want that functionality there is file named slideshow(copy).phtml.
+ * */
+$imagesUrl		=	$this->getSkinUrl('images/homeslider/');
+?>
+<script type="text/javascript">
+<!--
+var		imageBaseUrl		=	"<?php echo $imagesUrl; ?>";
+if(document.images)
+{	rollover1 = new Image;
+rolloff1 = new Image;
+rollover1.src = imageBaseUrl+"home_ati_hover.jpg";
+rolloff1.src =  imageBaseUrl+"home_ati_off.jpg";	}
+
+{	rollover2 = new Image;
+rolloff2 = new Image;
+rollover2.src = imageBaseUrl+"home_ai_hover.jpg";
+rolloff2.src =  imageBaseUrl+"home_ai_off.jpg";	}
+
+{	rollover3 = new Image;
+rolloff3 = new Image;
+rollover3.src = imageBaseUrl+"apply_reseller_hover.png";
+rolloff3.src =  imageBaseUrl+"apply_reseller_off.png";	}
+
+{	rollover4 = new Image;
+rolloff4 = new Image;
+rollover4.src = imageBaseUrl+"login_hover.png";
+rolloff4.src =  imageBaseUrl+"login_off.png";	}
+
+           
+function image1_rollover() 
+{	if(document.images) document.images["btn1"].src = rollover1.src;}
+
+function image1_rolloff()
+{	if(document.images) document.images["btn1"].src = rolloff1.src;}
+
+
+function image2_rollover() 
+{	if(document.images) document.images["btn2"].src = rollover2.src;}
+
+function image2_rolloff()
+{	if(document.images) document.images["btn2"].src = rolloff2.src;}
+
+
+function image3_rollover() 
+{	if(document.images) document.images["btn3"].src = rollover3.src;}
+
+function image3_rolloff()
+{	if(document.images) document.images["btn3"].src = rolloff3.src;}
+
+
+function image4_rollover() 
+{	if(document.images) document.images["btn4"].src = rollover4.src;}
+
+function image4_rolloff()
+{	if(document.images) document.images["btn4"].src = rolloff4.src;}
+    //<![CDATA[
+        var dataForm = new VarienForm('login-form', true);
+    //]]>
+// -->
+</script>
+<div style="float:left;border:0;margin:0 4px 4px 0;height:auto;width:auto;">
+<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('home_banner_image')->toHtml() ?>
+</div>
+
+<div style="background:url('<?=$imagesUrl?>existing_resllers_login.png') no-repeat;float:left;border:0;margin:0 0 4px 0;height:275px;width:316px;">
+	<form action="<?php echo $this->getUrl() ?>customer/account/loginPost/" method="post" id="login-form" name="myform">
+		<div style="background:url('<?=$imagesUrl?>existing_resllers_login.png') no-repeat;float:left;border:0;margin:0 0 4px 0;height:275px;width:316px;">
+					<div style="position:relative;top:90px;left:46px;font-size:11px;font-family:arial;color:white;letter-spacing:.02em;">
+						email address 
+							<input type="text" name="login[username]" id="email" style="background:white;width:215px;height:25px;color:#595959;border:0;display:block;padding-left:5px;margin:3px 0 13px 0;" />
+						password 
+							<input type="password" name="login[password]" style="background:white;width:215px;height:25px;color:#595959;border:0;display:block;padding-left:5px;xmargin:3px 0 2px 0;" id="pass" />
+			<a href="<?php echo $this->getUrl() ?>customer/account/forgotpassword/" style="color:#b3d0c6;font-style:italic;display:block;text-decoration:none;"><?php echo $this->__('Forgot Your Password?') ?></a>	
+			<a href="javascript:document.myform.submit();" onmouseover="image4_rollover()" onmouseout="image4_rolloff()"><img src="<?=$imagesUrl?>login_off.png" alt="Login" style="position:relative;left:19px;top:39px;border:0;margin:0 4px 0 0;height:29px;width:251px;" name="btn4"></a>
+					</div>
+
+		</div>
+	</form>
+</div>
+
+
+
+
+<div style="clear:both;"></div>
+<a href="<?php echo Mage::getModel("catalog/category")->load(115)->getUrl() ?>" onmouseover="image1_rollover()" onmouseout="image1_rolloff()"><img src="<?=$imagesUrl?>home_ati_off.jpg" alt="Exclusive N. America Distributor for ATI" style="float:left;border:0;margin:0 4px 0 0;height:205px;width:316px;" name="btn1"></a>
+<a href="<?php echo Mage::getModel("catalog/category")->load(17)->getUrl() ?>" onmouseover="image2_rollover()" onmouseout="image2_rolloff()"><img src="<?=$imagesUrl?>home_ai_off.jpg" alt="Premier Distributor for AquaIllumination" style="float:left;border:0;margin:0 4px 0 0;height:205px;width:316px;" name="btn2"></a>
+<a href="<?php echo $this->getUrl('customer/account/create/'); ?>" onmouseover="image3_rollover()" onmouseout="image3_rolloff()"><img src="<?=$imagesUrl?>apply_reseller_off.png" alt="Apply to become a reseller of these great products" style="float:left;border:0;margin:0 0px 0 0;height:205px;width:315px;" name="btn3"></a>
+</div>

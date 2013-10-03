@@ -1,0 +1,101 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2011 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Top menu for store
+ *
+ * @see Mage_Catalog_Block_Navigation
+ */
+?>
+<?php
+/**
+ * $this->renderCategoriesMenuHtml() supports optional arguments:
+ * int Level number for list item class to start from
+ * string Extra class of outermost list items
+ * string If specified wraps children list in div with this class
+ */
+?>
+<?php $_menu = $this->renderCategoriesMenuHtml(0,'level-top') ?>
+<?php /*?><?php if($_menu): ?>
+<div class="nav-container">
+    <ul id="nav" style="display:block">
+    <!--<ul style="display:block;">-->
+        <?php echo $_menu ?>
+    </ul>
+</div>
+<?php endif ?><?php */?>
+<?php //Get skin settings
+
+	$select_skinclass = '';
+	$topnavskin			= Mage::getStoreConfig('customadmin/design/navbar_skin', Mage::app()->getStore()->getId());
+	$navLevel2skin		= Mage::getStoreConfig('customadmin/design/navbar_level2_link', Mage::app()->getStore()->getId());
+	if ($topnavskin)
+		$select_skinclass .= ' nav-' . $topnavskin;
+	if ($navLevel2skin)
+		$select_skinclass .= ' level2-' . $navLevel2skin;
+?>
+<div class="nav-container<?php if($select_skinclass) echo $select_skinclass; ?>">
+
+	<div class="navbar-bg navbar-left"></div>
+	<div class="navbar-bg navbar">
+    	<?php /*?><ul id="nav" style="display:none;"><?php */?>
+        <ul id="nav">
+        <?php // Display home links ?>
+		<?php if (Mage::getStoreConfig('customadmin/header/links_home_enabled', Mage::app()->getStore()->getId())): ?>
+            <li id="nav-home-link" class="level0 level-top">
+            	<?php if (Mage::getStoreConfig('customadmin/header/links_home_img', Mage::app()->getStore()->getId())): ?>
+                	<a class="show-home-img level-top" href="<?php echo $this->getBaseUrl(); ?>"><?php echo $this->__('Home'); ?></a>
+                <?php else: ?>
+                	<a class="level-top" href="<?php echo $this->getBaseUrl(); ?>"><span><?php echo $this->__('Home'); ?></span></a>
+                <?php endif; ?>
+            </li>
+        <?php endif; ?>
+
+		<?php echo $_menu; //Main menu ?>
+
+		<?php // Display static CMS block as dropdown, if block exists ?>
+        <?php if ($tmp_html = $this->getChildHtml('i_block_header_nav_dropdown1')): ?> <?php //Predefined CMS block ?>
+        	<li id="nav-custom-link" class="level0 level-top parent">
+            	<?php // Get the block title, and display it as tab title
+                    $blockTitle = Mage::getModel('cms/block')
+						->setStoreId(Mage::app()->getStore()->getId())
+						->load('block_header_nav_dropdown1')
+						->getTitle();
+				?>
+                <a class="level-top" href="#"><span><?php echo $blockTitle; ?></span></a>
+                <ul class="level0">
+                	<div class="header-nav-dropdown-wrapper clearer"><?php echo $tmp_html; ?></div>
+                </ul>
+            </li>
+		<?php endif; ?>
+        
+		</ul>
+    </div>
+	<div class="navbar-bg navbar-right"></div>
+    
+</div>
+

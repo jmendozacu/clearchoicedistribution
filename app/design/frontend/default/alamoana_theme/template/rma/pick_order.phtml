@@ -1,0 +1,78 @@
+<?php
+$daysAllowed = Mage::getStoreConfig('rma/rma3/returndays');
+$timeAllowed = $daysAllowed . " days ago";
+?>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<?php $_orders = $this->getOrders(); ?>
+<div class="page-head">
+    <h3><?php echo $this->__('Create Return: Shipped Orders') ?></h3>
+</div>
+<?php if($_orders->getSize()): ?>
+<table cellspacing="0" class="data-table" id="my-orders-table">
+    <thead>
+        <tr>
+            <th><?php echo $this->__('Order #') ?></th>
+            <th><?php echo $this->__('Ship Date') ?></th>
+            <th><?php echo $this->__('Ship to') ?></th>
+            <th><?php echo $this->__('Order Total') ?></th>
+            <th><?php echo $this->__('Order Status') ?></th>
+            <th>&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php $_odd = ''; ?>
+        <?php foreach ($_orders as $_order): ?>
+        <?php if( ($_order->getStoreId() == Mage::app()->getStore()->getStoreId()) && (strtotime($_order->getCreatedAt()) > strtotime($timeAllowed)) ) { ?>
+        <?php
+		  
+$read = Mage::getSingleton('core/resource')->getConnection('core_read');
+$result = $read->query("SELECT created_at FROM sales_flat_shipment_track WHERE order_id='" . $_order->getId()  . "' LIMIT 1");
+$row = $result->fetch();
+
+if($row)
+	{ 
+	$shipment_date_raw = $row['created_at'];
+	$shipment_time = strtotime($shipment_date_raw);
+	$shipment_date = date("m/d/y", $shipment_time);
+	
+	$timeSinceShipment = time() - $shipment_time;
+	$daysSinceShipment = ceil($timeSinceShipment / 60 / 60 / 24);
+	
+	
+	
+	$alreadyRMA = false;
+	$alreadyRMA_query = "SELECT rma_id FROM rma WHERE order_number='" . $_order->getIncrementId()  . "'";
+	$alreadyRMA_result = Mage::getSingleton('core/resource')->getConnection('core_read')->fetchAll($alreadyRMA_query);
+	
+	if(count($alreadyRMA_result) != 0)
+		{
+		$alreadyRMA = true;
+		}
+	
+	?>
+        	<tr>
+                <td><?php echo $_order->getRealOrderId() ?></td>
+                <td><?php //echo $this->formatDate($_order->getCreatedAtStoreDate()) ?><?=$shipment_date;?></td>
+                <td><?php echo $_order->getShippingAddress() ? $this->htmlEscape($_order->getShippingAddress()->getName()) : '&nbsp;' ?></td>
+                <td><?php echo $_order->formatPrice($_order->getGrandTotal()) ?></td>
+                <td><?php echo $_order->getStatusLabel() ?></td>
+                <td class="a-center">
+						<?php if ($alreadyRMA) { ?>
+                        <span style="color:#009; font-style:italic; cursor: default; font-size:13px; font-weight:bold;">RMA Filed</span>
+                  <?php } else if ($daysSinceShipment <= $daysAllowed) { ?>
+                        <a href="<?php echo $this->getUrl( 'rma/pickitems', array( 'order_id' => $_order->getId() ) ) ?>" style="color:#090; font-size:13px; font-weight:bold;"><?php echo $this->__('Request RMA') ?></a>
+                  <?php } else { ?>
+                        <span style="color:#900; font-style:italic; cursor: default; font-size:13px; font-weight:bold;">Past 15 day limit</span>
+                  <?php } ?>
+                </td>
+            </tr>
+        <?php } ?>
+        <?php } ?>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+<script type="text/javascript">decorateTable('my-orders-table')</script>
+<?php echo $this->getPagerHtml(); ?>
+<?php else: ?>
+    <p><?php echo $this->__('You have placed no orders.'); ?></p>
+<?php endif ?>

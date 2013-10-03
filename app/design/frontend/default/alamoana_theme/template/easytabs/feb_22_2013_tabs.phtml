@@ -1,0 +1,218 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category   design_default
+ * @package    Mage
+ * @copyright  Copyright (c) 2008 Irubin Consulting Inc. DBA Varien (http://www.varien.com)
+ * @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Product view template
+ *
+ * @see Mage_Catalog_Block_Product_View
+ */
+?>
+<ul class="tabs">
+    <?php foreach ($this->getTabs() as $_index => $_tab): ?>
+        	<?php
+				$tab_title = $_tab['title'];
+				if($tab_title=='Related Products'){
+					$product_id = Mage::registry('current_product')->getId();
+					$model = Mage::getModel('catalog/product'); //getting product model
+					$_product = $model->load($product_id);
+					if(count($_product->getRelatedProductIds())==0){
+						continue;
+					}
+				}
+        		$tab_is_custom = strpos($_tab['alias'], 'custom');
+				$tab_is_cms= strpos($_tab['alias'], 'cms');
+				if($tab_is_custom === 0){
+        			$tab_is_tmp_id =  substr($_tab['alias'], 6);
+        			$tab_is_custom_id = (!empty($tab_is_tmp_id)) ? $tab_is_tmp_id : '';
+					$tab_title = Mage::getStoreConfig('easy_tabs/custom/customtabname'.$tab_is_custom_id);
+        		} elseif($tab_is_cms === 0) {
+					$tab_is_tmp_id =  substr($_tab['alias'], 3);
+        			$tab_is_custom_id = (!empty($tab_is_tmp_id)) ? $tab_is_tmp_id : '';
+					$tab_title = Mage::getStoreConfig('easy_tabs/customcms/tabnamecms'.$tab_is_custom_id);
+        		} 
+        	?>
+        	<?php 
+        	$style="";
+        	if($_tab['alias']=="upsell_products_tabbed" || $_tab['alias']=="tags_tabbed" || $_tab['alias']=="review_tabbed"):
+        	$style="style='display:none;'";
+        	if($tab_title=='Additional Information'){
+				$tab_title='Specifications';
+			}
+        	?>     
+        	<?php endif;?>   	 
+            <li id="product_tabs_<?php echo $_tab['alias'] ?>" <?php echo $style;?> <?php echo !$_index ? 'class="active first"' : '' ?>><a href="#"><?php echo $tab_title; ?></a></li>
+            <?php endforeach; ?>
+</ul>
+<div class="padder">
+    <?php foreach ($this->getTabs() as $_index => $_tab): ?>
+            
+        <?php  //Sanjay	
+			if($_tab['alias']=='upsell_products_tabbed')    
+            {
+			?>
+	            <div id="product_tabs_<?php echo $_tab['alias'] ?>_contents">
+				<?php 
+				
+					 $replace_upsell_product = Mage::getStoreConfig('customadmin/products/replace_upsell', Mage::app()->getStore()->getId());
+					 $upsell_block = $this->getLayout()->createBlock('cms/block')->setBlockId('replace_upsell_product_block')->toHtml(); 
+					
+						if ($replace_upsell_product == 0) //Do not replace with static CMS block
+						{
+							$list_pro =$this->getChildHtml($_tab['alias']);
+							if($list_pro)
+							{
+								echo $list_pro;	
+							}
+							else
+							{
+								echo "There is no Upsell products available";	
+							}
+						}
+						elseif ($replace_upsell_product == 1) //Always replace with Static Block
+						{
+							if ($upsell_block)
+							{
+								echo $upsell_block;
+							}
+							else
+							{
+								echo "Please Create Static block for display with the following ID: <h2>replace_upsell_product_block</h2>";
+							}
+						}
+						else //Replace if no upsell products
+						{
+							if ($blockUpsell_html = $this->getChildHtml('upsell_products'))
+								echo $blockUpsell_html;
+							else
+							
+								if ($blockUpsell_html = $this->getChildHtml($_tab['alias'])) //If related product available
+									echo $blockUpsell_html;
+								else //No related product available
+									if ($upsell_block)
+									{
+										echo $upsell_block;
+									}
+									else
+									{
+										echo "Please Create Static block for display with the following ID: <h2>replace_related_product_block</h2>";
+									}
+						}
+					
+				
+				  ?>
+                </div>
+			<?php }	
+			else if($_tab['alias']=='related_tabbed')    
+            {
+				if(count($_product->getRelatedProductIds())==0){
+					continue;
+				}
+				
+				 ?>
+				
+                <div id="product_tabs_<?php echo $_tab['alias'] ?>_contents">
+				<?php 
+				$replace_related_block = Mage::getStoreConfig('customadmin/products/replace_related', Mage::app()->getStore()->getId());
+				$related_block = $this->getLayout()->createBlock('cms/block')->setBlockId('replace_related_product_block')->toHtml(); 
+				if ($replace_related_block == 0) // display related product that is not replace with block
+				{
+					$list_pro_related = $this->getChildHtml($_tab['alias']);
+					if($list_pro_related)
+							{
+								echo $list_pro_related;	
+							}
+							else
+							{
+								echo "There is no Related products available";	
+							}
+				}
+				elseif ($replace_related_block == 1) // This option always replaced with static CMS block
+				{
+					if ($related_block)
+					{
+						echo $related_block;
+					}
+					else
+					{
+						echo "Please Create Static block for display with the following ID: <h2>replace_related_product_block</h2>";
+					}
+					
+				}
+				else // This is replaced if there is no related product available
+				{
+					
+					if ($blockRelated_html = $this->getChildHtml($_tab['alias'])) //If related product available
+						echo $blockRelated_html;
+					else //No related product available
+						if ($related_block)
+						{
+							echo $related_block;
+						}
+						else
+						{
+							echo "Please Create Static block for display with the following ID: <h2>replace_related_product_block</h2>";
+						}
+				}
+				?>
+               </div>
+		<?php }	
+		 else { ?>			
+			<div id="product_tabs_<?php echo $_tab['alias'] ?>_contents"><?php echo $this->getChildHtml($_tab['alias']); ?></div>
+        <?php  } ?>
+    <?php endforeach; ?>
+</div>
+<script type="text/javascript">
+Varien.Tabs = Class.create();
+Varien.Tabs.prototype = {
+  initialize: function(selector) {
+    var self=this;
+    $$(selector+' a').each(this.initTab.bind(this));
+  },
+
+  initTab: function(el) {
+      el.href = 'javascript:void(0)';
+      if ($(el.parentNode).hasClassName('active')) {
+        this.showContent(el);
+      }
+      el.observe('click', this.showContent.bind(this, el));
+  },
+
+  showContent: function(a) {
+    var li = $(a.parentNode), ul = $(li.parentNode);
+    ul.select('li', 'ol').each(function(el){
+      var contents = $(el.id+'_contents');
+      if (el==li) {
+        el.addClassName('active');
+        contents.show();
+      } else {
+        el.removeClassName('active');
+        contents.hide();
+      }
+    });
+  }
+}
+new Varien.Tabs('.tabs');
+</script>

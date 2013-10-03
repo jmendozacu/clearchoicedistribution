@@ -1,0 +1,20 @@
+
+.jcarousel-skin-tango .jcarousel-next-horizontal { background:url(aroStyle2.png) no-repeat right top;} 
+
+.jcarousel-skin-tango .jcarousel-next-disabled-horizontal,
+.jcarousel-skin-tango .jcarousel-next-disabled-horizontal:hover,
+.jcarousel-skin-tango .jcarousel-next-disabled-horizontal:focus,
+.jcarousel-skin-tango .jcarousel-next-disabled-horizontal:active {
+	opacity:1;
+    background-position: right top !important;
+}
+
+.jcarousel-skin-tango .jcarousel-prev-horizontal { background:url(aroStyle2.png) no-repeat left top;}
+.jcarousel-skin-tango .jcarousel-prev-disabled-horizontal,
+.jcarousel-skin-tango .jcarousel-prev-disabled-horizontal:hover,
+.jcarousel-skin-tango .jcarousel-prev-disabled-horizontal:focus,
+.jcarousel-skin-tango .jcarousel-prev-disabled-horizontal:active {
+	opacity:1;
+    background-position: left top !important;
+}
+

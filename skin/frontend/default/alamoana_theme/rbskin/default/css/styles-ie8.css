@@ -1,0 +1,8 @@
+/* Fix for transparency issue and artifacts on none-transparent images in Cycle plugin when "fade" is enabled */
+/* "filter" is for IE6 & 7 */
+/*.the-slideshow .slideshow .slide img {  
+    background: transparent;
+    -ms-filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#00FFFFFF,endColorstr=#00FFFFFF);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#19FFFFFF,endColorstr=#19FFFFFF);
+    zoom: 1;
+}*/

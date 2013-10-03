@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+    </default>
+	<rmaeg_index_index>
+		<reference name="head">
+            <action method="addItem"><type>js_css</type><name>calendar/calendar-win2k-1.css</name><params/><!--<if/><condition>can_load_calendar_js</condition>--></action>
+            <action method="addItem"><type>js</type><name>calendar/calendar.js</name><!--<params/><if/><condition>can_load_calendar_js</condition>--></action>
+            <action method="addItem"><type>js</type><name>calendar/calendar-setup.js</name><!--<params/><if/><condition>can_load_calendar_js</condition>--></action>
+        </reference> 
+        <reference name="content">
+            <block type="rmaeg/rmaeg" name="rmaeg" template="rmaeg/rmaeg.phtml">
+				<block type="core/html_calendar" name="html_calendar" as="html_calendar" template="page/js/calendar.phtml"/> 
+			</block>
+        </reference>
+    </rmaeg_index_index>
+	
+	<rmaeg_return_index>
+		<reference name="root">
+            <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+        </reference>
+		<reference name="head">
+            <action method="addItem"><type>js_css</type><name>calendar/calendar-win2k-1.css</name><params/><!--<if/><condition>can_load_calendar_js</condition>--></action>
+            <action method="addItem"><type>js</type><name>calendar/calendar.js</name><!--<params/><if/><condition>can_load_calendar_js</condition>--></action>
+            <action method="addItem"><type>js</type><name>calendar/calendar-setup.js</name><!--<params/><if/><condition>can_load_calendar_js</condition>--></action>
+        </reference> 
+		<reference name="content">
+            <block type="rmaeg/return" name="rmaeg.return" template="rmaeg/return.phtml">
+				<block type="core/html_calendar" name="html_calendar" as="html_calendar" template="page/js/calendar.phtml"/>
+			</block>
+        </reference>
+    </rmaeg_return_index>
+	
+	<!--<rmaeg_items_index>
+		<reference name="root">
+			<action method="setTemplate"><template>page/popup.phtml</template></action>
+		</reference>
+		<reference name="content">
+			<block type="rmaeg/items" name="rmaeg.items" template="rmaeg/items.phtml">
+		</reference>
+	</rmaeg_items_index>-->
+	
+	<rmaeg_check_index>
+		<reference name="content">
+            <block type="rmaeg/check" name="rmaeg.check" template="rmaeg/check.phtml">
+			</block>
+        </reference>
+    </rmaeg_check_index>
+	
+	<rmaeg_done_index>
+        <reference name="content">
+            <block type="rmaeg/done" name="rmaeg.done"/>
+            <block type="customer/account_dashboard" name="customer.account.link.back" template="customer/account/link/back.phtml"/>
+        </reference>
+    </rmaeg_done_index>
+</layout> 

@@ -1,0 +1,121 @@
+<script type="text/javascript" src="http://localhost/ccd_live/skin/frontend/default/default/js/moduleJS/custom_zoom.js"></script>
+<link rel="stylesheet" type="text/css" href="http://localhost/ccd_live/skin/frontend/default/alamoana_theme/css/custom.zoom.css" media="all" />
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('additional_slider/jquery.js')?>"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('additional_slider/skin.css')?>">
+<script type="text/javascript">
+jQuery(document).ready(function() {
+    jQuery('#mycarousel').jcarousel(); 
+});
+</script>
+<style>
+.product-img-box div.mainBox{
+width:47% !important;
+}
+</style>
+<?php
+	$model 	= Mage::getModel('catalog/product'); //getting product model
+	$pSku	=	$_REQUEST['pSku'];
+	$pId	=	 $model->getIdBySku($pSku);
+	$_product = $model->load($pId);
+    $_helper = $this->helper('catalog/output');
+    $galleryImages = $_product->getMediaGalleryImages();
+    $config = Mage::helper("CustomZoom")->getConfig();
+	//print_r($config);	
+	$zoom_enable=Mage::getStoreConfig('GTT_CustomZoom/general/enabled', Mage::app()->getStore()->getId());
+	//echo $zoom_enable;
+?>
+<?php if($zoom_enable==1):?>
+	<div id="image" name="image">
+        <?php $firtsImage = Mage::helper("CustomZoom")->imageToVarien($_product); ?>
+        <a href='<?php echo $firtsImage->getUrl()?>' class='custom-zoom' id='zoom' rel="<?php echo $config['conf'] ?>">
+            <img src="<?php echo Mage::helper("CustomZoom")->resizeImage($_product, $firtsImage, $config['fixSize'], $config['imgSize'])?>" alt='<?php echo $this->htmlEscape($_product->getName()) ?>' style="<?php echo $config['fixSize'].":".$config['imgSize'] ?>px" title="" />
+        </a>
+    </div>
+<?php else: ?>
+	<p class="product-image">
+		<?php
+			$_img = '<img src="'.$this->helper('catalog/image')->init($_product, 'image')->resize(265).'" alt="'.$this->htmlEscape($this->getImageLabel()).'" title="'.$this->htmlEscape($this->getImageLabel()).'" />';
+			echo $_helper->productAttribute($_product, $_img, 'image');
+		?>
+	</p>
+<?php endif; ?>
+
+<?php if (count($galleryImages) > 0): ?>
+
+<?php
+	 //For thumnail image 
+	 
+	$thumb_width	= intval(Mage::getStoreConfig('customadmin/images/product_thumbnail_width', Mage::app()->getStore()->getId()));
+	$thumb_height	= intval(Mage::getStoreConfig('customadmin/images/product_thumbnail_height', Mage::app()->getStore()->getId()));
+	
+	if($thumb_height)
+	{
+		$thumb_height_fix = $thumb_height;
+	}
+	else
+	{
+			$thumb_height_fix = 56;
+	}
+    if ($thumb_width)
+	{
+			$thumb_width_fix = $thumb_width;
+	}
+	else
+     {		
+	 		$thumb_width_fix = 56;
+	 }
+
+?>
+
+
+<div class="more-views" id="zoom-gallery" style="display:<?php echo count($galleryImages)>1?"block":"none"?>">
+	<h4><?php echo $this->__('More Views') ?></h4>
+    
+    <div class=" jcarousel-skin-tango">
+    	<div style="position: relative; display: block;" class="jcarousel-container jcarousel-container-horizontal">
+        	<div style="position: relative;" class="jcarousel-clip jcarousel-clip-horizontal">
+            	<ul style="overflow: hidden; position: relative; top: 0px; margin: 0px; padding: 0px; left: -255px; width: 950px;" id="mycarousel" class="jcarousel-list jcarousel-list-horizontal">
+                <?php $i=1; ?>
+    			<?php foreach ($galleryImages as $_image): ?>
+    				
+   					    				
+					<li jcarouselindex="<?php echo $i;?>" style="float: left; list-style: none outside none;" class="jcarousel-item jcarousel-item-horizontal jcarousel-item-<?php echo $i;?> jcarousel-item-<?php echo $i;?>-horizontal">
+                    <?php $_smallImg = Mage::helper("CustomZoom")->resizeImage($_product, $_image, $config['fixSize'], $config['imgSize']); ?>
+                    <a href="<?php echo $_image->url; ?>" class="custom-zoom-gallery" rel="useZoom: 'zoom', smallImage: '<?php echo $_smallImg ?>'">
+                        <img src="<?php echo $this->helper('catalog/image')->init($_product, 'thumbnail', $_image->getFile())->resize($thumb_width_fix,$thumb_height_fix); ?>" alt="<?php echo $this->htmlEscape($_image->getLabel()) ?>" title="<?php echo $this->htmlEscape($_image->getLabel()) ?>" height="75" width="75" />
+                    </a>
+                    </li>
+                    
+                    <?php /*?><li>
+                    <?php $_smallImg = Mage::helper("CustomZoom")->resizeImage($_product, $_image, $config['fixSize'], $config['imgSize']); ?>
+                    <a href="<?php echo $_image->url; ?>" class="custom-zoom-gallery" rel="useZoom: 'zoom', smallImage: '<?php echo $_smallImg ?>'">
+                        <img src="<?php echo $this->helper('catalog/image')->init($_product, 'thumbnail', $_image->getFile())->resize($thumb_width_fix,$thumb_height_fix); ?>" alt="<?php echo $this->htmlEscape($_image->getLabel()) ?>" title="<?php echo $this->htmlEscape($_image->getLabel()) ?>" />
+                    </a>
+                    </li><?php */?>
+                    <?php $i++; ?>
+			    <?php endforeach; ?>
+    			</ul>
+			</div>
+			<div disabled="false" style="display: block;" class="jcarousel-prev jcarousel-prev-horizontal"></div>
+            <div disabled="false" style="display: block;" class="jcarousel-next jcarousel-next-horizontal"></div>
+		</div>
+    </div>    
+</div>
+<?php endif; ?>
+<?php /*?><script type="text/javascript" src="<?php echo $this->getSkinUrl('featured_slider/jquery-1.4.2.min.js')?>"></script><?php */?>
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('home-slider/skin.css')?>">
+<div class="gallery-area" style="display:none">
+      <div class="column-box">
+<div class="img-gallery gallery-holder">
+<ul id="product_slider" class="img-list jcarousel-skin-tango">
+    	<?php foreach ($this->getGalleryImages() as $_image): ?>
+            <li>
+                    <div class="pro product_pro">
+            			<a href="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile());?>" ><img src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize(312); ?>" alt="" width="312" /><span class="mask">&nbsp;</span></a>
+            		</div>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+    </div>
+</div>
+</div> 

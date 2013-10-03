@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+
+    <rma_adminhtml_rma_index>
+        <reference name="content">
+            <block type="rma/adminhtml_rma" name="rma" />
+        </reference>
+    </rma_adminhtml_rma_index>
+	
+	<rma_adminhtml_rma_edit>
+	<reference name="content">
+        <block type="rma/adminhtml_rma_edit" name="rma_edit">
+		</block>
+    </reference>
+	<reference name="left">
+            <block type="rma/adminhtml_rma_edit_tabs" name="rma_edit_tabs">
+				<block type="rma/adminhtml_rma_edit_tab_view" name="rma_edit_tab_view" template="rma/tab/view.phtml">
+					<block type="rma/adminhtml_rma_edit_tab_view_form" name="form" before="-"></block>
+					<block type="rma/adminhtml_rma_edit_tab_view_items" name="items" template="rma/tab/view/items.phtml"></block>
+					<block type="rma/adminhtml_rma_edit_tab_view_remarks" name="remarks"></block>
+					<block type="rma/adminhtml_rma_edit_tab_view_sample" name="sample" template="rma/tab/view/sample.phtml"></block>
+				</block>
+				<block type="rma/adminhtml_rma_edit_tab_email" name="rma_edit_tab_email" template="rma/tab/email.phtml">
+					<block type="rma/adminhtml_rma_edit_tab_view_form" name="form" before="-"></block>
+					<block type="rma/adminhtml_rma_edit_tab_view_items" name="items" template="rma/tab/view/items.phtml"></block>
+					<block type="rma/adminhtml_rma_edit_tab_view_remarks" name="remarks"></block>
+					<block type="rma/adminhtml_rma_edit_tab_view_sample" name="sample" template="rma/tab/view/sample.phtml"></block>
+				</block>
+				<action method="addTab"><name>rma_edit_tab_view</name><block>rma_edit_tab_view</block></action>
+				<action method="addTab"><name>rma_edit_tab_email</name><block>rma_edit_tab_email</block></action>
+            </block>
+        </reference>
+    </rma_adminhtml_rma_edit>
+	
+	<rma_adminhtml_rma_createrma>
+	<reference name="content">
+        <block type="rma/adminhtml_rma_createrma" name="rma_createrma"></block>
+    </reference>
+	<reference name="left">
+		<block type="rma/adminhtml_rma_createrma_tabs" name="rma_createrma_tabs">
+			<block type="rma/adminhtml_rma_createrma_tab_view" name="rma_createrma_tab_view" template="rma/create/tab/view.phtml">
+				<block type="rma/adminhtml_rma_createrma_tab_view_items" name="items" template="rma/create/tab/view/items.phtml"></block>
+			</block>
+			<action method="addTab"><name>rma_createrma_tab_view</name><block>rma_createrma_tab_view</block></action>
+		</block>
+	</reference>
+	</rma_adminhtml_rma_createrma>
+	
+	<rma_adminhtml_rma_verify>
+	<reference name="content">
+        <block type="rma/adminhtml_rma_verify" name="rma_verify"></block>
+    </reference>
+	<reference name="left">
+		<block type="rma/adminhtml_rma_verify_tabs" name="rma_verify_tabs">
+			<block type="rma/adminhtml_rma_verify_tab_view" name="rma_verify_tab_view" template="rma/verify/tab/view.phtml">
+				<block type="rma/adminhtml_rma_verify_tab_view_info" name="info" before="-"></block>
+				<block type="rma/adminhtml_rma_verify_tab_view_reason" name="reason" before="-"></block>
+				<block type="rma/adminhtml_rma_verify_tab_view_form" name="form" before="-"></block>
+				<block type="rma/adminhtml_rma_verify_tab_view_remarks" name="remarks" before="-"></block>
+			</block>
+			<action method="addTab"><name>rma_verify_tab_view</name><block>rma_verify_tab_view</block></action>
+		</block>
+	</reference>
+	<!--<reference name="left">
+		<block type="rma/adminhtml_rma_createrma_tabs" name="rma_createrma_tabs">
+			<block type="rma/adminhtml_rma_createrma_tab_view" name="rma_createrma_tab_view" template="rma/create/tab/view.phtml">
+				<block type="rma/adminhtml_rma_createrma_tab_view_items" name="items" template="rma/create/tab/view/items.phtml"></block>
+			</block>
+			<action method="addTab"><name>rma_createrma_tab_view</name><block>rma_createrma_tab_view</block></action>
+		</block>
+	</reference>-->
+	</rma_adminhtml_rma_verify>
+	
+	<rma_adminhtml_rma_printrma>
+	<reference name="content">
+        <block type="rma/adminhtml_rma_printrma" name="rma_printrma" template="rma/tab/view.phtml">
+		</block>
+    </reference>
+	</rma_adminhtml_rma_printrma>
+	
+</layout>

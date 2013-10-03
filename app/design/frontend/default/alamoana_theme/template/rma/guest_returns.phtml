@@ -1,0 +1,242 @@
+<?php
+
+require_once('lib/captcha/recaptchalib.php');
+$usecaptcha = Mage::getStoreConfig('rma/rma4/usecaptcha');
+if($usecaptcha)
+	{
+	$publickey = Mage::getStoreConfig('rma/rma4/captchapublic');
+	$privatekey = Mage::getStoreConfig('rma/rma4/captchaprivate');
+	
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_URL, "https://www.google.com/recaptcha/api/noscript?k=".$publickey."&zzz=".rand(0,1000));
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+	curl_setopt($ch, CURLOPT_FRESH_CONNECT, true);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+	$output = curl_exec($ch);
+	curl_close($ch);
+	
+	if(preg_match("#error#",$output)) // Format of site key was invalid 
+		{
+		echo("Captcha is not properly configured.");
+		return;
+		}
+	
+	$captchaHTML = recaptcha_get_html($publickey);
+	}
+
+if($_POST['filerma'])
+	{
+	$captcha_valid = true;
+	if($usecaptcha)
+		{
+		$resp = recaptcha_check_answer ($privatekey,
+											  $_SERVER["REMOTE_ADDR"],
+											  $_POST["recaptcha_challenge_field"],
+											  $_POST["recaptcha_response_field"]);
+		if (!$resp->is_valid)
+			{
+			echo("The CAPTCHA code you entered is invalid. Please go back and re-enter your information.");
+			return;
+			}
+		}
+	
+	$num_to_update = 0;
+	for($x=0; $x<count($_POST["prodskus"]); $x++)
+		{
+		$num_to_update+= $_POST['quantities'][$x];
+		}
+	if($num_to_update == 0)
+		{
+		echo("You did not choose any products to return.");
+		return;
+		}
+	
+	?>
+<h2>Return Created Successfully</h2>
+Dear <?=$_POST['order_customer_name'];?>,
+<br />Your Return has been succesfully submitted.
+<br />Our customer service department will be contacting you regarding your Return.
+<?php
+	
+	$sql = "INSERT INTO `rma`
+		(`order_id`, `order_number`, `customer_id`, `customer_name`, `customer_email`, `store_id`, `status`, `date_created`, `date_lastupdated`) 
+		VALUES
+		('".$_POST['orderID']."', '".$_POST['order_number']."', '".$_POST['order_customer_id']."', '".$_POST['order_customer_name']."', '".$_POST['order_customer_email']."', '".$this->helper('core')->getStoreId()."', '1', '".date('Y-m-d_H-i-s')."', '".date('Y-m-d_H-i-s')."')";
+	$result = Mage::getSingleton('core/resource')->getConnection('core_write')->query($sql);
+	
+	$sql = "SELECT rma_id FROM `rma` WHERE `order_number`='".$_POST['order_number']."' AND customer_email='".$_POST['order_customer_email']."' ORDER BY `rma_id` DESC LIMIT 1";
+	$result = Mage::getSingleton('core/resource')->getConnection('core_read')->fetchAll($sql);
+	
+	$rma_id = $result[0]['rma_id'];
+	
+	for($x=0; $x<count($_POST["serials"]); $x++)
+		{
+		
+		if($_POST["quantities"][$x])
+			{
+			$sql = "INSERT INTO `rma_items`
+					(`rma_id`, `item_id`, `qty`, `serial_number`, `reason`, `type`, `status`) 
+					VALUES
+					('".$rma_id."', '".$_POST["prodids"][$x]."', '".$_POST["quantities"][$x]."', '".$_POST["serials"][$x]."', '".$_POST["reasons"][$x]."', '".$_POST['order_customer_name']."', 'Waiting for Item')";
+			$result = Mage::getSingleton('core/resource')->getConnection('core_write')->query($sql);
+			}
+		}
+	
+	$company_email_name = Mage::getStoreConfig('rma/rma/emailname');
+	$company_email_address = Mage::getStoreConfig('rma/rma/emailaddress');
+	
+	$message = "A guest RMA was just placed on the front end of your website." . "\n\n";
+	$message .= "Customer: " . $_POST['order_customer_name'] . "\n";
+	$message .= "Email: " . $_POST['order_customer_email'] . "\n";
+	$message .= "Order #" . $_POST['order_number'] . "\n\n";
+	$message .= "You can view this RMA at your online control panel." . "\n";
+	$to      = $company_email_address;
+	$subject = 'A guest RMA has been placed.';
+	$headers = 'From: "' . $company_email_name . '" <' . $company_email_address . '>' . "\r\n" . 'X-Mailer: PHP/' . phpversion();
+	mail($to, $subject, $message, $headers);
+	
+	$message = "This email is a confirmation of your Return Request with our store." . "\n\n";
+	$message .= "Customer: " . $_POST['order_customer_name'] . "\n";
+	$message .= "Email: " . $_POST['order_customer_email'] . "\n";
+	$message .= "Order #" . $_POST['order_number'] . "\n\n";
+	$message .= "A member of our Customer Service team will call you ASAP for details on this return." . "\n";
+	$to      = $_POST['order_customer_email'];
+	$subject = 'Confirmation of your Return request';
+	$headers = 'From: "' . $company_email_name . '" <' . $company_email_address . '>' . "\r\n" . 'X-Mailer: PHP/' . phpversion();
+	mail($to, $subject, $message, $headers);
+	
+	}
+else
+	{
+?>
+<script language="javascript">
+function validate_form(curr_qty, curr_value, curr_item)
+	{
+	if (curr_value > curr_qty)
+		{
+		alert ("The quantity you are trying to return is greater than what is shipped.");
+		document.getElementById('quantity_'+curr_item).value = curr_qty;
+		document.getElementById("addtorma_"+curr_item).checked = true;
+		}
+	if (curr_value == 0 && document.getElementById("addtorma_"+curr_item).checked==true)
+		{
+		document.getElementById("addtorma_"+curr_item).checked = false;
+		}
+	if (curr_value>0)
+		{
+		document.getElementById("addtorma_"+curr_item).checked = true;
+		}
+	}
+
+function isNumberKey(textboxIn, evt)
+{
+	   if (!evt)
+	   	evt = window.event;
+	   var charCode = (evt.which) ? evt.which : evt.keyCode;
+		 if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode != 46) {
+			return false;
+		}
+	
+		if(charCode == 46 && textboxIn.indexOf(".") != -1) {
+			return false;
+		}
+	  
+	return true;
+}
+function checkboxupdate(checkbox, qty_to_return, curr_item)
+	{
+	if(checkbox)
+		{
+		document.getElementById('quantity_'+curr_item).value = qty_to_return;
+		}
+	else
+		{
+		document.getElementById('quantity_'+curr_item).value = "0";
+		}
+	}
+
+var $j = jQuery.noConflict(); 
+$j(document).ready(function()
+	{
+	$j('#load_order').click(function(){
+		
+		var order_number = $j("#order_number").val();
+		var email = $j("#customer_email").val();
+		dataToSend = "order_number="+order_number+"&email="+email;
+		
+		$j.ajax({
+			url: "rma/ajax/loadorder/",
+			type: "GET",
+			data: dataToSend,
+			beforeSend: function()
+				{
+				$j("#order_data").html("Loading...");
+				},
+			success: function(return_data)
+				{
+				if(return_data != "Invalid order number.")
+					{
+					$j("#order_data").html(return_data);
+					$j("#rmafooter").show();
+					}
+				else
+					{
+					$j("#order_data").html(return_data);
+					}
+				}
+		 });
+		});
+	});
+</script>
+
+<?php if($usecaptcha) { ?><script type="text/javascript">var RecaptchaOptions = {theme : 'white'};</script><?php } ?>
+ 
+<form method="POST" action="guest-returns" name="mainFrm" id="mainFrm">
+ 
+<center>
+
+<h1 style="color:#d83827; font-weight: bold; margin-top:-20px; margin-bottom: 5px;">Guest Returns</h1>
+
+<table cellspacing="0" cellpadding="0" style="border: 2px solid #000; padding: 10px; width: 575px; background-color:#eee;">
+<tr>
+<td style="text-align: center; padding: 10px">
+
+<table width="100%">
+<tr>
+<td>
+<div style="font-size: 20px; font-weight: bold; text-align:center;">Order Info</div>
+<table cellpadding="0" cellspacing="0">
+<tr>
+<td style="font-size: 16px; font-weight: bold; text-align:left; padding-right: 3px;">Order #:</td>
+<td style="width: 180px;"><input type="text" id="order_number" name="order_number" value="" style="width: 167px; border: 1px solid #888;"> <span class="required">*</span></td>
+</tr>
+<tr>
+<td style="font-size: 16px; font-weight: bold; text-align:left; padding-right: 3px;">Email:</td>
+<td style="width: 180px;"><input type="text" id="customer_email" name="customer_email" value="" style="width: 167px; border: 1px solid #888;"> <span class="required">*</span></td>
+</tr>
+</table>
+</td>
+<td style="text-align: center; width: 280px; font-size: 14px; font-weight: bold; padding-top: 0px;">
+Your email addrest MUST MATCH<br />the order number to continue.
+<br /><input id="load_order" type="button" onClick="loadOrder();" style="font-size:20px;" value="Load Order" />
+</td>
+</tr>
+</table>
+</tr>
+<tr>
+<td id="order_data">
+</td>
+</tr>
+<tr>
+<td id="rmafooter" style="display:none;">
+<?php if($usecaptcha) { ?><div style="margin-left: 150px;"><?=$captchaHTML?></div><?php } ?>
+<div class="button-set">
+<button type="submit" class="button" title="Submit RMA" style="float:right;"><span><span>Submit RMA</span></span></button>
+</div>
+</td>
+</tr>
+</table>
+</center>
+<?php
+	}
+	?>		

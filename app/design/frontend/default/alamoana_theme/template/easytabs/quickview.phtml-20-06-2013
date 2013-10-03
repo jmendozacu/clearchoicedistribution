@@ -1,0 +1,17 @@
+<?php
+    $_product = $this->getProduct();
+?>
+<div class="product-box">
+	<?php if (count($this->getGalleryImages()) > 0): $counter = 1 ?>
+    <ul class="img-list">
+        <?php foreach ($this->getGalleryImages() as $_image): if ($counter++ < 4): ?>
+        <li><a href="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile())->resize(220) ?>"><img src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize(60); ?>" alt="<?php echo $this->htmlEscape($_image->getLabel()) ?>" width="60" height="60" /></a></li>
+        <?php endif; endforeach; ?>
+    </ul>
+    <?php endif; ?>
+    
+	<div class="img-box">
+    	<img id="quickview" src="<?php echo $this->helper('catalog/image')->init($_product, 'image')->resize(220) ?>" alt="<?php echo $this->htmlEscape($this->getImageLabel()) ?>" />
+    	<p><a href="<?php echo $_product->getProductUrl() ?>" class="fancybox quickview-link"><?php echo $this->__('View product page') ?></a></p>
+    </div>
+</div>

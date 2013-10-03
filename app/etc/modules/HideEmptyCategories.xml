@@ -1,0 +1,8 @@
+<config>
+    <modules>
+        <Rob_HideEmptyCategories>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Rob_HideEmptyCategories>
+    </modules>
+</config>

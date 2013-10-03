@@ -1,0 +1,208 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2011 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+
+                <?php
+				$quote = Mage::helper('checkout')->getQuote();
+				foreach ($quote->getItemsCollection() as $item) {
+				// output details of an item.
+
+				} ?>
+<?php $_product = $this->getProduct(); ?>
+
+
+<?php $_wishlistSubmitUrl = $this->helper('wishlist')->getAddUrl($_product); ?>
+<?php
+    $_compareUrl = $this->helper('catalog/product_compare')->getAddUrl($_product);
+?>
+
+<div class="detail_static_block"> <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('detail_page_block')->toHtml() ?> </div>
+</div>
+
+<div class="special_shipping">
+	<?php echo $_product->getSpecialShipping(); ?>
+</div>
+
+<ul class="add-to-links">
+  <?php if ($this->helper('wishlist')->isAllow()) : ?>
+  <li >
+  
+  <div style="float:left;"><span class="separator">+</span> <a href="<?php echo $_wishlistSubmitUrl ?>" onclick="productAddToCartForm.submitLight(this, '<?php echo $_wishlistSubmitUrl ?>'); return false;" class="link-wishlist"><?php echo $this->__('Add to Wishlist') ?></a></div>
+  
+  </li>
+  <br>
+  <li>
+<div class="test">Mix And Price</div>
+  </li>
+  <li>
+  
+   
+  <?php $_product = Mage::getModel('catalog/product')->load($_product->getId()); ?>
+				<?php $pro=Mage::getModel('catalog/product')->load($_product->getId());
+      	 $product_help_units= $pro->getproduct_help_units();
+      		?>
+	<?php $pro=Mage::getModel('catalog/product')->load($_product->getId());
+      		 $product_help_cases=$pro->getproduct_help_cases();
+      		?>
+		<?php $pro=Mage::getModel('catalog/product')->load($_product->getId());
+      		 $product_help_intro1=$pro->getproduct_help_intro1();
+      		?>
+	<?php $pro=Mage::getModel('catalog/product')->load($_product->getId());
+      		 $product_help_intro2=$pro->getproduct_help_intro2();
+      		?>
+			<?php $pro=Mage::getModel('catalog/product')->load($_product->getId());
+      		 $product_help_happy=$pro->getproduct_help_happy();
+      		?>
+		<?php $pro=Mage::getModel('catalog/product')->load($_product->getId());
+      		$product_help_unhappy1=$pro->getproduct_help_unhappy1();
+      		?>
+			<?php $pro=Mage::getModel('catalog/product')->load($_product->getId());
+      	 $product_help_unhappy2=$pro->getproduct_help_unhappy2();
+      		?>
+  
+  <?php
+			if(isset($product_help_cases))
+			{
+			?>
+			
+  <form method="post" action="">
+<div  style="float:left; margin-top:-10px;"> 
+ <!--  <img src="/skin/frontend/default/alamoana_theme/images/btn-learn_more.png" onmouseover="return showHide()" style="margin-left:330px; cursor: pointer; "/>   -->
+<img src="/skin/frontend/default/alamoana_theme/images/btn-learn_more.png" onclick="return showHide()" style="margin-left:330px; cursor: pointer; "/>
+<!--<a href="javascript:void(0);" id="digit" class="GetDivCount"><input type="image"   onclick="return showHide()" onmouseover="return showHide()" src="/skin/frontend/default/alamoana_theme/images/btn-learn_more.png"  style="margin-left:330px;"/></a>-->
+</div>
+</form>
+<?php
+}
+?>
+  
+ </li>  
+  <?php endif; ?>
+  <?php /*?><?php if ($this->canEmailToFriend()): ?>
+  <li><span class="separator">+</span> <a href="<?php echo $this->helper('catalog/product')->getEmailToFriendUrl($_product) ?>"><?php echo $this->__('Email to a Friend') ?></a></li>
+  <?php endif; ?><?php */?>
+</ul>
+
+</div>
+
+<div class="social_network">
+<!-- AddThis Button BEGIN -->
+<?php /*?><div class="addthis_toolbox addthis_default_style "> <a class="addthis_button_preferred_1"></a> <a class="addthis_button_preferred_2"></a> <a class="addthis_button_preferred_3"></a> <a class="addthis_button_preferred_4"></a> <a class="addthis_button_compact"></a> <a class="addthis_counter addthis_bubble_style"></a> </div><?php */?>
+<?php
+			if(isset($product_help_cases))
+			{
+			?>
+			
+  <div id="wrapperpop" style="display:none;">
+<div class="arrow-up"></div>
+<div id="green-header">
+<div class="pad" >
+<p style="color:#ffffff!important;"><?php echo $product_help_intro1; ?></p>
+</div></div>
+<div>
+<div class="pad" >
+<?php echo $product_help_intro2; ?>
+</div>
+</div>
+
+
+<div>
+<ul>
+ <li class="smile">
+ <?php echo $product_help_happy; ?>
+ </li>
+ 
+<li class="sad" style="padding-top:-5px;">
+<?php echo $product_help_unhappy1; ?>
+</li>
+
+<li class="sad" style="padding-top:6px;padding-bottom:6px;">
+<?php echo $product_help_unhappy2; ?>
+ 
+</li>
+
+</ul>
+
+</div>
+
+</div>
+	<?php
+	}
+	?>
+<script type="text/javascript" language="javascript">// <![CDATA[
+function showHide() {
+    var ele = document.getElementById("wrapperpop");
+    if(ele.style.display == "block") {
+            ele.style.display = "none";
+      }
+    else {
+        ele.style.display = "block";
+    }
+}
+// ]]></script>
+<style type="text/css">
+
+#wrapperpop {Width:300px !important; border: 2px solid #007a52; padding-top:-5px; 
+margin-left: 122px; z-index:999; position:absolute;   background: #FFFFFF!important;}
+
+#green-header {background: #007a52; color: white; font-size:12px; height:54px;  }
+
+.pad {padding: 5px; font-size:10px !important; color:#fff !important; font-family: Arial !important;}
+.pad p{font-size:10px !important; line-height:11px !important; padding: 10px 7px 2px;  color:#000000!important; margin-left:-6px !important; }
+
+p.green {color: #077d58 !important; font-weight:bold; font-size:11px !important;line-height: 14px; padding-top: 4px;}
+p.red {color: #cf1527 !important; font-weight:bold; font-size:11px!important ; line-height: 14px; font-family:Arial !important;}
+
+li {font-size: 11px !important;}
+
+li.smile {background: url('/skin/frontend/default/alamoana_theme/images/smile.png') no-repeat 0 18px transparent;  padding: 13px 20px; list-style: none;}
+li.sad {background: url('/skin/frontend/default/alamoana_theme/images/sad.png') no-repeat 0 4px transparent;  padding: 0px 20px; list-style: none;}
+
+.sad p, .smile p { margin:0 0 0 20px; font-size:10px !important; color:#000000; font-family: Arial !important; line-height:11px !important; }
+
+.sad p:first-of-type, .smile p:first-of-type {font-weight:bold; font-size:11px!important; font-family: Arial !important;}
+
+.break {border-bottom: 1px  solid black; margin:2px 0 5px 20px;}
+ 
+ ul {margin: 0 0 0 10px; padding: 0;}
+ 
+ .arrow-up {
+	width: 0; 
+	height: 0; 
+	border-left: 15px solid transparent;
+	border-right: 15px solid transparent;
+	border-bottom: 15px solid #007a52;
+	float: right;
+	margin: -7px 30px 0 0;
+}
+.button {
+  background-image: url ('/skin/frontend/default/alamoana_theme/images/btn-learn_more.png') no-repeat;
+  cursor:pointer;
+  }
+</style>
+
+		         
+

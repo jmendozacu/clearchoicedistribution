@@ -1,0 +1,8 @@
+[22-Nov-2012 02:43:34] PHP Fatal error:  Uncaught exception 'Exception' with message 'This is not a valid Magento install dir: ccd.ydodev.com/' in /home2/ccdydode/public_html/module_creator/index.php:429
+Stack trace:
+#0 {main}
+  thrown in /home2/ccdydode/public_html/module_creator/index.php on line 429
+[22-Nov-2012 02:48:15] PHP Fatal error:  Uncaught exception 'Exception' with message 'This is not a valid Magento install dir: http://ccd.ydodev.com/home2/ccdydode/public_html' in /home2/ccdydode/public_html/module_creator/index.php:429
+Stack trace:
+#0 {main}
+  thrown in /home2/ccdydode/public_html/module_creator/index.php on line 429

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Gttadmin_CustomAdmin>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Gttadmin_CustomAdmin>
+    </modules>
+</config> 

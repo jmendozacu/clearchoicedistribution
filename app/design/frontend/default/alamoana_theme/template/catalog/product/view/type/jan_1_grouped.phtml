@@ -1,0 +1,271 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2011 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Grouped product data template
+ *
+ * @see Mage_Catalog_Block_Product_View_Media
+ * @see Mage_Catalog_Block_Product_View_Type_Grouped
+ */
+?>
+<?php $this->setPreconfiguredValue(); ?>
+<?php $_product = $this->getProduct(); ?>
+<?php $_associatedProducts = $this->getAssociatedProducts(); ?>
+<?php $_hasAssociatedProducts = count($_associatedProducts) > 0; ?>
+<?php if ($_product->isAvailable() && $_hasAssociatedProducts): ?>
+    <p class="availability in-stock"><?php echo $this->__('Availability:') ?> <span><?php echo $this->__('In stock') ?></span></p>
+<?php else: ?>
+    <p class="availability out-of-stock"><?php echo $this->__('Availability:') ?> <span><?php echo $this->__('Out of stock') ?></span></p>
+<?php endif; ?>
+<?php echo $this->getChildHtml('product_type_data_extra') ?>
+<?php /*<table class="data-table grouped-items-table" id="super-product-table">
+    <col />
+    <col />
+    <col width="1" />
+    <thead>
+        <tr>
+            <th><?php echo $this->__('Product Name') ?></th>
+            <?php if ($this->getCanShowProductPrice($_product)): ?>
+            <th class="a-right"><?php echo $this->__('Price') ?></th>
+            <?php endif; ?>
+            <?php if ($_product->isSaleable()): ?>
+            <th class="a-center"><?php echo $this->__('Qty') ?></th>
+            <?php endif; ?>
+        </tr>
+    </thead>
+    <tbody>
+    <?php if ($_hasAssociatedProducts): ?>
+    <?php foreach ($_associatedProducts as $_item): ?>
+        <?php $_finalPriceInclTax = $this->helper('tax')->getPrice($_item, $_item->getFinalPrice(), true) ?>
+        <tr>
+            <td><?php echo $this->htmlEscape($_item->getName()) ?></td>
+            <?php if ($this->getCanShowProductPrice($_product)): ?>
+            <td class="a-right">
+                <?php if ($this->getCanShowProductPrice($_item)): ?>
+                <?php echo $this->getPriceHtml($_item, true) ?>
+                <?php echo $this->getTierPriceHtml($_item) ?>
+                <?php endif; ?>
+            </td>
+            <?php endif; ?>
+            <?php if ($_product->isSaleable()): ?>
+            <td class="a-center">
+            <?php if ($_item->isSaleable()) : ?>
+                <input type="text" name="super_group[<?php echo $_item->getId() ?>]" maxlength="12" value="<?php echo $_item->getQty()*1 ?>" title="<?php echo $this->__('Qty') ?>" class="input-text qty" />
+            <?php else: ?>
+                <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
+            <?php endif; ?>
+            </td>
+            <?php endif; ?>
+        </tr>
+    <?php endforeach; ?>
+    <?php else: ?>
+       <tr>
+           <td colspan="<?php if ($_product->isSaleable()): ?>4<?php else : ?>3<?php endif; ?>"><?php echo $this->__('No options of this product are available.') ?></td>
+       </tr>
+    <?php endif; ?>
+    </tbody>
+</table> */?>
+<?php $content = array(); ?>
+Select Product:<br>
+<style>
+.product_select{
+background: none repeat scroll 0 0 #FFFFFF;
+border: 1px solid #C7C7C7;
+min-width:250px;
+}
+</style>
+<select class="product_select">
+	<?php if ($_hasAssociatedProducts): ?>
+		<option value="select one">Choose a product...</option>
+		<?php foreach ($_associatedProducts as $_item): ?>
+			<option value="<?php echo $this->htmlEscape($_item->getSku()); ?>">
+				<?php echo $this->htmlEscape($_item->getName()) ?>
+			</option>
+				<?php if ($this->getCanShowProductPrice($_product)): ?>
+					<?php if ($this->getCanShowProductPrice($_item)): ?>
+						<?php //echo $this->getPriceHtml($_item, true) ?>
+						<?php $content[] = $this->getTierPriceHtml($_item) ?>
+					<?php endif; ?>
+				<?php endif; ?>
+		<?php endforeach; ?>
+	<?php endif; ?>
+</select>
+<div class="target_div" id="target_div">
+
+	<?php 
+	$i		=	0;
+	foreach ($_associatedProducts as $_item): ?>
+		<div id="<?php echo $this->htmlEscape($_item->getSku()); ?>" style="display:none;" >
+			<?php echo $this->getPriceHtml($_item, true) ?>
+			<div style="clear:both;"></div>
+			<?php echo $this->getTierPriceHtml($_item); ?>
+			<?php if ($_product->isSaleable()): ?>
+				<?php if ($_item->isSaleable()) : ?>
+					<div style="margin:0px 0px 10px 0px;border:solid 1px #BBBDBF;background:#f9f9f9;padding-bottom: 5px;padding-top:5px;padding-left: 5px;">Qty: <input type="text" name="super_group[<?php echo $_item->getId() ?>]" maxlength="12" value="<?php echo $_item->getQty()*1 ?>" title="<?php echo $this->__('Qty') ?>" class="input-text qty" /></div>
+					<?php else: ?>
+						<p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
+				<?php endif; ?>
+			<?php endif; ?>
+				<?php
+
+			// Get product object.
+		   $object = Mage::getModel('catalog/product');
+		   
+		   //Get product detail using product id  (Suppose you have product id is : $product_id)
+		   $_product = $object->load($this->htmlEscape($_item->getId()));
+		  
+		   // Fetch list of upsell product using query.
+		   $upsell_product = $_product->getUpSellProductCollection()->addAttributeToSort('position', Varien_Db_Select::SQL_ASC)->addStoreFilter(); 
+
+		   //check if record is empty or not
+		   $count = count($upsell_product); 
+		   if(empty($count)) : 
+			   //if empty
+			   echo "";
+			   else:
+				echo '<b style="font-size:14px;">Add-on Products:</b><br>';
+				 //if result is not empty then get  upsell product detail using foreach loop
+				  $i		= 0;
+				  foreach($upsell_product as $_upsell):				 
+						//get detail of single upsell prdocut using upsell product id
+						$upsp = $object->load($_upsell->getId());
+						//echo "Product Name : ". $upsp->getName();
+						// echo "Poduct url : ". $upsp->getProductUrl();
+						//echo "Product regular price : ". $upsp->getPrice().'<br>';
+						$id= $upsp->getId();
+						$addOn[$_item->getSku()][$i]['id'] =$upsp->getId();
+						$addOn[$_item->getSku()][$i]['name'] =$upsp->getName();
+						$addOn[$_item->getSku()][$i]['price'] =$upsp->getPrice();	
+						//$product1[$i] = Mage :: getSingleton( 'catalog/product' ) -> load( $upsp->getId() );			 
+						$i++;
+					endforeach;		   
+		   endif;?>
+		</div>
+		
+	<?php endforeach; ?>
+</div>
+				<div class="addOn" style="overflow:auto;max-height:130px;">
+					<?php
+
+						$addOnArr=array();
+						foreach($addOn as $keygen=>$add){
+
+							echo "<div id='addOn'>";
+							$id="";
+							$first=true;//print_r($add);
+							//echo '<div style="margin:10px 0px 10px 0px;border:1px solid black;" class="'.$keygen.'_addon">';
+							foreach($add as $key => $val){
+								if($first){
+									$id.=$val['id'];
+									$first=false;
+								}else{
+								$id.="-".$val['id'];
+								}
+								if(!in_array($val['id'],$addOnArr)){
+									echo "<div style='display:none;margin-bottom:2px;' name='addOn".$val['id']."' id='addOn".$val['id']."' value='".$id."'/>";
+									$_prod = Mage::getModel("catalog/product")->load($val['id']);
+									?><?php
+									echo '<div class="addOnContainer"><img src="'.$this->helper('catalog/image')->init($_prod,'small_image')->resize(60).'"><div class="imageBoxContainer"><a href="'.$this->htmlEscape($_prod->getProductUrl()).'" target=\'_blank\' style="outline: medium none !important;text-decoration: none;color:#5C5959;"><b>'.strtoupper($val['name']).'</b> + $'.$val['price'].''?></a><input type="text" name="addPro[<?=$val['id']?>]" value="0" style="margin-left:20px;float:right;" maxlength="12" title="<?php echo $this->__('Qty') ?>" class="input-text qty"/></div></div><?php
+									echo "</div>";
+								}			
+								$addOnArr[]=$val['id'];
+							}
+							echo "<input type='hidden' name='add".$keygen."' id='add".$keygen."' value='".$id."'/>";
+							echo '</div>';	
+		
+						}echo "<input type='hidden' name='totalAdd' id='totalAdd' value='".implode("-",array_unique($addOnArr))."'/>";
+
+					?>
+				</div>
+<?php
+	//THIS CODE WILL ONLY BE ACCISIBLE ONLY THROUGH AJAX REQUEST TO UPDATE STOCK STATUS UPDATES
+	if(isset($_REQUEST['productStockForStatus'])){ 
+                    $skuNew=$_REQUEST['productStockForStatus'];
+					$product = Mage::getModel('catalog/product');
+					$productId = $product->getIdBySku($skuNew);
+
+					$product = Mage::getModel("catalog/product")->load($productId);
+
+					$attVal = $product->getId();
+					$limitedStockVal		=	 $product->getLimitedStock();
+					$qtyStock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($product)->getQty();
+					$availableQunatity		=	 (int)$qtyStock;
+					$optStr = "";
+					 ?>
+		<?php if($availableQunatity >= $limitedStockVal): ?>
+				<div id="testme"><?php echo $this->__('In stock') ?></div>
+			<?php else: ?>
+				<?php if($availableQunatity<=0): ?>
+					<div id="testme"><?php echo $this->__('Out of stock') ?></div>
+				<?php else: ?>
+					<div id="testme"><?php echo $this->__('Limited stock') ?></div>
+				<?php endif; ?>    
+		<?php endif; ?>		
+		<?php
+	}
+	// STOCK STATUS UPDATION CODE ENDS HERE.
+?>
+<script type="text/javascript">decorateTable('super-product-table')</script>
+<script>
+	jQuery('.product_select').change(function() {
+		//jQuery(".target_div").html("");
+		//jQuery('div.addOn').children().css('display','none');
+		var a = document.getElementById(jQuery('select.product_select option:selected').val());
+		var pro=jQuery('select.product_select option:selected').val();
+		if(document.getElementById('add'+pro)){
+			var add=document.getElementById('add'+pro).value;
+		}
+		else{
+			var block	= true;
+		}
+		var totalAdd=document.getElementById('totalAdd').value;
+		var totalAdd=totalAdd.split("-");
+		for(var i=0; i<totalAdd.length; i++){
+			//alert(totalAdd[i]);
+			document.getElementById("addOn"+totalAdd[i]).style.display='none';
+		}
+		if(!block){		
+			var addOn=add.split("-");
+			for(var i=0; i<addOn.length; i++){
+				//alert(addOn[i]);
+				document.getElementById("addOn"+addOn[i]).style.display='block';
+			}
+		}
+		else{			
+		}
+		jQuery('.qty').val('0');
+		jQuery('div.target_div').children().css('display', 'none');
+		jQuery("div."+jQuery('select.product_select option:selected').val()+"_addon").css('display','block');
+		a.style.display="block";
+					jQuery.ajax({
+			  type: "GET",
+			  url: "#",
+			  data: "productStockForStatus="+pro
+			}).done(function(data) {
+				jQuery('.availability').html('Availability: <span>'+jQuery(data).find('#testme').html()+'</span>');
+			});
+	});
+</script>

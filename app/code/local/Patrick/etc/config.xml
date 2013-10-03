@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Patrick_>
+            <version>0.1.0</version>
+        </Patrick_>
+    </modules>
+    <admin>
+        <routers>
+			<>
+				<use>admin</use>
+				<args>
+					<module>Patrick_</module>
+					<frontName></frontName>
+				</args>
+			</>
+        </routers>
+    </admin>
+    <adminhtml>
+		<menu>
+			< module="">
+				<title>Gallery</title>
+				<sort_order>71</sort_order>               
+				<children>
+					<items module="">
+						<title>Manage Items</title>
+						<sort_order>0</sort_order>
+						<action>/gallery</action>
+					</items>
+				</children>
+			</>
+		</menu>
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+						<Patrick_>
+							<title>Gallery Module</title>
+							<sort_order>10</sort_order>
+						</Patrick_>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+		<layout>
+			<updates>
+				<>
+					<file>.xml</file>
+				</>
+			</updates>
+		</layout>
+    </adminhtml>   
+    <global>
+		<blocks>
+			<>
+				<class>Patrick__Block</class>
+			</>
+		</blocks>
+		<helpers>
+			<>
+				<class>Patrick__Helper</class>
+			</>
+		</helpers>
+    </global>
+</config>

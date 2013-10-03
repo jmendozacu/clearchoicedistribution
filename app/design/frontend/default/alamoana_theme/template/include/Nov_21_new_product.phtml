@@ -1,0 +1,158 @@
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('additional_slider/jquery-1.js')?>"></script>
+
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('additional_slider/jquery.js')?>"></script>
+
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+    	jQuery('#mycarousel123').jcarousel();
+});
+</script>
+
+<div id="home-featured1">
+	<div class="page-title featured-title">
+        <h3><?php echo $this->__('New products') ?></h3>
+    </div>
+
+	<?php
+		$_helper = $this->helper('catalog/output');
+		$storeId = Mage::app()->getStore()->getId();
+		$catalog = $this->getLayout()->createBlock('catalog/product_list')->setStoreId($storeId);
+
+		$collection = Mage::getModel('catalog/product')->getCollection();
+		$collection->addAttributeToSelect('new_product');
+		$collection->addFieldToFilter(array(
+			array('attribute' => 'new_product', 'eq' => true),
+		));
+
+		if (!$collection->count()) :
+	?>
+		<p class="note-msg"><?php echo $this->__('There are no new products at the moment.') ?></p>
+	<?php else : ?>
+	<?php /*?><div class="category-products-feature"><?php */?>
+    
+    <div class=" jcarousel-skin-tango">
+  			<div style="position: relative; display: block;" class="jcarousel-container jcarousel-container-horizontal">
+        		<div style="position: relative;" class="jcarousel-clip jcarousel-clip-horizontal">
+    
+	<?php /*?><ul class="products-grid"><?php */?>
+    <ul style="overflow: hidden; position: relative; top: 0px; margin: 0px; padding: 0px; left: -255px; width: 950px;" id="mycarousel123" class="jcarousel-list jcarousel-list-horizontal related_pro">
+	<?php
+		//$i=0;
+		foreach ($collection as $_product) :
+			$_product = Mage::getModel('catalog/product')->setStoreId($storeId)->load($_product->getId());
+		?>
+		
+	        
+            <?php /*?><li class="item<?php if(($i-1)%$_columnCount==0): ?><?php elseif($i%$_columnCount==0): ?> last<?php endif; ?>"><?php */?>
+            <li<?php if($_product->isComposite() || !$_product->isSaleable()): ?> class="super-products"<?php endif; ?> jcarouselindex="<?php echo $i; ?>" style="float: left; list-style: none outside none; " class="jcarousel-item jcarousel-item-horizontal jcarousel-item-<?php echo $i; ?> jcarousel-item-<?php echo $i; ?>-horizontal item">
+	            <div class="product-images">
+                <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(210); ?>" width="210" height="210" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></a>
+                <?php
+					//For display reppon of new product and sell product 
+      		 		require('media_labels_listpage.phtml'); 
+			 	?>               
+                </div>
+                <div class="product-details">
+	            <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>"><?php echo wordCut($_helper->productAttribute($_product, $_product->getName(), 'name'), 40, "...") ?></a>
+                              
+                <?php
+					$storeId = Mage::app()->getStore()->getId();
+					$summaryData = Mage::getModel('review/review_summary')->setStoreId($storeId)  ->load($_product->getId());
+					$reviewData = Mage::getModel('review/review/summary');
+					
+					if($reviewData->getTotalReviews($_product->getId()) == '0')
+					{
+				?> 
+				<div class="ratings" style="visibility:hidden;">    
+                    <div class="rating-box">
+                        <div class="rating" style="width:<?php echo $summaryData['rating_summary']; ?>%"></div>
+                    </div>    
+					<?php echo $reviewData->getTotalReviews($_product->getId()).' Review(s)'; ?>
+				</div> 
+                <?php } else { ?>
+                <div class="ratings">    
+                    <div class="rating-box">
+                        <div class="rating" style="width:<?php echo $summaryData['rating_summary']; ?>%"></div>
+                    </div>    
+					<?php echo $reviewData->getTotalReviews($_product->getId()).' Review(s)'; ?>
+				</div>                 
+                <?php } ?>            
+                               
+                <?php /*?><?php
+                $price = $_product->getPrice();
+                $specialprice = $_product->getFinalPrice();
+				$special = $_product->getSpecialPrice();
+				?>
+                <div class="price-box">
+               
+                <?php if(number_format($special,2) == '0.00') { ?>
+                	<span class="specialprice"><?php echo "$ ". number_format($price,2); ?></span>	
+                <?php } else { ?>
+                	<span class="old_price"><?php echo "$ ". number_format($price,2); ?></span>	
+                	<span class="specialprice"><?php echo "$ ". number_format($special,2); ?></span>
+                <?php } ?>
+                </div><?php */?>
+                
+                <?php 
+			 
+				$_coreHelper = $this->helper('core');
+		     	$regularprice = $_coreHelper->currency(number_format($_product->getPrice(),2),true,false);
+		     	$specialprice = $_coreHelper->currency(number_format($_product->getSpecialPrice(),2),true,false);
+		     	//echo "Regular Price : ".$regularprice."<br>";
+		     	//echo "Special Price : ".$specialprice."<br>";
+			 	//echo $_product->getSpecialPrice();
+			 	$test=$_product->getSpecialPrice();
+				?>
+            
+                <div class="price-box">
+                	
+                <?php /*?><span class="specialprice"><?php echo "$ ". number_format($specialprice,2); ?></span><?php */?>
+                <?php if($test == '') { ?>
+                	<span class="specialprice"><?php echo $regularprice; ?></span>	
+                <?php } else { ?>
+                	<span class="old_price"><?php echo $regularprice; ?></span>	
+                	<span class="specialprice"><?php echo $specialprice; ?></span>
+                <?php } ?>
+                </div>
+                
+                  <?php /*?><a class="quickview" rel="nofollow" href="<?php echo Mage::getBaseUrl(), 'catalog/ajax_product/view/id/', $_product->getId() ?>"><?php echo $this->__('Quickview') ?></a><?php */?>	            <?php echo $this->getPriceHtml($_product, true) ?>
+                  
+                   <?php if($_product->isSaleable()): ?>
+                            <button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setLocation('<?php echo $_product->getProductUrl(); ?>')"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button>
+                        	<?php else: ?>
+                            <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
+                        	<?php endif; ?>
+	            </div>
+                 <a class="quickview" rel="nofollow" href="<?php echo Mage::getBaseUrl(), 'catalog/ajax_product/view/id/', $_product->getId() ?>"><?php echo $this->__('Quickview') ?></a>
+	        </li>
+	    
+        <?php /*?><?php if($i==1)
+		       break;
+			  else
+		       $i++; 
+			endforeach ?><?php */?>
+        <?php 
+			endforeach; ?>
+        </ul>
+         </div></div></div><div class="cls"></div>
+	<?php /*?></div><?php */?>
+	<?php endif ?>
+</div>
+<?php 
+function wordCut($text, $limit, $msg="...")
+{
+  $text = strip_tags($text);
+  if (strlen($text) > $limit)
+  {
+       $txt1=wordwrap($text, $limit, '[cut]');
+       $txt2=explode('[cut]', $txt1);
+       $ourTxt=$txt2[0];
+       $finalTxt=$ourTxt.$msg;
+   }
+   else
+   {
+       $finalTxt=$text;
+   }
+   return $finalTxt;
+}
+?>

@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <mptp_adminhtml_mptp_index>
+        <reference name="content">
+            <block type="mptp/adminhtml_mptp" name="mptp" />
+        </reference>
+    </mptp_adminhtml_mptp_index>
+</layout>

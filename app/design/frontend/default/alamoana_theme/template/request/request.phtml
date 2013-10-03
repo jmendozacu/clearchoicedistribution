@@ -1,0 +1,177 @@
+<?php 
+	$session=Mage::getSingleton('customer/session', array('name'=>'frontend') );
+	if (!$session->isLoggedIn()) {
+		echo '<span style="color:red;">Please login to access this service</span>';
+		die;
+	}
+	$blockRun			=	0;
+?>
+
+			<h4><?php echo $this->__('New Dealer Application Form') ?></h4>
+            <?php
+				$url = Mage::getBaseUrl().'request';
+				if(isset($_POST) && !empty($_POST['request_for_special_group'])):
+					if(isset($_POST['request_phone']) && isset($_POST['request_data'])):
+						$phoneId			=	$_POST['request_phone'];
+						$requestString		=	$_POST['request_data'];
+						$timestamp			= date('Y-m-d H:i:s');
+						$website			=	$_POST['website'];
+						$address			=	$_POST['address'];
+						$description		=	$_POST['description'];
+						$session			=	Mage::getSingleton('customer/session', array('name'=>'frontend') );
+						if ($session->isLoggedIn()):
+							$userName		=	$session->getCustomer()->getName();
+							$userId			=	$session->getCustomer()->getId();
+						else:
+								echo '<span style="color:red;">Some error occurred</span>';
+						endif;
+						if(checkDuplicate($userId)==true):
+							$sql = "INSERT INTO `request` (`userid`,`username`,`userphone`,`requestdata`,`created_time`,`approoved`,`website`,`address`,`description`) VALUES ('$userId','$userName','$phoneId','$requestString','$timestamp','0','$website','$address','$description')";
+							$connection = Mage::getSingleton('core/resource')->getConnection('core_write');
+							$status				=	$connection->query($sql);
+							$blockRun			=	1;
+							if($status==true):
+								echo '<span style="color:green;">Successfully Requested</span>';
+							else:
+								echo '<span style="color:red;">Some error occurred</span>';
+							endif;
+						else:
+							echo '<span style="color:red;">Some error occurred</span>';
+						endif;	
+					endif;
+				endif;
+               // $news = Mage::getModel('request/request')->load(1);
+               // echo '<br><b>User Name:-</b>'.$news->getUsername().'<br>';
+               // echo '<b>phone Id:-</b>'.$news->getUsermail().'<br>';
+               // echo '<b>Application:-</b>'.$news->getRequestdata ().'<br>';
+               // echo '<b>Application Date:-</b>'.$news->getCreated_time().'<br>';
+               // $bc= date('Y-m-d H:i:s');
+               // echo $bc;
+            
+                //$sql = "INSERT INTO `request` (`request_id`,`userid`,`username`,`usermail`,`requestdata`,`created_time`) VALUES (4,'4','deepak','deepak@clerisysolutions.com','this is me your friend','$bc')";
+	
+				//$connection = Mage::getSingleton('core/resource')->getConnection('core_write');
+				//echo $connection->query($sql);
+                ?>
+                <?php
+					$session			=	Mage::getSingleton('customer/session', array('name'=>'frontend') );
+					$userId				=	$session->getCustomer()->getId();                
+					$sql = "select count(*) from `request` where userid=$userId";
+					$connection = Mage::getSingleton('core/resource')->getConnection('core_read');
+					$status				=	$connection->fetchAll($sql); 
+					foreach($status as $key){
+						$count			=	$key['count(*)'];
+					}
+					if($count==0):          
+                ?>
+						<form method="post" action="<?php echo $url; ?>">
+							<table>
+								<tr>
+									<th><h5>Contact No.</h5></th>
+									<td><input type="text" name="request_phone" id="phone"></td>
+								</tr>
+								
+								<tr>
+									<th>
+										<h5>Website Url(if any)</h5>
+									</th>
+									<td>
+										<textarea placeholder="www.example.com" name="website"></textarea>
+									</td>
+								</tr>	
+								<tr>
+									<th>
+										<h5>Address</h5>
+									</th>
+									<td>
+										<textarea placeholder="Address" name="address"></textarea>		
+									</td>
+								</tr>
+								<tr>
+									<th>
+										<h5>Business Description</h5>
+									</th>
+									<td>
+										<textarea placeholder="Enter few Lines Describing your business" name="description"></textarea>
+									</td>										
+								</tr>
+
+								<tr>
+									<th><h5>Request</h5></th>
+									<td><textarea placeholder="Enter your request" name="request_data"></textarea></td>
+								</tr>
+									<input type="hidden" name="request_for_special_group" value="1">
+								<tr>
+									<td colspan="2"><input class="button" type="submit" value="stay a request"></td>
+								</tr>
+							</table>
+						</form>
+                <?php
+					else:
+						if($blockRun==0):
+							echo '<span style="color:Brown;font-size:15px;">You have already sent a request</span>';
+						endif;
+					endif;
+					
+	function checkDuplicate($userId){
+		$sql = "select count(*) from `request` where userid=$userId";
+		$connection = Mage::getSingleton('core/resource')->getConnection('core_read');
+		$status				=	$connection->fetchAll($sql);	
+		foreach($status as $key):
+			$val		=	$key['count(*)'];
+		endforeach;
+		if($val==0):
+			return true;
+		else:
+			return false;
+		endif;
+	}					
+                /*
+                    This shows an alternate way of loading datas from a record using the database the "Magento Way" (using blocks and controller).
+ 					Uncomment blocks in /app/code/local/Namespace/Module/controllers/IndexController.php if you want to use it.
+
+               */
+                /*
+                $object = $this->getRequest();
+                echo 'id: '.$object['test_id'].'<br/>';
+				echo 'title: '.$object['title'].'<br/>';
+				echo 'content: '.$object['content'].'<br/>';
+				echo 'status: '.$object['status'].'<br/>';
+                */            
+            
+            
+                /*
+                    This shows how to load multiple rows in a collection and save a change to them.
+                    1) The setPageSize function will load only 5 records per page and you can set the current Page with the setCurPage function.
+                    2) The $collection->walk('save') allows you to save everything in the collection after all changes have been made.
+                */
+                /*
+                $i = 0;
+                
+                $collection = Mage::getModel('request/request')->getCollection();
+                $collection->setPageSize(5);
+                $collection->setCurPage(2);
+                $size = $collection->getSize();
+                $cnt = count($collection);
+                foreach ($collection as $item) {
+                    $i = $i+1;
+                    $item->setTitle($i);
+                    echo $item->getTitle();
+                }
+
+                $collection->walk('save');
+                */
+                
+                /*
+                    This shows how to load a single record and save a change.
+                    1) Note the setTitle, this corresponds to the table field name, title, and then you pass it the text to change.
+                    2) Call the save() function only on a single record.
+                */
+                /*
+                $object = Mage::getModel('request/request')->load(1);
+                $object->setTitle('This is a changed title');
+                $object->save();
+				*/
+
+            ?> 
+            <div style="clear:both;"></div>

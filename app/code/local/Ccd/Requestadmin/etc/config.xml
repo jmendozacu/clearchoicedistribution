@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Ccd_Requestadmin>
+            <version>0.1.0</version>
+        </Ccd_Requestadmin>
+    </modules>
+    <admin>
+        <routers>
+			<requestadmin>
+				<use>admin</use>
+				<args>
+					<module>Ccd_Requestadmin</module>
+					<frontName>requestadmin</frontName>
+				</args>
+			</requestadmin>
+        </routers>
+    </admin>
+    <adminhtml>
+		<menu>
+			<requestadmin module="requestadmin">
+				<title>Dealer Applications</title>
+				<sort_order>71</sort_order>               
+				<children>
+					<items module="requestadmin">
+						<title>Inbox</title>
+						<sort_order>0</sort_order>
+						<action>requestadmin/request</action>
+					</items>
+				</children>
+			</requestadmin>
+		</menu>
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+						<Ccd_Requestadmin>
+							<title>Request Module</title>
+							<sort_order>10</sort_order>
+						</Ccd_Requestadmin>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+		<layout>
+			<updates>
+				<requestadmin>
+					<file>requestadmin.xml</file>
+				</requestadmin>
+			</updates>
+		</layout>
+    </adminhtml>   
+    <global>
+		<blocks>
+			<requestadmin>
+				<class>Ccd_Requestadmin_Block</class>
+			</requestadmin>
+		</blocks>
+		<helpers>
+			<requestadmin>
+				<class>Ccd_Requestadmin_Helper</class>
+			</requestadmin>
+		</helpers>
+    </global>
+</config>
